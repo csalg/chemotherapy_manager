@@ -6,27 +6,27 @@ This is a very fast SPA tool to help nurses manage chemotherapy doses. It is cur
 
 - The main screen is a table which can be filtered and searched directly from the browser (no need to call the server multiple times). 
 
-  ![](/Users/vivian/Desktop/img/main.png)
+  ![](./img/main.png)
 
-  ![](/Users/vivian/Desktop/img/main_search.png)
+  ![](./img/main_search.png)
 
 - The application has modals which let nurses know only the most important information about the patient (upcoming heart scans, when to set next appointment, etc.).
 
-  ![](/Users/vivian/Desktop/img/modal1.png)
+  ![](./img/modal1.png)
 
-  ![](/Users/vivian/Desktop/img/modal2.png)
+  ![](./img/modal2.png)
 
 - Labels for the medicine vials are produced in pdf ready to print.
 
-  ![](/Users/vivian/Desktop/img/labels.png)
+  ![](./img/labels.png)
 
 - Smart forms: the new patient form suggests dosages based on the procedure at the hospital and is designed to prevent typos and human error.
 
-  ![](/Users/vivian/Desktop/img/new_patient.png)
+  ![](./img/new_patient.png)
 
 - The app keeps track of how much medicine is left in the last vial and calculates how many new vials need to be opened.
 
-  ![](/Users/vivian/Desktop/img/bottles.png)
+  ![](./img/bottles.png)
 
 # Technical notes
 
