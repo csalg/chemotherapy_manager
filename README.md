@@ -1,8 +1,8 @@
-#About
+# About
 
 This is a very fast SPA tool to help nurses manage chemotherapy doses. It is currently used in the Breast Cancer Ward at Shanghai Ruijin Hospital. 
 
-#Some Features
+# Some Features
 
 - The main screen is a table which can be filtered and searched directly from the browser (no need to call the server multiple times). 
 
