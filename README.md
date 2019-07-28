@@ -6,27 +6,27 @@ This is a very fast SPA tool to help nurses manage chemotherapy doses. It is cur
 
 - The main screen is a table which can be filtered and searched directly from the browser (no need to call the server multiple times). 
 
-  ![](./img/main.png)
+  ![](./img/main.jpg)
 
-  ![](./img/main_search.png)
+  ![](./img/main_search.jpg)
 
-- The application has modals which let nurses know only the most important information about the patient (upcoming heart scans, when to set next appointment, etc.).
+- The application has modals which dynamically color-code/highlight the most important information about the patient (upcoming heart scans, when to set next appointment, etc.).
 
-  ![](./img/modal1.png)
+  ![](./img/modal1.jpg)
 
-  ![](./img/modal2.png)
+  ![](./img/modal2.jpg)
 
 - Labels for the medicine vials are produced in pdf ready to print.
 
-  ![](./img/labels.png)
+  ![](./img/labels.jpg)
 
 - Smart forms: the new patient form suggests dosages based on the procedure at the hospital and is designed to prevent typos and human error.
 
-  ![](./img/new_patient.png)
+  ![](./img/new_patient.jpg)
 
 - The app keeps track of how much medicine is left in the last vial and calculates how many new vials need to be opened.
 
-  ![](./img/bottles.png)
+  ![](./img/bottles.jpg)
 
 # Technical notes
 
