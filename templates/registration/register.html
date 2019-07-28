@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block head_extra %}
+      {% load static %}
+  <link rel="stylesheet" href={% static "css/login.css" %}>
+{% endblock %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+{%if hospitals %} 
+
+<div class="login_bg">
+	<div class="wrapper">
+		<div class="login_box">
+		<h2>注册</h2>
+			<form method="post">
+				{% csrf_token %}
+
+				<!-- {{ form.as_p }} -->
+				<div class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input type="text" class="mdl-textfield__input" name="username">
+					<label for="username" class="mdl-textfield__label">用户名</label>
+					<span class = "mdl-textfield__error">必须填</span>
+				</div>
+				<br>
+
+				<div class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input type="text" class="mdl-textfield__input" name="first_name">
+					<label for="username" class="mdl-textfield__label">姓名</label>
+					<span class = "mdl-textfield__error">必须填</span>
+				</div>
+				<br>
+				
+					<input type="hidden" name="hospital"value="{{hospitals.0.id}}">
+					{% if hospitals|length > 1%} 
+				<div class = "mdl-textfield mdl-js-textfield getmdl-select">
+
+					<input type="text" class="mdl-textfield__input" readonly>
+					<label for="hospital" class="mdl-textfield__label">医院</label>
+
+					<ul for="hospital" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+						{% for hospital in hospitals %}
+						<li class="mdl-menu__item" data-val="{{hospital.id}}">{{hospital.name}}</li>
+						{%endfor%}
+					</ul>
+					<span class = "mdl-textfield__error">必须填</span>
+				</div>
+					{%endif%}
+				<br>
+
+
+				<div class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input type="password" class="mdl-textfield__input" name="password1">
+					<label for="password1" class="mdl-textfield__label">密码</label>
+					<span class = "mdl-textfield__error">必须填</span>
+				</div>
+				<br>
+
+				<div>
+					<ul>
+						<li>密码不能与您的其他个人信息太相似。</li>
+						<li>密码必须至少包含8个字符。</li>
+						<li>密码不能是常用密码。</li>
+						<li>密码不能完全是数字。</li>
+					</ul>
+				</div>	
+				<br>
+				
+				<div class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input type="password" class="mdl-textfield__input" name="password2">
+					<label for="password2" class="mdl-textfield__label">密码确认</label>
+					<span class = "mdl-textfield__error">必须填</span>
+				</div>
+				<br>
+				
+				<button class="mdl-button mdl-js-button mdl-button--raised" type="submit">注册</button>
+			</form>
+			<div>
+				<a href="/login">已经有账号？ 在此登录！</a>
+			</div>
+		</div>
+	</div>
+  <script src={% static "vendors/mdl/material.js" %}></script>
+
+</div>
+
+ {% endif %}
+{% endblock %}

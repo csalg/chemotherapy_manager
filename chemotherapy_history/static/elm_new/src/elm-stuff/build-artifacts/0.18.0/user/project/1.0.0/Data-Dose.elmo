@@ -1,0 +1,247 @@
+var _user$project$Data_Dose$fieldsAsStr = {
+	ctor: '::',
+	_0: 'dose_dt',
+	_1: {
+		ctor: '::',
+		_0: 'dose_weight',
+		_1: {
+			ctor: '::',
+			_0: 'dose_amount',
+			_1: {
+				ctor: '::',
+				_0: 'dose_remaining_dose',
+				_1: {
+					ctor: '::',
+					_0: 'dose_dt_opened',
+					_1: {
+						ctor: '::',
+						_0: 'dose_dt_opened_expiry',
+						_1: {
+							ctor: '::',
+							_0: 'dose_remarks',
+							_1: {
+								ctor: '::',
+								_0: 'dose_next_appointment_dt',
+								_1: {
+									ctor: '::',
+									_0: 'dose_number',
+									_1: {
+										ctor: '::',
+										_0: 'dose_remarks',
+										_1: {
+											ctor: '::',
+											_0: 'dose_number_cycle',
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
+var _user$project$Data_Dose$toChinese = function (str) {
+	var _p0 = str;
+	switch (_p0) {
+		case 'dose_amount':
+			return '剂量';
+		case 'dose_weight':
+			return '体重';
+		case 'dose_open_new':
+			return '是否开封新药';
+		case 'dose_dt_opened':
+			return '开封新药日期';
+		case 'dose_initial_dose':
+			return '首次用药时间';
+		case 'patient_maintenance_dose':
+			return '维持使用';
+		case 'dose_remaining_dose':
+			return '剩余剂量';
+		case 'dose_dt_created':
+			return '记录日期';
+		case 'dose_dt':
+			return '用药日期';
+		case 'dose_remarks':
+			return '备注';
+		case 'dose_number':
+			return '第几次用药';
+		default:
+			return str;
+	}
+};
+var _user$project$Data_Dose$getValue = F2(
+	function (dose_, str) {
+		var dose = _elm_lang$core$Native_Utils.update(
+			dose_,
+			{
+				dose_weight: _elm_lang$core$Basics$toString(dose_.dose_weight),
+				dose_amount: _elm_lang$core$Basics$toString(dose_.dose_amount),
+				dose_remaining_dose: _elm_lang$core$Basics$toString(dose_.dose_remaining_dose),
+				dose_next_appointment_dt: _user$project$Data_Date$dateToString(dose_.dose_next_appointment_dt),
+				dose_dt_opened: _user$project$Data_Date$dateToString(dose_.dose_dt_opened),
+				dose_dt: _user$project$Data_Date$dateToString(dose_.dose_dt),
+				dose_dt_opened_expiry: _user$project$Data_Date$dateToString(dose_.dose_dt_opened_expiry),
+				dose_number: _elm_lang$core$Basics$toString(dose_.dose_number),
+				dose_number_cycle: _elm_lang$core$Basics$toString(dose_.dose_number_cycle)
+			});
+		var _p1 = str;
+		switch (_p1) {
+			case 'dose_dt':
+				return dose.dose_dt;
+			case 'dose_weight':
+				return dose.dose_weight;
+			case 'dose_amount':
+				return dose.dose_amount;
+			case 'dose_remaining_dose':
+				return dose.dose_remaining_dose;
+			case 'dose_dt_opened':
+				return dose.dose_dt_opened;
+			case 'dose_dt_opened_expiry':
+				return dose.dose_dt_opened_expiry;
+			case 'dose_remarks':
+				return dose.dose_remarks;
+			case 'dose_next_appointment_dt':
+				return dose.dose_next_appointment_dt;
+			case 'dose_number':
+				return dose.dose_number;
+			case 'dose_number_cycle':
+				return dose.dose_number_cycle;
+			default:
+				return '';
+		}
+	});
+var _user$project$Data_Dose$getValueJS = F2(
+	function (dose_, str) {
+		var _p2 = str;
+		switch (_p2) {
+			case 'dose_next_appointment_dt':
+				return _user$project$Data_Date$dateToStringJS(dose_.dose_next_appointment_dt);
+			case 'dose_dt_opened':
+				return _user$project$Data_Date$dateToStringJS(dose_.dose_dt_opened);
+			case 'dose_dt':
+				return _user$project$Data_Date$dateToStringJS(dose_.dose_dt);
+			case 'dose_dt_opened_expiry':
+				return _user$project$Data_Date$dateToStringJS(dose_.dose_dt_opened_expiry);
+			default:
+				return A2(_user$project$Data_Dose$getValue, dose_, str);
+		}
+	});
+var _user$project$Data_Dose$encode_ = function (dose_) {
+	return _elm_lang$core$Json_Encode$object(
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			A2(
+				_elm_lang$core$List$map,
+				function (str) {
+					return {
+						ctor: '_Tuple2',
+						_0: str,
+						_1: _elm_lang$core$Json_Encode$string(
+							A2(_user$project$Data_Dose$getValue, dose_, str))
+					};
+				},
+				_user$project$Data_Dose$fieldsAsStr),
+			{
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'bottles',
+					_1: _user$project$Data_Bottle$encodeList(dose_.bottles)
+				},
+				_1: {ctor: '[]'}
+			}));
+};
+var _user$project$Data_Dose$encode = function (dose) {
+	return _elm_lang$http$Http$jsonBody(
+		_user$project$Data_Dose$encode_(dose));
+};
+var _user$project$Data_Dose$Dose = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return {dose_dt: a, dose_weight: b, dose_amount: c, dose_remaining_dose: d, dose_dt_opened: e, dose_dt_opened_expiry: f, dose_remarks: g, dose_next_appointment_dt: h, dose_number: i, dose_number_cycle: j, csrf: k, bottles: l};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Data_Dose$init = _user$project$Data_Dose$Dose(
+	_elm_lang$core$Date$fromTime(0))(0)(0)(0)(
+	_elm_lang$core$Date$fromTime(0))(
+	_elm_lang$core$Date$fromTime(0))('')(
+	_elm_lang$core$Date$fromTime(0))(1)(1)('')(
+	{ctor: '[]'});
+var _user$project$Data_Dose$decode = function (dt_now) {
+	return A2(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$hardcoded,
+		{ctor: '[]'},
+		A2(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$hardcoded,
+			'',
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'dose_number_cycle',
+				_user$project$Util$decodeStringToInt,
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'dose_number',
+					_user$project$Util$decodeStringToInt,
+					A3(
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+						'dose_next_appointment_dt',
+						_user$project$Data_Date$decoder,
+						A3(
+							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+							'dose_remarks',
+							_elm_lang$core$Json_Decode$string,
+							A3(
+								_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+								'dose_dt_opened',
+								A2(
+									_elm_lang$core$Json_Decode$map,
+									_user$project$Data_Date$addDays(_user$project$Constants$constants.drug_shelf_life),
+									_user$project$Data_Date$decoder),
+								A3(
+									_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+									'dose_dt_opened',
+									_user$project$Data_Date$decoder,
+									A3(
+										_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+										'dose_remaining_dose',
+										_user$project$Util$decodeStringToInt,
+										A3(
+											_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+											'dose_amount',
+											_user$project$Util$decodeStringToInt,
+											A3(
+												_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+												'dose_weight',
+												_user$project$Util$decodeStringToInt,
+												A3(
+													_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+													'dose_dt',
+													_user$project$Data_Date$decoder,
+													_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Data_Dose$Dose)))))))))))));
+};
+var _user$project$Data_Dose$decodeList = function (dt_now) {
+	return _elm_lang$core$Json_Decode$list(
+		_user$project$Data_Dose$decode(dt_now));
+};

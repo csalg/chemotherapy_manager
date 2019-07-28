@@ -1,0 +1,83 @@
+
+
+
+
+
+
+
+
+
+
+					<form class="form .form-horizontal" action="/editPersonalInfo/" method="post">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							<select id="patient_therapy" name="patient_therapy" class="form-control" name="therapy" data-selected="{%block patient_therapy %}{%endblock%}" {%use_macro personal_disabled%}>
+
+								<option id="EC-T" value="EC-T(H)">EC-T(H)</option>
+								<option id="T" value="T(H)">T(H)</option>
+								<option id="TCb" value="TCb(H)">TCb(H)</option>
+								<option id="EC-Wp" value="EC-Wp(H)">EC-Wp(H)</option>
+								<option id="P" value="P(H)">P(H)</option>
+								<option id="PCb" value="PCb(H)">PCb(H)</option>
+								<option id="EC-wPCb" value="EC-wPCb(H)">EC-wPCb(H)</option>
+								<option id="TC" value="TC(H)">TC(H)</option>
+								<option id="N" value="N(H)">N(H)</option>
+								<option id="X" value="X(H)">X(H)</option>
+								<option id="FEC-T" value="FEC-T(H)">FEC-T(H)</option>
+								<option id="ddAC-Wp" value="ddAC-Wp(H)">ddAC-Wp(H)</option>
+								<option id="ddAC-ddP" value="ddAC-ddP(H)">ddAC-ddP(H)</option>
+
+							</select>
+
+						<script>
+							var selected_therapy = $("#patient_therapy").data('selected');
+							var selected_therapy = selected_therapy.includes("(") ? selected_therapy.slice(0,selected_therapy.indexOf("(")) : selected_therapy
+							var selected_therapy = "#" + selected_therapy
+
+							$(`${selected_therapy}`).attr('selected','selected');
+						</script>
+
+							<select {% block heart_text %}{% endblock %} name="heart_text" id="heart_text" data-selected="三尖瓣狭窄" class="form-control" name="therapy" {%use_macro heart_disabled%}>
+								<option value="遵医嘱">遵医嘱</option>
+								<option value="心超无异常">心超无异常</option>
+								<option value="二尖瓣狭窄">二尖瓣狭窄</option>
+								<option value="二尖瓣反流">二尖瓣反流</option>
+								<option value="二尖瓣关闭不全">二尖瓣关闭不全</option>
+								<option value="主动脉关闭不全">主动脉关闭不全</option>
+								<option value="三尖瓣狭窄">三尖瓣狭窄</option>
+								<option value="三尖瓣反流">三尖瓣反流</option>
+								<option value="三尖瓣关闭不全">三尖瓣关闭不全</option>
+								<option value="室间隔缺损">室间隔缺损</option>
+								<option value="肺动脉高压">肺动脉高压</option>
+								<option value="主动脉内径增宽">主动脉内径增宽</option>
+								<option value="右室增大与肥厚">右室增大与肥厚</option>
+								<option value="左心房增大">左心房增大</option>
+							</select>	
+
+
+
+													<script>
+							var selected_heart = $("#heart_text").data('selected');
+							var selected_heart = selected_heart.includes("(") ? selected_heart.slice(0,selected_heart.indexOf("(")) : selected_heart
+							var selected_heart = "#" + selected_heart
+							$(`option[value=${selected_heart}]`).attr('selected','selected');
+						</script>

@@ -1,0 +1,815 @@
+var _user$project$Data_Patient$decodeAgo = F3(
+	function (dt_now, plus, invert) {
+		return A2(
+			_elm_lang$core$Json_Decode$map,
+			function (dt) {
+				return (invert ? function (x) {
+					return 0 - x;
+				} : function (x) {
+					return x;
+				})(
+					_elm_lang$core$Basics$floor(
+						function (x) {
+							return x / (((24 * 60) * 60) * 1000);
+						}(
+							_elm_lang$core$Date$toTime(dt_now) - (_elm_lang$core$Date$toTime(dt) + plus))));
+			},
+			_user$project$Data_Date$decoder);
+	});
+var _user$project$Data_Patient$frequencyToMultiplier = function (frequency) {
+	var _p0 = frequency;
+	switch (_p0) {
+		case '三周一次':
+			return _user$project$Constants$constants.multiplier.maintenance.triweekly;
+		case '一周一次':
+			return _user$project$Constants$constants.multiplier.maintenance.weekly;
+		case '一周一次 (三周用药，一周停药)':
+			return _user$project$Constants$constants.multiplier.maintenance.weekly;
+		default:
+			return 0;
+	}
+};
+var _user$project$Data_Patient$statusToString = function (st) {
+	var _p1 = st;
+	switch (_p1.ctor) {
+		case 'Active':
+			return '治疗中';
+		case 'TemporaryHalt':
+			return '暂停治疗';
+		case 'Halt':
+			return '终止';
+		default:
+			return '完成所有治疗';
+	}
+};
+var _user$project$Data_Patient$encode = function (patient_) {
+	var patient = _elm_lang$core$Native_Utils.update(
+		patient_,
+		{
+			patient_initial_dose_dt: _user$project$Data_Date$dateToString(patient_.patient_initial_dose_dt),
+			dose_dt: _user$project$Data_Date$dateToString(patient_.dose_dt),
+			dose_dt_opened: _user$project$Data_Date$dateToString(patient_.dose_dt_opened),
+			dose_dt_opened_expiry: _user$project$Data_Date$dateToString(patient_.dose_dt_opened_expiry),
+			dose_next_appointment_dt: _user$project$Data_Date$dateToString(patient_.dose_next_appointment_dt),
+			heart_dt: _user$project$Data_Date$dateToString(patient_.heart_dt),
+			dt_now: _user$project$Data_Date$dateToString(patient_.dt_now),
+			therapy_status: _user$project$Data_Patient$statusToString(patient_.therapy_status),
+			therapy_dt: _user$project$Data_Date$dateToString(patient_.therapy_dt)
+		});
+	return _elm_lang$http$Http$jsonBody(
+		_elm_lang$core$Json_Encode$object(
+			{
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'patient_name',
+					_1: _elm_lang$core$Json_Encode$string(patient.patient_name)
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'patient_age',
+						_1: _elm_lang$core$Json_Encode$string(patient.patient_age)
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'patient_card',
+							_1: _elm_lang$core$Json_Encode$string(patient.patient_card)
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'patient_therapy',
+								_1: _elm_lang$core$Json_Encode$string(patient.patient_therapy)
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'patient_frequency',
+									_1: _elm_lang$core$Json_Encode$string(patient.patient_frequency)
+								},
+								_1: {
+									ctor: '::',
+									_0: {
+										ctor: '_Tuple2',
+										_0: 'patient_initial_dose',
+										_1: _elm_lang$core$Json_Encode$int(patient.patient_initial_dose)
+									},
+									_1: {
+										ctor: '::',
+										_0: {
+											ctor: '_Tuple2',
+											_0: 'patient_initial_dose_dt',
+											_1: _elm_lang$core$Json_Encode$string(patient.patient_initial_dose_dt)
+										},
+										_1: {
+											ctor: '::',
+											_0: {
+												ctor: '_Tuple2',
+												_0: 'patient_maintenance_dose',
+												_1: _elm_lang$core$Json_Encode$int(patient.patient_maintenance_dose)
+											},
+											_1: {
+												ctor: '::',
+												_0: {
+													ctor: '_Tuple2',
+													_0: 'patient_nacl_amount',
+													_1: _elm_lang$core$Json_Encode$int(patient.patient_nacl_amount)
+												},
+												_1: {
+													ctor: '::',
+													_0: {
+														ctor: '_Tuple2',
+														_0: 'dose_dt',
+														_1: _elm_lang$core$Json_Encode$string(patient.dose_dt)
+													},
+													_1: {
+														ctor: '::',
+														_0: {
+															ctor: '_Tuple2',
+															_0: 'dose_dt_opened',
+															_1: _elm_lang$core$Json_Encode$string(patient.dose_dt_opened)
+														},
+														_1: {
+															ctor: '::',
+															_0: {
+																ctor: '_Tuple2',
+																_0: 'dose_weight',
+																_1: _elm_lang$core$Json_Encode$int(patient.dose_weight)
+															},
+															_1: {
+																ctor: '::',
+																_0: {
+																	ctor: '_Tuple2',
+																	_0: 'dose_amount',
+																	_1: _elm_lang$core$Json_Encode$int(patient.dose_amount)
+																},
+																_1: {
+																	ctor: '::',
+																	_0: {
+																		ctor: '_Tuple2',
+																		_0: 'dose_remaining_dose',
+																		_1: _elm_lang$core$Json_Encode$int(patient.dose_remaining_dose)
+																	},
+																	_1: {
+																		ctor: '::',
+																		_0: {
+																			ctor: '_Tuple2',
+																			_0: 'dose_remarks',
+																			_1: _elm_lang$core$Json_Encode$string(patient.dose_remarks)
+																		},
+																		_1: {
+																			ctor: '::',
+																			_0: {
+																				ctor: '_Tuple2',
+																				_0: 'dose_next_appointment_dt',
+																				_1: _elm_lang$core$Json_Encode$string(patient.dose_next_appointment_dt)
+																			},
+																			_1: {
+																				ctor: '::',
+																				_0: {
+																					ctor: '_Tuple2',
+																					_0: 'dose_number',
+																					_1: _elm_lang$core$Json_Encode$int(patient.dose_number)
+																				},
+																				_1: {
+																					ctor: '::',
+																					_0: {
+																						ctor: '_Tuple2',
+																						_0: 'dose_number_cycle',
+																						_1: _elm_lang$core$Json_Encode$int(patient.dose_number_cycle)
+																					},
+																					_1: {
+																						ctor: '::',
+																						_0: {
+																							ctor: '_Tuple2',
+																							_0: 'heart_text',
+																							_1: _elm_lang$core$Json_Encode$string(patient.heart_text)
+																						},
+																						_1: {
+																							ctor: '::',
+																							_0: {
+																								ctor: '_Tuple2',
+																								_0: 'heart_dt',
+																								_1: _elm_lang$core$Json_Encode$string(patient.heart_dt)
+																							},
+																							_1: {
+																								ctor: '::',
+																								_0: {
+																									ctor: '_Tuple2',
+																									_0: 'heart_percentage',
+																									_1: _elm_lang$core$Json_Encode$string(patient.heart_percentage)
+																								},
+																								_1: {
+																									ctor: '::',
+																									_0: {
+																										ctor: '_Tuple2',
+																										_0: 'heart_remarks',
+																										_1: _elm_lang$core$Json_Encode$string(patient.heart_remarks)
+																									},
+																									_1: {
+																										ctor: '::',
+																										_0: {
+																											ctor: '_Tuple2',
+																											_0: 'therapy_status',
+																											_1: _elm_lang$core$Json_Encode$string(patient.therapy_status)
+																										},
+																										_1: {
+																											ctor: '::',
+																											_0: {
+																												ctor: '_Tuple2',
+																												_0: 'therapy_dt',
+																												_1: _elm_lang$core$Json_Encode$string(patient.therapy_dt)
+																											},
+																											_1: {
+																												ctor: '::',
+																												_0: {
+																													ctor: '_Tuple2',
+																													_0: 'therapy_reason',
+																													_1: _elm_lang$core$Json_Encode$string(patient.therapy_reason)
+																												},
+																												_1: {
+																													ctor: '::',
+																													_0: {
+																														ctor: '_Tuple2',
+																														_0: 'therapy_remarks',
+																														_1: _elm_lang$core$Json_Encode$string(patient.therapy_remarks)
+																													},
+																													_1: {
+																														ctor: '::',
+																														_0: {
+																															ctor: '_Tuple2',
+																															_0: 'bottles',
+																															_1: _user$project$Data_Bottle$encodeList(patient.bottles)
+																														},
+																														_1: {ctor: '[]'}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}));
+};
+var _user$project$Data_Patient$doseFrequencyToMultiplier = F3(
+	function (df, dose_number_cycle, dose_number) {
+		return df.loops ? (_elm_lang$core$Native_Utils.eq(dose_number, 1) ? df.initialMultiplier : df.finalMultiplier) : ((_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$List$length(df.restBetweenDoses),
+			dose_number) > -1) ? df.nextMultiplier : df.finalMultiplier);
+	});
+var _user$project$Data_Patient$dfIncreaseDoseNumberCycle = F2(
+	function (dose_number_cycle, df) {
+		var _p2 = df;
+		var restBetweenDoses = _p2.restBetweenDoses;
+		var loops = _p2.loops;
+		var initialMultiplier = _p2.initialMultiplier;
+		var nextMultiplier = _p2.nextMultiplier;
+		var finalMultiplier = _p2.finalMultiplier;
+		return loops ? ((_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$List$length(restBetweenDoses),
+			dose_number_cycle) < 1) ? 1 : (dose_number_cycle + 1)) : dose_number_cycle;
+	});
+var _user$project$Data_Patient$dfFrequencyToDays = F3(
+	function (df, dose_number_cycle, dose_number) {
+		return df.loops ? A2(
+			_elm_lang$core$Maybe$withDefault,
+			0,
+			_elm_lang$core$List$head(
+				_elm_lang$core$List$reverse(
+					A2(_elm_lang$core$List$take, dose_number_cycle, df.restBetweenDoses)))) : ((_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$List$length(df.restBetweenDoses),
+			dose_number) > -1) ? A2(
+			_elm_lang$core$Maybe$withDefault,
+			0,
+			_elm_lang$core$List$head(
+				_elm_lang$core$List$reverse(df.restBetweenDoses))) : A2(
+			_elm_lang$core$Maybe$withDefault,
+			0,
+			_elm_lang$core$List$head(
+				A2(_elm_lang$core$List$take, dose_number, df.restBetweenDoses))));
+	});
+var _user$project$Data_Patient$Patient = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return function (n) {
+														return function (o) {
+															return function (p) {
+																return function (q) {
+																	return function (r) {
+																		return function (s) {
+																			return function (t) {
+																				return function (u) {
+																					return function (v) {
+																						return function (w) {
+																							return function (x) {
+																								return function (y) {
+																									return function (z) {
+																										return function (_1) {
+																											return function (_2) {
+																												return function (_3) {
+																													return function (_4) {
+																														return function (_5) {
+																															return function (_6) {
+																																return function (_7) {
+																																	return function (_8) {
+																																		return {id: a, patient_name: b, patient_age: c, patient_card: d, patient_therapy: e, patient_frequency: f, patient_initial_dose: g, patient_initial_dose_dt: h, patient_maintenance_dose: i, patient_nacl_amount: j, dose_dt: k, dose_dt_opened: l, dose_dt_opened_expiry: m, dose_weight: n, dose_amount: o, dose_remaining_dose: p, dose_remarks: q, dose_next_appointment_dt: r, dose_number: s, dose_number_cycle: t, heart_text: u, heart_dt: v, heart_percentage: w, heart_remarks: x, dose_ago: y, expiry_ago: z, heart_ago: _1, user: _2, dt_now: _3, therapy_status: _4, therapy_dt: _5, therapy_reason: _6, therapy_remarks: _7, bottles: _8};
+																																	};
+																																};
+																															};
+																														};
+																													};
+																												};
+																											};
+																										};
+																									};
+																								};
+																							};
+																						};
+																					};
+																				};
+																			};
+																		};
+																	};
+																};
+															};
+														};
+													};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Data_Patient$PatientSimple = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return {id: a, patient_name: b, patient_age: c, patient_card: d, dose_dt: e, dose_dt_opened: f, dose_dt_opened_expiry: g, heart_dt: h, dose_ago: i, expiry_ago: j, heart_ago: k, therapy_status: l};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Data_Patient$DoseFrequency = F5(
+	function (a, b, c, d, e) {
+		return {restBetweenDoses: a, loops: b, initialMultiplier: c, nextMultiplier: d, finalMultiplier: e};
+	});
+var _user$project$Data_Patient$frequencyToDoseFrequency = function (freq) {
+	var _p3 = freq;
+	switch (_p3) {
+		case '一周一次':
+			return A5(
+				_user$project$Data_Patient$DoseFrequency,
+				{
+					ctor: '::',
+					_0: 7,
+					_1: {ctor: '[]'}
+				},
+				true,
+				6,
+				4,
+				4);
+		case '三周一次':
+			return A5(
+				_user$project$Data_Patient$DoseFrequency,
+				{
+					ctor: '::',
+					_0: 21,
+					_1: {ctor: '[]'}
+				},
+				true,
+				8,
+				6,
+				6);
+		case '一周一次 (三周用药，一周停药)':
+			return A5(
+				_user$project$Data_Patient$DoseFrequency,
+				{
+					ctor: '::',
+					_0: 7,
+					_1: {
+						ctor: '::',
+						_0: 7,
+						_1: {
+							ctor: '::',
+							_0: 14,
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				true,
+				6,
+				4,
+				4);
+		case '12周三周一次， 后来一周一次':
+			return A5(
+				_user$project$Data_Patient$DoseFrequency,
+				{
+					ctor: '::',
+					_0: 21,
+					_1: {
+						ctor: '::',
+						_0: 21,
+						_1: {
+							ctor: '::',
+							_0: 21,
+							_1: {
+								ctor: '::',
+								_0: 21,
+								_1: {
+									ctor: '::',
+									_0: 7,
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				},
+				false,
+				8,
+				6,
+				4);
+		case '8周两周一次， 后来一周一次':
+			return A5(
+				_user$project$Data_Patient$DoseFrequency,
+				{
+					ctor: '::',
+					_0: 14,
+					_1: {
+						ctor: '::',
+						_0: 14,
+						_1: {
+							ctor: '::',
+							_0: 14,
+							_1: {
+								ctor: '::',
+								_0: 14,
+								_1: {
+									ctor: '::',
+									_0: 7,
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				},
+				false,
+				6,
+				4,
+				4);
+		default:
+			return A5(
+				_user$project$Data_Patient$DoseFrequency,
+				{ctor: '[]'},
+				false,
+				0,
+				0,
+				0);
+	}
+};
+var _user$project$Data_Patient$frequencyToShouldBeHidden = function (freq) {
+	return function (x) {
+		return (!x.loops) || (_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$List$length(x.restBetweenDoses),
+			2) < 0);
+	}(
+		_user$project$Data_Patient$frequencyToDoseFrequency(freq));
+};
+var _user$project$Data_Patient$doseFrequencyToDays = function (freq) {
+	return _user$project$Data_Patient$dfFrequencyToDays(
+		_user$project$Data_Patient$frequencyToDoseFrequency(freq));
+};
+var _user$project$Data_Patient$increaseDoseNumberCycle = F2(
+	function (dose_number_cycle, freq) {
+		return A2(
+			_user$project$Data_Patient$dfIncreaseDoseNumberCycle,
+			dose_number_cycle,
+			_user$project$Data_Patient$frequencyToDoseFrequency(freq));
+	});
+var _user$project$Data_Patient$Finished = {ctor: 'Finished'};
+var _user$project$Data_Patient$Halt = {ctor: 'Halt'};
+var _user$project$Data_Patient$TemporaryHalt = {ctor: 'TemporaryHalt'};
+var _user$project$Data_Patient$Active = {ctor: 'Active'};
+var _user$project$Data_Patient$init = {
+	id: 0,
+	patient_name: '',
+	patient_age: '',
+	patient_card: '',
+	patient_therapy: A2(
+		_elm_lang$core$Maybe$withDefault,
+		'',
+		_elm_lang$core$List$head(_user$project$Constants$constants.chemotherapy_protocols)),
+	patient_frequency: A2(
+		_elm_lang$core$Maybe$withDefault,
+		'',
+		_elm_lang$core$List$head(_user$project$Constants$constants.injection_frequency)),
+	patient_initial_dose: 0,
+	patient_initial_dose_dt: _elm_lang$core$Date$fromTime(0),
+	patient_maintenance_dose: 0,
+	patient_nacl_amount: _user$project$Util$stringToInt(
+		A2(
+			_elm_lang$core$Maybe$withDefault,
+			'',
+			_elm_lang$core$List$head(_user$project$Constants$constants.nacl_amounts))),
+	dose_dt: _elm_lang$core$Date$fromTime(0),
+	dose_dt_opened: _elm_lang$core$Date$fromTime(0),
+	dose_dt_opened_expiry: _elm_lang$core$Date$fromTime(0),
+	dose_weight: 0,
+	dose_amount: 0,
+	dose_remaining_dose: 0,
+	dose_remarks: '',
+	dose_next_appointment_dt: _elm_lang$core$Date$fromTime(0),
+	dose_number: 1,
+	dose_number_cycle: 1,
+	heart_text: A2(
+		_elm_lang$core$Maybe$withDefault,
+		'',
+		_elm_lang$core$List$head(_user$project$Constants$constants.echocardiography_reports)),
+	heart_dt: _elm_lang$core$Date$fromTime(0),
+	heart_percentage: '',
+	heart_remarks: '',
+	dose_ago: 0,
+	expiry_ago: 0,
+	heart_ago: 0,
+	user: '',
+	dt_now: _elm_lang$core$Date$fromTime(0),
+	therapy_status: _user$project$Data_Patient$Active,
+	therapy_dt: _elm_lang$core$Date$fromTime(0),
+	therapy_reason: '',
+	therapy_remarks: '',
+	bottles: {ctor: '[]'}
+};
+var _user$project$Data_Patient$decodeTherapyStatus = function (str) {
+	var _p4 = str;
+	switch (_p4) {
+		case '暂停治疗':
+			return _user$project$Data_Patient$TemporaryHalt;
+		case '终止':
+			return _user$project$Data_Patient$Halt;
+		case '完成所有治疗':
+			return _user$project$Data_Patient$Finished;
+		default:
+			return _user$project$Data_Patient$Active;
+	}
+};
+var _user$project$Data_Patient$patientDecoder = function (dt_now) {
+	return A2(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$hardcoded,
+		{ctor: '[]'},
+		A4(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+			'therapy_remarks',
+			_elm_lang$core$Json_Decode$string,
+			'',
+			A4(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+				'therapy_reason',
+				_elm_lang$core$Json_Decode$string,
+				'',
+				A4(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+					'therapy_dt',
+					_user$project$Data_Date$decoder,
+					_elm_lang$core$Date$fromTime(0),
+					A4(
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+						'therapy_status',
+						A2(_elm_lang$core$Json_Decode$map, _user$project$Data_Patient$decodeTherapyStatus, _elm_lang$core$Json_Decode$string),
+						_user$project$Data_Patient$Active,
+						A2(
+							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$hardcoded,
+							dt_now,
+							A4(
+								_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+								'user',
+								_elm_lang$core$Json_Decode$string,
+								'',
+								A3(
+									_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+									'heart_dt',
+									A3(_user$project$Data_Patient$decodeAgo, dt_now, _user$project$Constants$constants.heart_report_frequency, true),
+									A3(
+										_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+										'dose_dt_opened',
+										A3(_user$project$Data_Patient$decodeAgo, dt_now, _user$project$Constants$constants.drug_shelf_life_days, true),
+										A3(
+											_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+											'dose_next_appointment_dt',
+											A3(_user$project$Data_Patient$decodeAgo, dt_now, 0, true),
+											A4(
+												_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+												'heart_remarks',
+												_elm_lang$core$Json_Decode$string,
+												'',
+												A3(
+													_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+													'heart_percentage',
+													_elm_lang$core$Json_Decode$string,
+													A3(
+														_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+														'heart_dt',
+														_user$project$Data_Date$decoder,
+														A3(
+															_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+															'heart_text',
+															_elm_lang$core$Json_Decode$string,
+															A3(
+																_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+																'dose_number_cycle',
+																_user$project$Util$decodeStringToInt,
+																A3(
+																	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+																	'dose_number',
+																	_user$project$Util$decodeStringToInt,
+																	A3(
+																		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+																		'dose_next_appointment_dt',
+																		_user$project$Data_Date$decoder,
+																		A4(
+																			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+																			'dose_remarks',
+																			_elm_lang$core$Json_Decode$string,
+																			'',
+																			A3(
+																				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+																				'dose_remaining_dose',
+																				_user$project$Util$decodeStringToInt,
+																				A3(
+																					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+																					'dose_amount',
+																					_user$project$Util$decodeStringToInt,
+																					A3(
+																						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+																						'dose_weight',
+																						_user$project$Util$decodeStringToInt,
+																						A3(
+																							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+																							'dose_dt_opened',
+																							A2(
+																								_elm_lang$core$Json_Decode$map,
+																								_user$project$Data_Date$addDays(_user$project$Constants$constants.drug_shelf_life_days),
+																								_user$project$Data_Date$decoder),
+																							A3(
+																								_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+																								'dose_dt_opened',
+																								_user$project$Data_Date$decoder,
+																								A3(
+																									_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+																									'dose_dt',
+																									_user$project$Data_Date$decoder,
+																									A3(
+																										_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+																										'patient_nacl_amount',
+																										_user$project$Util$decodeStringToInt,
+																										A3(
+																											_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+																											'patient_maintenance_dose',
+																											_user$project$Util$decodeStringToInt,
+																											A3(
+																												_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+																												'patient_initial_dose_dt',
+																												_user$project$Data_Date$decoder,
+																												A3(
+																													_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+																													'patient_initial_dose',
+																													_user$project$Util$decodeStringToInt,
+																													A3(
+																														_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+																														'patient_frequency',
+																														_elm_lang$core$Json_Decode$string,
+																														A3(
+																															_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+																															'patient_therapy',
+																															_elm_lang$core$Json_Decode$string,
+																															A3(
+																																_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+																																'patient_card',
+																																_elm_lang$core$Json_Decode$string,
+																																A3(
+																																	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+																																	'patient_age',
+																																	_elm_lang$core$Json_Decode$string,
+																																	A3(
+																																		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+																																		'patient_name',
+																																		_elm_lang$core$Json_Decode$string,
+																																		A4(
+																																			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+																																			'id',
+																																			_elm_lang$core$Json_Decode$int,
+																																			0,
+																																			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Data_Patient$Patient)))))))))))))))))))))))))))))))))));
+};
+var _user$project$Data_Patient$patientSimpleDecoder = function (dt_now) {
+	return A4(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+		'therapy_status',
+		A2(_elm_lang$core$Json_Decode$map, _user$project$Data_Patient$decodeTherapyStatus, _elm_lang$core$Json_Decode$string),
+		_user$project$Data_Patient$Active,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'heart_dt',
+			A3(_user$project$Data_Patient$decodeAgo, dt_now, 0, false),
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'dose_dt_opened',
+				A3(_user$project$Data_Patient$decodeAgo, dt_now, _user$project$Constants$constants.drug_shelf_life, true),
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'dose_dt',
+					A3(_user$project$Data_Patient$decodeAgo, dt_now, 0, false),
+					A3(
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+						'heart_dt',
+						_user$project$Data_Date$decoder,
+						A3(
+							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+							'dose_dt_opened',
+							A2(
+								_elm_lang$core$Json_Decode$map,
+								_user$project$Data_Date$addDays(28),
+								_user$project$Data_Date$decoder),
+							A3(
+								_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+								'dose_dt_opened',
+								_user$project$Data_Date$decoder,
+								A3(
+									_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+									'dose_dt',
+									_user$project$Data_Date$decoder,
+									A3(
+										_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+										'patient_card',
+										_elm_lang$core$Json_Decode$string,
+										A3(
+											_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+											'patient_age',
+											_elm_lang$core$Json_Decode$string,
+											A3(
+												_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+												'patient_name',
+												_elm_lang$core$Json_Decode$string,
+												A4(
+													_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+													'id',
+													_elm_lang$core$Json_Decode$int,
+													0,
+													_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Data_Patient$PatientSimple)))))))))))));
+};

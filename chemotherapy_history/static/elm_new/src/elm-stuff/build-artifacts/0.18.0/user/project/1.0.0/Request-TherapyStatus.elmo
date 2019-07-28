@@ -1,0 +1,16 @@
+var _user$project$Request_TherapyStatus$post = F3(
+	function (pid, data, responseMsg) {
+		var url = _user$project$Request_Helpers$apiUrl(
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				'/updateTherapyStatus/',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(pid),
+					'/')));
+		return A3(
+			_user$project$Request_Helpers$post,
+			url,
+			responseMsg,
+			_user$project$Data_TherapyStatus$encode(data));
+	});

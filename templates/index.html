@@ -1,0 +1,108 @@
+
+{% extends "base.html"%}
+{% block body_attr %}
+<body style="background: #fff;">
+{%endblock%}
+{% block content %}
+
+  <div class="container">
+
+
+    <form action='/search' class="form form-horizontal">
+
+      <br>
+      <div class="search_bar">
+
+        <div class="row">
+         <div class="col-sm-7">
+          <input type="text" class="form-control" placeholder="" name="search_term">
+        </div>
+
+        <div class="col-sm-5">
+          <input id="search_archive" type="checkbox" name="search_archive">
+          <label style="padding: 0 10px 0 10px;" for="search_archive">搜索归档</label>
+         <button type="submit" class="btn btn-default " id="search_button">
+          <i class="fas fa-search"></i> 搜索
+        </button>
+
+
+       <a id="newPatientButton" type="button" class="btn btn-default btn-inline" href="{% url 'new_patient' %}">
+        <!-- <i class="far fa-plus-square"></i> --><i class="fas fa-user-plus"></i> 新建患者
+      </a>
+
+    </div>
+  </div>
+</div>
+
+</form>
+
+<br>
+
+{% load my_filters %}
+
+
+
+<div class="row">
+    <table class="table table-hover">
+      <thead>         
+        {% for key in patients|first %}
+        <th class='fieldname'>
+                  {% if translation|lookup:key %}
+                    {{ translation|lookup:key }}
+                  {% else %}
+                    {{ key }}
+                  {% endif %}</th>
+        {% endfor %}
+      </thead>
+          
+{% for patient in patients %}
+    <tr>
+      {% for value in patient.values %}
+        {% if value == patient.patient_name %}
+        <td>
+          <a href="/patient/{{ patient.id }}">{{ value }}</a>
+        </td>
+        {% else %}
+        <td>
+
+          {{ value }}
+          
+        </td>
+        {% endif%}
+
+      {% endfor %}
+    </tr>
+
+{% endfor %}
+
+</table>
+<hr>
+<div class="col-sm-12" style="text-align: center;">
+    <span class="step-links">
+        {% if patients.has_previous %}
+            <a href="?page=1"><i class="fas fa-angle-double-left"></i></a>
+            <a href="?page={{ patients.previous_page_number }}"><i class="fas fa-angle-left"></i></a>
+        {% endif %}
+
+        <span class="current">
+到第 {{ patients.number }} 页 . 共 {{ patients.paginator.num_pages }} 页，
+        </span>
+
+        {% if patients.has_next %}
+            <a href="?page={{ patients.next_page_number }}"><i class="fas fa-angle-right"></i></a>
+            <a href="?page={{ patients.paginator.num_pages }}"><i class="fas fa-angle-double-right"></i></a>
+        {% endif %}
+    </span>
+</div>
+</div>
+
+{% block footer %}
+{% endblock %}
+
+</div>
+
+  
+</body>
+  {% block endofbody %}
+  {% endblock %}
+{% endblock %}

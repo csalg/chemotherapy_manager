@@ -1,0 +1,116 @@
+{% extends 'b.html' %}
+{% block head_extra %}
+      {% load static %}
+  <link rel="stylesheet" href={% static "css/login.css" %}>
+{% endblock %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+<body class="login_bg">
+<div class="wrapper">
+
+	<div class="line header">
+		<div class="x6 start">			
+			<img class="login_box-logo-img" src="{% static 'img/logos/sjtu.png' %}" alt="">
+		</div>
+		<div class="x6 end">			
+			<img class="login_box-logo-img" src="{% static 'img/logos/ruijin_1.png' %}" alt=""></div>
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="login_box-logo">
+	<div class="login_box-logo-logos">
+		<div class="login_box-logo-logos-logo">
+
+		</div>
+	</div>
+</div>
+
+<div class="login_box-title">
+		<div class="login-title-item ">上海交通大学医学院附属瑞金医院乳腺疾病诊治中心</div>
+		<div class="login-title-item ">乳腺癌患者靶向治疗信息化管理系统</div>
+	</div>
+		<div class="login_box">
+
+
+
+
+<div class="login_box-form">
+	<h4 style="text-align: center;">用户登录</h4>
+			<form method="post">
+				{% csrf_token %}
+
+				<!-- {{ form.as_p }} -->
+				<div class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input type="text" class="mdl-textfield__input" name="username">
+					<label for="username" class="mdl-textfield__label">用户名</label>
+					<span class = "mdl-textfield__error">必须填</span>
+				</div>
+				<br>
+				<div class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input type="text" class="mdl-textfield__input" name="password">
+					<label for="password" class="mdl-textfield__label">密码</label>
+					<span class = "mdl-textfield__error">必须填</span>
+				</div>
+				<br>
+				<button class="mdl-button mdl-js-button mdl-button--raised" type="submit">登录</button>
+			</form>
+			<br>
+			<div>
+				<a href="/signup">没有账号？ 在此注册。</a>
+			</div>
+		</div>
+	</div>
+
+		<footer>
+<!-- <div class="row">
+<div class="x4">
+<ul class="no-bullet">
+<h6>合作机构</h6>
+<li>
+<a class="th" href="http://www.rjhbc.com/">
+<div class="img">
+<img alt="rj_badge" title="上海交通大学医学院附属瑞金医院" src="/assets/badge_rj_100-71c2ebaee38556b2f52ebe114aecbcbb415a7c34ade2d46b37544d35572c6fd8.png">
+</div>
+</a>
+<a class="th" href="http://www.sjtu.edu.cn">
+<div class="img">
+<img alt="sjtu_badge" title="上海交通大学" src="/assets/badge_sjtu_100-155281df4b0d3bd43b8d0679ca0d9afb497ee0bae4dc115bf56d7a67d3b7ff20.png">
+</div>
+</a>
+</li>
+</ul>
+</div>
+<div class="x4">
+<ul class="no-bullet">
+<h6>联系方式</h6>
+<li>电话：（021）64370045总机，转601968</li>
+<li>地址：上海市瑞金二路197号（永嘉路口）</li>
+<li>邮件：sjtu_bcdb@163.com</li>
+</ul>
+</div>
+<div class="x4">
+<!-- <ul class="no-bullet">
+<h6>帮助</h6>
+<li>bug反馈</li>
+<li>使用说明</li>
+<li>隐私说明</li>
+</ul> 
+</div>
+</div> -->
+</footer>
+		
+	</div>
+  <script src={% static "vendors/mdl/material.js" %}></script>
+
+</body>
+  
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "patient_base.html" %}
+
+<!-- Window title -->
+{% block head_title %} 新建患者 {% endblock %}
+
+<!-- Page title -->
+{% block title %}
+	<i class="fas fa-user-plus"></i> 新建患者
+{% endblock %}
+
+<!-- Panel input fields (disabled or nothing) -->
+{% block personal_disabled %}{%endblock%}
+{% block dose_disabled %}{%endblock%}
+{% block heart_disabled %}{%endblock%}
+
+<!-- Select menus for therapies and heart report results -->
+{% block heart_text %}
+<select name="heart_text" id="heart_text" data-selected="三尖瓣狭窄" class="form-control" name="therapy">
+	<option></option>
+	<option value="遵医嘱">遵医嘱</option>
+	<option value="心超无异常">心超无异常</option>
+	<option value="二尖瓣狭窄">二尖瓣狭窄</option>
+	<option value="二尖瓣反流">二尖瓣反流</option>
+	<option value="二尖瓣关闭不全">二尖瓣关闭不全</option>
+	<option value="主动脉关闭不全">主动脉关闭不全</option>
+	<option value="三尖瓣狭窄">三尖瓣狭窄</option>
+	<option value="三尖瓣反流">三尖瓣反流</option>
+	<option value="三尖瓣关闭不全">三尖瓣关闭不全</option>
+	<option value="室间隔缺损">室间隔缺损</option>
+	<option value="肺动脉高压">肺动脉高压</option>
+	<option value="主动脉内径增宽">主动脉内径增宽</option>
+	<option value="右室增大与肥厚">右室增大与肥厚</option>
+	<option value="左心房增大">左心房增大</option>
+</select>	
+{% endblock %}
+
+{%block patient_therapy %}
+<select id="patient_therapy" name="patient_therapy" class="form-control" name="therapy">
+	<option></option>
+	<option id="EC-T" value="EC-T(H)">EC-T(H)</option>
+	<option id="T" value="T(H)">T(H)</option>
+	<option id="TCb" value="TCb(H)">TCb(H)</option>
+	<option id="EC-Wp" value="EC-Wp(H)">EC-Wp(H)</option>
+	<option id="P" value="P(H)">P(H)</option>
+	<option id="PCb" value="PCb(H)">PCb(H)</option>
+	<option id="EC-wPCb" value="EC-wPCb(H)">EC-wPCb(H)</option>
+	<option id="TC" value="TC(H)">TC(H)</option>
+	<option id="N" value="N(H)">N(H)</option>
+	<option id="X" value="X(H)">X(H)</option>
+	<option id="FEC-T" value="FEC-T(H)">FEC-T(H)</option>
+	<option id="ddAC-Wp" value="ddAC-Wp(H)">ddAC-Wp(H)</option>
+	<option id="ddAC-ddP" value="ddAC-ddP(H)">ddAC-ddP(H)</option>
+</select>
+{%endblock%}
+
+<!-- Form start -->
+{% block personal_panel_start %}
+<form class="form .form-horizontal" action="/newPatientForm/" method="post">
+                  {% csrf_token %}
+	
+{% endblock %}
+
+
+<!-- Footer -->
+{% block footer %}
+<div class="modal-footer">
+	<div class="col-sm-2" style="text-align: left;">
+	<button type="button" class="btn btn-default" onclick="location.href='/index';">
+        <i class="fas fa-home"></i> 回到主页
+		</button></div>
+	<div class="col-sm-8" style="text-align: right;"></div>
+
+	<div class="col-sm-2" style="text-align: right;">
+		<button type="submit" class="btn btn-default" onclick="location.href='/index';">
+	        <i class="fas fa-check"></i> 提交
+		</button>
+	</div>
+
+</div>
+</form>
+{% endblock %}
+

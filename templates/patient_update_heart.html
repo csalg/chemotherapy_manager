@@ -1,0 +1,60 @@
+{% extends "patient_main.html" %}
+
+{% block heart_disabled %}{%endblock%}
+
+{% block personal_panel_start %}
+<form class="form .form-horizontal" action="/patient/{{patient.id}}/updateHeart/" method="post">
+                  {% csrf_token %}
+
+
+{% endblock %}
+
+{% block heart_panel_end %}
+<div class="panel-footer">
+	<div class="row">
+		<div class="col-sm-8"></div>
+
+		<div class="col-sm-2">
+			<button id="editPersonalInfo" type="button" class="btn btn-default" onclick="location.href='/patient/{{patient.id}}/main';">
+				<i class="fas fa-undo-alt"></i> 回到患者消息
+			</button>
+		</div>
+
+
+
+		<div class="col-sm-2">
+
+			<button type="submit" class="btn btn-default">
+				<i class="fas fa-check"></i> 提交
+			</button>
+
+		</div>
+	</div>
+</div>
+</form>
+{% endblock %}
+
+{% block heart_text %}
+<select name="heart_text" id="heart_text" class="form-control" name="therapy">
+	<option value="遵医嘱">遵医嘱</option>
+	<option value="心超无异常">心超无异常</option>
+	<option value="二尖瓣狭窄">二尖瓣狭窄</option>
+	<option value="二尖瓣反流">二尖瓣反流</option>
+	<option value="二尖瓣关闭不全">二尖瓣关闭不全</option>
+	<option value="主动脉关闭不全">主动脉关闭不全</option>
+	<option value="三尖瓣狭窄">三尖瓣狭窄</option>
+	<option value="三尖瓣反流">三尖瓣反流</option>
+	<option value="三尖瓣关闭不全">三尖瓣关闭不全</option>
+	<option value="室间隔缺损">室间隔缺损</option>
+	<option value="肺动脉高压">肺动脉高压</option>
+	<option value="主动脉内径增宽">主动脉内径增宽</option>
+	<option value="右室增大与肥厚">右室增大与肥厚</option>
+	<option value="左心房增大">左心房增大</option>
+</select>	
+{% endblock %}
+
+
+{% block personal_panel_end %}
+{%endblock%}
+{% block dose_panel_end %}
+{%endblock%}

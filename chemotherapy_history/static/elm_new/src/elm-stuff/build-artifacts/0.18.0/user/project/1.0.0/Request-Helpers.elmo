@@ -1,0 +1,21 @@
+var _user$project$Request_Helpers$post = F3(
+	function (url, responseMsg, body) {
+		var expect = _elm_lang$http$Http$expectJson(_user$project$Data_DjangoResponse$decode_);
+		return A2(
+			_lukewestby$elm_http_builder$HttpBuilder$send,
+			responseMsg,
+			A2(
+				_lukewestby$elm_http_builder$HttpBuilder$withExpect,
+				expect,
+				A2(
+					_lukewestby$elm_http_builder$HttpBuilder$withBody,
+					body,
+					A3(
+						_lukewestby$elm_http_builder$HttpBuilder$withHeader,
+						'Content-Type',
+						'application/json',
+						_lukewestby$elm_http_builder$HttpBuilder$post(url)))));
+	});
+var _user$project$Request_Helpers$apiUrl = function (str) {
+	return A2(_elm_lang$core$Basics_ops['++'], 'http://127.0.0.1:8000/api', str);
+};

@@ -1,0 +1,775 @@
+var _user$project$Views_PatientForms_Base$modifyFC = F3(
+	function (recordModifierFunction, fieldName, model) {
+		var entry = A2(_elm_lang$core$Dict$get, fieldName, model.fc);
+		var _p0 = entry;
+		if (_p0.ctor === 'Just') {
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{
+					fc: A3(
+						_elm_lang$core$Dict$insert,
+						fieldName,
+						recordModifierFunction(_p0._0),
+						model.fc)
+				});
+		} else {
+			return model;
+		}
+	});
+var _user$project$Views_PatientForms_Base$removeField = F2(
+	function (fieldName, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				fc: A2(_elm_lang$core$Dict$remove, fieldName, model.fc)
+			});
+	});
+var _user$project$Views_PatientForms_Base$getFieldName = F2(
+	function (fieldName, model) {
+		return A2(_elm_lang$core$Dict$get, fieldName, model.fc);
+	});
+var _user$project$Views_PatientForms_Base$modifyFormControls = F3(
+	function (fieldName, model, recordModifier) {
+		var _p1 = A2(_user$project$Views_PatientForms_Base$getFieldName, fieldName, model);
+		if (_p1.ctor === 'Just') {
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{
+					fc: A3(
+						_elm_lang$core$Dict$insert,
+						fieldName,
+						recordModifier(_p1._0),
+						model.fc)
+				});
+		} else {
+			return model;
+		}
+	});
+var _user$project$Views_PatientForms_Base$setDisabled = F3(
+	function (fieldName, val, model) {
+		return A3(
+			_user$project$Views_PatientForms_Base$modifyFormControls,
+			fieldName,
+			model,
+			function (record) {
+				return _elm_lang$core$Native_Utils.update(
+					record,
+					{disabled: val});
+			});
+	});
+var _user$project$Views_PatientForms_Base$removeActions = F2(
+	function (fieldName, model) {
+		return A3(
+			_user$project$Views_PatientForms_Base$modifyFormControls,
+			fieldName,
+			model,
+			function (record) {
+				return _elm_lang$core$Native_Utils.update(
+					record,
+					{
+						actions: {ctor: '[]'}
+					});
+			});
+	});
+var _user$project$Views_PatientForms_Base$appendActions = F3(
+	function (fieldName, newActions, model) {
+		var entry = A2(_elm_lang$core$Dict$get, fieldName, model.fc);
+		var _p2 = entry;
+		if (_p2.ctor === 'Nothing') {
+			return model;
+		} else {
+			return A3(
+				_user$project$Views_PatientForms_Base$modifyFormControls,
+				fieldName,
+				model,
+				function (record) {
+					return _elm_lang$core$Native_Utils.update(
+						record,
+						{
+							actions: A2(_elm_lang$core$Basics_ops['++'], _p2._0.actions, newActions)
+						});
+				});
+		}
+	});
+var _user$project$Views_PatientForms_Base$appendInputArgs = F3(
+	function (fieldName, newArgs, model) {
+		var entry = A2(_elm_lang$core$Dict$get, fieldName, model.fc);
+		var _p3 = entry;
+		if (_p3.ctor === 'Nothing') {
+			return model;
+		} else {
+			return A3(
+				_user$project$Views_PatientForms_Base$modifyFormControls,
+				fieldName,
+				model,
+				function (record) {
+					return _elm_lang$core$Native_Utils.update(
+						record,
+						{
+							inputArgs: A2(_elm_lang$core$Basics_ops['++'], _p3._0.inputArgs, newArgs)
+						});
+				});
+		}
+	});
+var _user$project$Views_PatientForms_Base$makeDisplayOnly = F3(
+	function (fieldName, allowInput, model) {
+		return A3(
+			_user$project$Views_PatientForms_Base$modifyFormControls,
+			fieldName,
+			model,
+			function (record) {
+				return _elm_lang$core$Native_Utils.update(
+					record,
+					{displayOnly: allowInput, disabled: allowInput});
+			});
+	});
+var _user$project$Views_PatientForms_Base$toggleHidden = F3(
+	function (fieldName, val, model) {
+		return A3(
+			_user$project$Views_PatientForms_Base$modifyFormControls,
+			fieldName,
+			model,
+			function (record) {
+				return _elm_lang$core$Native_Utils.update(
+					record,
+					{hidden: val});
+			});
+	});
+var _user$project$Views_PatientForms_Base$changeWidth = F3(
+	function (fieldName, val, model) {
+		return A3(
+			_user$project$Views_PatientForms_Base$modifyFormControls,
+			fieldName,
+			model,
+			function (record) {
+				return _elm_lang$core$Native_Utils.update(
+					record,
+					{width: val});
+			});
+	});
+var _user$project$Views_PatientForms_Base$updateVal = F5(
+	function (fieldName, val, txt, formatter, model) {
+		return A3(
+			_user$project$Views_PatientForms_Base$modifyFormControls,
+			fieldName,
+			model,
+			function (record) {
+				return _elm_lang$core$Native_Utils.update(
+					record,
+					{
+						value: formatter(val),
+						helpText: txt
+					});
+			});
+	});
+var _user$project$Views_PatientForms_Base$updateValue = F4(
+	function (fieldName, val, txt, model) {
+		return A5(_user$project$Views_PatientForms_Base$updateVal, fieldName, val, txt, _elm_lang$core$Basics$toString, model);
+	});
+var _user$project$Views_PatientForms_Base$updateValue_ = F4(
+	function (fieldName, val, txt, model) {
+		return A3(
+			_user$project$Views_PatientForms_Base$modifyFormControls,
+			fieldName,
+			model,
+			function (record) {
+				return _elm_lang$core$Native_Utils.update(
+					record,
+					{value: val, helpText: txt});
+			});
+	});
+var _user$project$Views_PatientForms_Base$buttons = function (msg) {
+	return {
+		ctor: '::',
+		_0: A2(
+			_rundis$elm_bootstrap$Bootstrap_Button$button,
+			{
+				ctor: '::',
+				_0: _rundis$elm_bootstrap$Bootstrap_Button$outlinePrimary,
+				_1: {
+					ctor: '::',
+					_0: _rundis$elm_bootstrap$Bootstrap_Button$onClick(msg),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('提交'),
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	};
+};
+var _user$project$Views_PatientForms_Base$update = F2(
+	function (msg, model) {
+		var _p4 = msg;
+		return A3(_user$project$Views_PatientForms_Base$makeDisplayOnly, _p4._0, !_p4._1, model);
+	});
+var _user$project$Views_PatientForms_Base$FormControl = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return function (n) {
+														return function (o) {
+															return function (p) {
+																return function (q) {
+																	return function (r) {
+																		return function (s) {
+																			return {fieldName: a, value: b, order: c, labelText: d, width: e, inputType: f, placeholder: g, helpText: h, options: i, disabled: j, required: k, allowOverride: l, validationState: m, displayOnly: n, min: o, max: p, hidden: q, inputArgs: r, actions: s};
+																		};
+																	};
+																};
+															};
+														};
+													};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Views_PatientForms_Base$Action = F4(
+	function (a, b, c, d) {
+		return {actionName: a, typ: b, txt: c, onchk: d};
+	});
+var _user$project$Views_PatientForms_Base$Notification = F2(
+	function (a, b) {
+		return {condition: a, txt: b};
+	});
+var _user$project$Views_PatientForms_Base$Valid = {ctor: 'Valid'};
+var _user$project$Views_PatientForms_Base$Invalid = {ctor: 'Invalid'};
+var _user$project$Views_PatientForms_Base$Empty = {ctor: 'Empty'};
+var _user$project$Views_PatientForms_Base$displayOnly = function (fc) {
+	return _elm_lang$core$Native_Utils.update(
+		fc,
+		{disabled: true, validationState: _user$project$Views_PatientForms_Base$Empty, displayOnly: true});
+};
+var _user$project$Views_PatientForms_Base$Checkbox = {ctor: 'Checkbox'};
+var _user$project$Views_PatientForms_Base$render = function (fc) {
+	var viewAction = function (_p5) {
+		var _p6 = _p5;
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('radio'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$input,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$type_(_p6.typ),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$name(_p6.actionName),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onCheck(_p6.onchk),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$label,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(_p6.txt),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	};
+	var hiddenVal = fc.displayOnly ? A2(
+		_elm_lang$html$Html$input,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$name(fc.fieldName),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$type_('hidden'),
+				_1: {
+					ctor: '::',
+					_0: A2(_elm_lang$html$Html_Attributes$attribute, 'value', fc.value),
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		{ctor: '[]'}) : _elm_lang$html$Html$text('');
+	var viewOption = function (optionValue) {
+		return A2(
+			_elm_lang$html$Html$option,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$value(optionValue),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(optionValue),
+				_1: {ctor: '[]'}
+			});
+	};
+	var inpt = function (extra) {
+		var attrs = fc.hidden ? {
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$type_('hidden'),
+			_1: {ctor: '[]'}
+		} : (fc.displayOnly ? {
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$type_('text'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$value(fc.value),
+				_1: {ctor: '[]'}
+			}
+		} : extra);
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$input,
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						attrs,
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							fc.inputArgs,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$name(fc.fieldName),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class(
+										_elm_lang$core$Native_Utils.eq(fc.inputType, _user$project$Views_PatientForms_Base$Checkbox) ? '' : 'form-control'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$disabled(fc.disabled || fc.displayOnly),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$required(fc.required),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							})),
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: hiddenVal,
+					_1: {ctor: '[]'}
+				}
+			});
+	};
+	var inputSelect = fc.displayOnly ? inpt(
+		{ctor: '[]'}) : A2(
+		_elm_lang$html$Html$select,
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$name(fc.fieldName),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$required(fc.required),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('form-control'),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			fc.inputArgs),
+		A2(_elm_lang$core$List$map, viewOption, fc.options));
+	var inputDT = (fc.hidden || fc.displayOnly) ? inpt(
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$type_('text'),
+			_1: {ctor: '[]'}
+		}) : A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _rundis$elm_bootstrap$Bootstrap_Form_Input$datetimeLocal(
+				{
+					ctor: '::',
+					_0: _rundis$elm_bootstrap$Bootstrap_Form_Input$small,
+					_1: {
+						ctor: '::',
+						_0: _rundis$elm_bootstrap$Bootstrap_Form_Input$attrs(
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$name(fc.fieldName),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$disabled(fc.disabled),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$required(fc.required),
+											_1: {ctor: '[]'}
+										}
+									}
+								},
+								fc.inputArgs)),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: hiddenVal,
+				_1: {ctor: '[]'}
+			}
+		});
+	var ifNotHidden = function (what) {
+		return fc.hidden ? _elm_lang$html$Html$text('') : what;
+	};
+	var actions = A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		A2(_elm_lang$core$List$map, viewAction, fc.actions));
+	var labl = A2(
+		_elm_lang$html$Html$label,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('control-label'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$for(fc.fieldName),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text(fc.labelText),
+			_1: {ctor: '[]'}
+		});
+	var wrapper = function (inpt) {
+		var hasWhat = function () {
+			var _p7 = fc.validationState;
+			switch (_p7.ctor) {
+				case 'Empty':
+					return '';
+				case 'Invalid':
+					return ' has-error';
+				default:
+					return ' has-success';
+			}
+		}();
+		var extraDivArgs = fc.hidden ? {
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$style(
+				{
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'display', _1: 'none'},
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		} : {ctor: '[]'};
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$id(fc.fieldName),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class(
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'form-group col-sm-',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								_elm_lang$core$Basics$toString(fc.width),
+								hasWhat))),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: ifNotHidden(
+					A2(
+						_elm_lang$html$Html$label,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('control-label'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$for(fc.fieldName),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$style(_user$project$Styles$formControlLabel),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(fc.labelText),
+							_1: {ctor: '[]'}
+						})),
+				_1: {
+					ctor: '::',
+					_0: inpt,
+					_1: {
+						ctor: '::',
+						_0: ifNotHidden(
+							A2(
+								_elm_lang$html$Html$span,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class(hasWhat),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(fc.helpText),
+									_1: {ctor: '[]'}
+								})),
+						_1: {
+							ctor: '::',
+							_0: ifNotHidden(actions),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			});
+	};
+	if (fc.hidden) {
+		return _elm_lang$html$Html$text('');
+	} else {
+		var _p8 = fc.inputType;
+		switch (_p8.ctor) {
+			case 'Inpt':
+				return wrapper(
+					inpt(
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$type_(_p8._0),
+								_1: {ctor: '[]'}
+							},
+							fc.inputArgs)));
+			case 'DateInput':
+				return wrapper(inputDT);
+			case 'OptionsInput':
+				return wrapper(inputSelect);
+			default:
+				return wrapper(
+					inpt(fc.inputArgs));
+		}
+	}
+};
+var _user$project$Views_PatientForms_Base$view = function (fcDict) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('panel-body'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('row'),
+					_1: {ctor: '[]'}
+				},
+				A2(
+					_elm_lang$core$List$map,
+					_user$project$Views_PatientForms_Base$render,
+					A2(
+						_elm_lang$core$List$sortBy,
+						function (_) {
+							return _.order;
+						},
+						_elm_lang$core$Dict$values(fcDict)))),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Views_PatientForms_Base$viewAsForm = F3(
+	function (fcs, notifications, submitMsg) {
+		var notifications_html = function () {
+			var perhaps = function (_p9) {
+				var _p10 = _p9;
+				return _p10.condition ? {
+					ctor: '::',
+					_0: _elm_lang$html$Html$b,
+					_1: {ctor: '[]'}
+				} : {ctor: '[]'};
+			};
+			var toLi = function (x) {
+				return A2(
+					_elm_lang$html$Html$li,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(x),
+						_1: {ctor: '[]'}
+					});
+			};
+			return A2(
+				_elm_lang$core$List$map,
+				toLi,
+				A2(
+					_elm_lang$core$List$map,
+					function (x) {
+						return x.txt;
+					},
+					A2(
+						_elm_lang$core$List$filter,
+						function (x) {
+							return x.condition;
+						},
+						notifications)));
+		}();
+		return A2(
+			_elm_lang$html$Html$form,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$method('post'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onSubmit(submitMsg),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _user$project$Views_PatientForms_Base$view(fcs),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$core$Native_Utils.eq(
+						notifications_html,
+						{ctor: '[]'}) ? _elm_lang$html$Html$text('') : A2(
+						_elm_lang$html$Html$hr,
+						{ctor: '[]'},
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$core$Native_Utils.eq(
+							notifications_html,
+							{ctor: '[]'}) ? _elm_lang$html$Html$text('') : A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('panel-body'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$h6,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$i,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('fas fa-exclamation-circle'),
+												_1: {ctor: '[]'}
+											},
+											{ctor: '[]'}),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(' 提醒'),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$ul,
+										{ctor: '[]'},
+										notifications_html),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$br,
+											{ctor: '[]'},
+											{ctor: '[]'}),
+										_1: {ctor: '[]'}
+									}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+	});
+var _user$project$Views_PatientForms_Base$OptionsInput = {ctor: 'OptionsInput'};
+var _user$project$Views_PatientForms_Base$DateInput = {ctor: 'DateInput'};
+var _user$project$Views_PatientForms_Base$Inpt = function (a) {
+	return {ctor: 'Inpt', _0: a};
+};
+var _user$project$Views_PatientForms_Base$formControlDefault = {
+	fieldName: '',
+	value: '',
+	order: 0,
+	labelText: '',
+	width: 4,
+	inputType: _user$project$Views_PatientForms_Base$Inpt('text'),
+	placeholder: '',
+	helpText: '',
+	options: {ctor: '[]'},
+	disabled: false,
+	required: true,
+	allowOverride: false,
+	validationState: _user$project$Views_PatientForms_Base$Empty,
+	displayOnly: false,
+	max: 9999999999999999,
+	min: 0,
+	hidden: false,
+	inputArgs: {ctor: '[]'},
+	actions: {ctor: '[]'}
+};
+var _user$project$Views_PatientForms_Base$AllowManualInput = F2(
+	function (a, b) {
+		return {ctor: 'AllowManualInput', _0: a, _1: b};
+	});
+var _user$project$Views_PatientForms_Base$manualInputAction = F2(
+	function (fieldName, msgWrapper) {
+		return {
+			ctor: '::',
+			_0: A4(
+				_user$project$Views_PatientForms_Base$Action,
+				'',
+				'checkbox',
+				'直接输入',
+				function (val) {
+					return msgWrapper(
+						A2(_user$project$Views_PatientForms_Base$AllowManualInput, fieldName, val));
+				}),
+			_1: {ctor: '[]'}
+		};
+	});

@@ -1,0 +1,144 @@
+{% extends "patient_main.html" %}
+
+<!-- This is to make sure the input fields are enabled -->
+{% block dose_disabled %}{%endblock%}
+<!-- Deals with the form tags as well as panel footer -->
+
+<!-- Disables hanging the bottle opened date -->
+{% block bottle_disabled %}disabled{% endblock %}
+
+<!-- Hides footers from other two panels -->
+{% block personal_panel_end %}
+{%endblock%}
+{% block dose_panel_end %}
+{%endblock%}
+{% block heart_panel_end %}
+{%endblock%}
+
+<!-- Deals with the dose logic and input fields -->
+<!-- 
+Warning: The dose is under the maintenance level. Suggest: use remaining medicine in this bottle and open a new one. -->
+
+
+
+
+{% block dose_panel %}
+<form class="form .form-horizontal" action="{% block send_to %}/patient/{{patient.id}}/updateStop/{% endblock %}" method="post">
+	{% csrf_token %}
+
+	<div class="row">	
+		<label class="control-label col-sm-3 form_label">上次用药日期：</label>
+		<div class="col-sm-4">
+			<input type="date" value="{{ patient.dose_dt }}"  class="form-control" placeholder=""  disabled>
+		</div>
+
+		<label class="control-label col-sm-2 form_label">上次体重(kg)：</label>
+		<div class="col-sm-2">
+			<input type="text" class="form-control" placeholder="体重" value="{{ patient.dose_weight }}"  disabled>
+		</div>
+	</div>	
+
+	<div class="row">	
+		<label class="control-label col-sm-3 form_label">本药开封日期：</label>
+		<div class="col-sm-4">
+			<input type="date" value="{{ patient.dose_dt_opened }}"   name="dose_dt_opened" class="form-control" placeholder="" disabled>
+		</div>
+<label class="control-label col-sm-2 form_label">本药有效期:</label>
+<div class="col-sm-3">
+	<input class="form-control"  value="{{ expiration_date }}" disabled>
+</div>
+	</div>	
+
+	<div class="row">
+
+		<label class="control-label col-sm-3 form_label">上次剂量(mg)：</label>
+		<div class="col-sm-3">
+			<input value="{{ patient.dose_amount }}" type="text" class="form-control" placeholder="剂量(mg)" disabled>
+		</div>
+
+		<label class="control-label col-sm-3 form_label">上次使用后剩余剂量(mg)：</label>
+		<div class="col-sm-3">
+			<input value="{{ patient.dose_remaining_dose }}"   type="text" class="form-control" placeholder="剩余剂量(mg)" disabled>
+		</div>
+	</div>
+
+	<div class="row">
+
+	</div>
+
+	<div class="row">
+		<div class="col-sm-3">
+			<label class="control-label col-sm-8 form_label">上次备注: </label>
+		</div>
+		<div class="col-sm-9">
+			<input type="text" value="{{patient.dose_remarks}}" class="form-control" placeholder="备注" disabled>
+		</div>
+	</div>
+
+
+
+	<br><hr><br>
+
+
+{% load my_filters %}
+
+
+
+<div class="row">
+
+	<label class="control-label form_label col-sm-3">				
+		{{ patient.translation|lookup:'drug_stop_reasons' }}
+	</label>
+	<div class="col-sm-9">
+		<select name="patient_stop_drug_reason" class="form-control" name="therapy">
+			<option></option>
+			{% for reason in patient.drug_stop_reasons %}
+			<option value="{{ reason}}">{{ reason}}</option>
+			{% endfor %}
+		</select>
+	</div>
+</div>
+
+<div class="row">
+
+      [ ("patient_stop_drug_reason", {formControlDefault | fieldName="patient_stop_drug_reason", labelText="心超报告：", inputType=OptionsInput, options=constants.drug_stop_reasons, width=12, order=1, panel=DoseE})
+       , ("patient_stop_drug_temporary_reason", {formControlDefault | fieldName="heart_dt", labelText="心超日期：", inputType=OptionsInput, options=constants.drug_stop_reasons_temp, width=12, order=2, panel=DoseE})
+       , ("heart_percentage", {formControlDefault | fieldName="heart_percentage", labelText="左心射血分数(%)：", inputType=NumberInput, order=3, width=6, panel=HeartE})
+       , ("heart_remarks", {formControlDefault | fieldName="heart_remarks", labelText="备注：", width=12, order=4, panel=HeartE, required=False})
+       ])
+	<label class="control-label form_label col-sm-3">				
+
+		{{ patient.translation|lookup:'drug_stop_reasons_temp' }}
+
+	</label>
+
+	<div class="col-sm-9">
+		<select name="patient_stop_drug_temporary_reason" class="form-control" name="therapy">
+			<option></option>
+			{% for reason in patient.drug_stop_reasons_temp %}
+			<option value="{{ reason}}">{{ reason}}</option>
+			{% endfor %}
+		</select>
+
+	</div>
+	<br>
+	
+	<hr>
+	<br>
+</div>
+
+
+</div>
+
+<div class="panel-footer">
+			<button type="button" class="btn btn-default btn-inline" onclick="location.href='/patient/{{patient.id}}/main';">
+				<i class="fas fa-undo-alt"></i> 回到患者消息
+			</button>
+
+			<button type="submit" class="btn btn-default btn-inline">
+				<i class="fas fa-archive"></i> 确定归档
+			</button>
+</div>
+</form>
+
+{%endblock%}

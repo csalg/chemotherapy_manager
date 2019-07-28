@@ -1,0 +1,23 @@
+{% extends "base.html"%}
+
+{% block head_title %}患者 {% endblock %}
+
+{% block content %}
+{% csrf_token %}
+
+<div class="container" id='embedElm'>
+	
+
+
+</div>
+<script src="/static/elm_new/patients.js"></script>
+  	<!-- <script type="text/javascript">Elm.Main.fullscreen()</script> -->
+
+  <script type="text/javascript">
+    var csrf_token = document.querySelector("input[name='csrfmiddlewaretoken']").value
+  	var app = Elm.Main.fullscreen(csrf_token);
+
+  </script>
+
+{%endblock%}
+

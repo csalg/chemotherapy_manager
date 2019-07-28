@@ -1,0 +1,1567 @@
+var _user$project$Page_Patient$view2 = function (model) {
+	var _p0 = model.patient;
+	if (_p0.ctor === 'Nothing') {
+		return _elm_lang$html$Html$text('本患者不存在或者你不能看到她的消息');
+	} else {
+		var _p2 = _p0._0;
+		var doses = _elm_lang$core$Native_Utils.update(
+			_user$project$Views_PatientInfoCard$profileSectionInit,
+			{
+				header: _elm_lang$core$Maybe$Just(
+					A3(_user$project$Views_PatientInfoCard$Header, '最近用药历史', 'fas fa-pills', '')),
+				contentRows: {
+					ctor: '::',
+					_0: {
+						ctor: '::',
+						_0: _user$project$Views_DoseTable$view(model.doses),
+						_1: {ctor: '[]'}
+					},
+					_1: {ctor: '[]'}
+				}
+			});
+		var dose = _elm_lang$core$Native_Utils.update(
+			_user$project$Views_PatientInfoCard$profileSectionInit,
+			{
+				header: _elm_lang$core$Maybe$Just(
+					A3(_user$project$Views_PatientInfoCard$Header, '最新用药信息', 'fas fa-pills', '')),
+				contentRows: A2(
+					_elm_lang$core$List$map,
+					_elm_lang$core$List$map(_user$project$Views_PatientInfoCard$viewProfileInfoItem),
+					{
+						ctor: '::',
+						_0: {
+							ctor: '::',
+							_0: A6(
+								_user$project$Views_PatientInfoCard$InfoItem,
+								_elm_lang$core$Maybe$Just(4),
+								{ctor: '[]'},
+								'fas fa-female',
+								{ctor: '[]'},
+								_elm_lang$core$Basics$toString(_p2.dose_weight),
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: A6(
+									_user$project$Views_PatientInfoCard$InfoItem,
+									_elm_lang$core$Maybe$Just(4),
+									{ctor: '[]'},
+									'far fa-id-card',
+									{ctor: '[]'},
+									_elm_lang$core$Basics$toString(_p2.dose_amount),
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: A6(
+										_user$project$Views_PatientInfoCard$InfoItem,
+										_elm_lang$core$Maybe$Just(4),
+										{ctor: '[]'},
+										'far fa-id-card',
+										{ctor: '[]'},
+										_elm_lang$core$Basics$toString(_p2.dose_remaining_dose),
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '::',
+								_0: A6(
+									_user$project$Views_PatientInfoCard$InfoItem,
+									_elm_lang$core$Maybe$Just(6),
+									{ctor: '[]'},
+									'fas fa-female',
+									{ctor: '[]'},
+									_user$project$Data_Date$dateToString(_p2.dose_dt_opened),
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: A6(
+										_user$project$Views_PatientInfoCard$InfoItem,
+										_elm_lang$core$Maybe$Just(6),
+										{ctor: '[]'},
+										'fas fa-female',
+										{ctor: '[]'},
+										_user$project$Data_Date$dateToString(_p2.dose_dt_opened_expiry),
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								}
+							},
+							_1: {ctor: '[]'}
+						}
+					})
+			});
+		var heart = _elm_lang$core$Native_Utils.update(
+			_user$project$Views_PatientInfoCard$profileSectionInit,
+			{
+				header: _elm_lang$core$Maybe$Just(
+					A3(_user$project$Views_PatientInfoCard$Header, '心超报告', 'fas fa-heartbeat', '')),
+				contentRows: A2(
+					_elm_lang$core$List$map,
+					_elm_lang$core$List$map(_user$project$Views_PatientInfoCard$viewProfileInfoItem),
+					{
+						ctor: '::',
+						_0: {
+							ctor: '::',
+							_0: A6(
+								_user$project$Views_PatientInfoCard$InfoItem,
+								_elm_lang$core$Maybe$Just(9),
+								{ctor: '[]'},
+								'fas fa-female',
+								{ctor: '[]'},
+								_p2.heart_text,
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: A6(
+									_user$project$Views_PatientInfoCard$InfoItem,
+									_elm_lang$core$Maybe$Just(3),
+									{ctor: '[]'},
+									'far fa-id-card',
+									{ctor: '[]'},
+									_p2.heart_percentage,
+									{ctor: '[]'}),
+								_1: {ctor: '[]'}
+							}
+						},
+						_1: {ctor: '[]'}
+					})
+			});
+		var personalInfo = _elm_lang$core$Native_Utils.update(
+			_user$project$Views_PatientInfoCard$profileSectionInit,
+			{
+				header: _elm_lang$core$Maybe$Just(
+					A3(_user$project$Views_PatientInfoCard$Header, '基本信息', 'fas fa-user-tie', '')),
+				contentRows: A2(
+					_elm_lang$core$List$map,
+					_elm_lang$core$List$map(_user$project$Views_PatientInfoCard$viewProfileInfoItem),
+					{
+						ctor: '::',
+						_0: {
+							ctor: '::',
+							_0: A6(
+								_user$project$Views_PatientInfoCard$InfoItem,
+								_elm_lang$core$Maybe$Just(6),
+								{ctor: '[]'},
+								'fas fa-female',
+								{ctor: '[]'},
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									_p2.patient_name,
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										', ',
+										A2(_elm_lang$core$Basics_ops['++'], _p2.patient_age, ' 岁'))),
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: A6(
+									_user$project$Views_PatientInfoCard$InfoItem,
+									_elm_lang$core$Maybe$Just(6),
+									{ctor: '[]'},
+									'far fa-id-card',
+									{ctor: '[]'},
+									_p2.patient_card,
+									{ctor: '[]'}),
+								_1: {ctor: '[]'}
+							}
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '::',
+								_0: A6(
+									_user$project$Views_PatientInfoCard$InfoItem,
+									_elm_lang$core$Maybe$Just(6),
+									{ctor: '[]'},
+									'fas fa-medkit',
+									{ctor: '[]'},
+									_p2.patient_therapy,
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: A6(
+										_user$project$Views_PatientInfoCard$InfoItem,
+										_elm_lang$core$Maybe$Just(6),
+										{ctor: '[]'},
+										'far fa-calendar-alt',
+										{ctor: '[]'},
+										_p2.patient_frequency,
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								}
+							},
+							_1: {ctor: '[]'}
+						}
+					})
+			});
+		var _p1 = A3(_user$project$Views_ExpressForm$decisionTree, _p2, true, _user$project$Route$Patients);
+		var infoItems = _p1._0;
+		var importantItems = _p1._1;
+		var footerButtons = _p1._2;
+		var importantInfo = _elm_lang$core$Native_Utils.update(
+			_user$project$Views_PatientInfoCard$profileSectionInit,
+			{
+				contentRows: {
+					ctor: '::',
+					_0: A2(_elm_lang$core$List$map, _user$project$Views_PatientInfoCard$viewImportantItem, importantItems),
+					_1: {ctor: '[]'}
+				}
+			});
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('container'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('line profile-wrapper'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('x6'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _user$project$Views_PatientInfoCard$viewProfileSection(personalInfo),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('x6'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _user$project$Views_PatientInfoCard$viewProfileSection(dose),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('x12'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _user$project$Views_PatientInfoCard$viewProfileSection(doses),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('x6'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _user$project$Views_PatientInfoCard$viewProfileSection(heart),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Util$debug(
+						_elm_lang$core$Basics$toString(model)),
+					_1: {ctor: '[]'}
+				}
+			});
+	}
+};
+var _user$project$Page_Patient$colorRanger = F3(
+	function (lower, upper, val) {
+		var gt = (_elm_lang$core$Native_Utils.cmp(lower, upper) < 0) ? F2(
+			function (x, y) {
+				return _elm_lang$core$Native_Utils.cmp(x, y) > 0;
+			}) : F2(
+			function (x, y) {
+				return _elm_lang$core$Native_Utils.cmp(x, y) < 0;
+			});
+		var lt = (_elm_lang$core$Native_Utils.cmp(lower, upper) < 0) ? F2(
+			function (x, y) {
+				return _elm_lang$core$Native_Utils.cmp(x, y) < 0;
+			}) : F2(
+			function (x, y) {
+				return _elm_lang$core$Native_Utils.cmp(x, y) > 0;
+			});
+		return A2(lt, val, lower) ? {
+			ctor: '::',
+			_0: _debois$elm_mdl$Material_Color$background(
+				A2(_debois$elm_mdl$Material_Color$color, _debois$elm_mdl$Material_Color$LightBlue, _debois$elm_mdl$Material_Color$S50)),
+			_1: {ctor: '[]'}
+		} : (((A2(gt, val, lower) && A2(lt, val, upper)) || _elm_lang$core$Native_Utils.eq(val, lower)) ? {
+			ctor: '::',
+			_0: _debois$elm_mdl$Material_Color$background(
+				A2(_debois$elm_mdl$Material_Color$color, _debois$elm_mdl$Material_Color$Amber, _debois$elm_mdl$Material_Color$S300)),
+			_1: {ctor: '[]'}
+		} : {
+			ctor: '::',
+			_0: _debois$elm_mdl$Material_Color$background(
+				A2(_debois$elm_mdl$Material_Color$color, _debois$elm_mdl$Material_Color$DeepOrange, _debois$elm_mdl$Material_Color$S300)),
+			_1: {ctor: '[]'}
+		});
+	});
+var _user$project$Page_Patient$Model = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {id: a, dt_now: b, error: c, patient: d, modal: e, postTo: f, mdl: g, doses: h};
+	});
+var _user$project$Page_Patient$Express = function (a) {
+	return {ctor: 'Express', _0: a};
+};
+var _user$project$Page_Patient$TherapyStatus = function (a) {
+	return {ctor: 'TherapyStatus', _0: a};
+};
+var _user$project$Page_Patient$Heart = function (a) {
+	return {ctor: 'Heart', _0: a};
+};
+var _user$project$Page_Patient$Dose = function (a) {
+	return {ctor: 'Dose', _0: a};
+};
+var _user$project$Page_Patient$PersonalInfo = function (a) {
+	return {ctor: 'PersonalInfo', _0: a};
+};
+var _user$project$Page_Patient$Hidden = {ctor: 'Hidden'};
+var _user$project$Page_Patient$init = function (pid) {
+	return A8(
+		_user$project$Page_Patient$Model,
+		pid,
+		_elm_lang$core$Date$fromTime(0),
+		_elm_lang$core$Maybe$Nothing,
+		_elm_lang$core$Maybe$Nothing,
+		_user$project$Page_Patient$Hidden,
+		'',
+		_debois$elm_mdl$Material$model,
+		{ctor: '[]'});
+};
+var _user$project$Page_Patient$ChangePage = function (a) {
+	return {ctor: 'ChangePage', _0: a};
+};
+var _user$project$Page_Patient$Mdl = function (a) {
+	return {ctor: 'Mdl', _0: a};
+};
+var _user$project$Page_Patient$Pass = {ctor: 'Pass'};
+var _user$project$Page_Patient$External = function (a) {
+	return {ctor: 'External', _0: a};
+};
+var _user$project$Page_Patient$ExpressMsg = function (a) {
+	return {ctor: 'ExpressMsg', _0: a};
+};
+var _user$project$Page_Patient$TherapyStatusMsg = function (a) {
+	return {ctor: 'TherapyStatusMsg', _0: a};
+};
+var _user$project$Page_Patient$HeartMsg = function (a) {
+	return {ctor: 'HeartMsg', _0: a};
+};
+var _user$project$Page_Patient$DoseMsg = function (a) {
+	return {ctor: 'DoseMsg', _0: a};
+};
+var _user$project$Page_Patient$PersonalInfoMsg = function (a) {
+	return {ctor: 'PersonalInfoMsg', _0: a};
+};
+var _user$project$Page_Patient$GetPatientExpress = function (a) {
+	return {ctor: 'GetPatientExpress', _0: a};
+};
+var _user$project$Page_Patient$initTaskExpressModal = A2(_elm_lang$core$Task$perform, _user$project$Page_Patient$GetPatientExpress, _elm_lang$core$Time$now);
+var _user$project$Page_Patient$ShowModal = function (a) {
+	return {ctor: 'ShowModal', _0: a};
+};
+var _user$project$Page_Patient$CloseModal = {ctor: 'CloseModal'};
+var _user$project$Page_Patient$view = function (model) {
+	var _p3 = model.patient;
+	if (_p3.ctor === 'Nothing') {
+		return _elm_lang$html$Html$text('本患者不存在或者你不能看到她的消息');
+	} else {
+		var _p8 = _p3._0;
+		var renderModal = function () {
+			var renderer = A2(_user$project$Views_Modal$view, _elm_lang$core$Basics$identity, _user$project$Page_Patient$CloseModal);
+			var _p4 = model.modal;
+			switch (_p4.ctor) {
+				case 'PersonalInfo':
+					return A5(
+						renderer,
+						'fa fa-user',
+						'记录新的基本消息',
+						_user$project$Views_PatientForms_PersonalInfo$viewAsForm(_p4._0),
+						_user$project$Views_PatientForms_PersonalInfo$buttons,
+						_user$project$Page_Patient$PersonalInfoMsg);
+				case 'Dose':
+					return A5(
+						renderer,
+						'fas fa-vial',
+						'记录新的剂量',
+						_user$project$Views_PatientForms_Dose$viewAsForm(_p4._0),
+						_user$project$Views_PatientForms_Dose$buttons,
+						_user$project$Page_Patient$DoseMsg);
+				case 'Heart':
+					return A5(
+						renderer,
+						'fas fa-heartbeat',
+						'记录新的报告',
+						_user$project$Views_PatientForms_Heart$viewAsForm(_p4._0),
+						_user$project$Views_PatientForms_Heart$buttons,
+						_user$project$Page_Patient$HeartMsg);
+				case 'TherapyStatus':
+					return A5(
+						renderer,
+						'far fa-play-circle',
+						'改变状态',
+						_user$project$Views_PatientForms_TherapyStatus$viewAsForm(_p4._0),
+						_user$project$Views_PatientForms_TherapyStatus$buttons,
+						_user$project$Page_Patient$TherapyStatusMsg);
+				default:
+					return _elm_lang$html$Html$text('');
+			}
+		}();
+		var tMenuList = A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
+				ctor: '::',
+				_0: A3(
+					_user$project$Views_PatientInfoCard$MenuBtn,
+					'history',
+					'查看历史',
+					_user$project$Page_Patient$External(_user$project$Constants$constants.links.therapyHistory)),
+				_1: {ctor: '[]'}
+			},
+			function () {
+				var _p5 = model.patient;
+				if (_p5.ctor === 'Nothing') {
+					return {ctor: '[]'};
+				} else {
+					return {
+						ctor: '::',
+						_0: A3(
+							_user$project$Views_PatientInfoCard$MenuBtn,
+							'add_circle_outline',
+							'改变状态',
+							_user$project$Page_Patient$ShowModal(
+								_user$project$Page_Patient$TherapyStatus(
+									A3(
+										_user$project$Views_PatientForms_TherapyStatus$initWithValues,
+										_p5._0.id,
+										_user$project$Data_Date$dateToString(model.dt_now),
+										_user$project$Route$Patient(model.id))))),
+						_1: {ctor: '[]'}
+					};
+				}
+			}());
+		var tInfoList = A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
+				ctor: '::',
+				_0: A5(
+					_user$project$Views_PatientInfoCard$CardBodyCell,
+					'治疗状态',
+					_user$project$Data_Patient$statusToString(_p8.therapy_status),
+					'',
+					6,
+					{
+						ctor: '::',
+						_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A5(
+						_user$project$Views_PatientInfoCard$CardBodyCell,
+						'最新纪录日期',
+						_user$project$Data_Date$dateToString(_p8.therapy_dt),
+						'',
+						6,
+						{
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			},
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Native_Utils.eq(_p8.therapy_reason, '') ? {ctor: '[]'} : {
+					ctor: '::',
+					_0: A5(
+						_user$project$Views_PatientInfoCard$CardBodyCell,
+						'原因',
+						_p8.therapy_reason,
+						'',
+						12,
+						{
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				},
+				_elm_lang$core$Native_Utils.eq(_p8.therapy_remarks, '') ? {ctor: '[]'} : {
+					ctor: '::',
+					_0: A5(
+						_user$project$Views_PatientInfoCard$CardBodyCell,
+						'备注',
+						_p8.therapy_remarks,
+						'',
+						12,
+						{
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}));
+		var hInfoList = A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
+				ctor: '::',
+				_0: A5(
+					_user$project$Views_PatientInfoCard$CardBodyCell,
+					'距离下次心超',
+					_elm_lang$core$Basics$toString(_p8.heart_ago),
+					'天',
+					6,
+					A3(
+						_user$project$Page_Patient$colorRanger,
+						_elm_lang$core$Tuple$first(_user$project$Constants$constants.heart_report_range),
+						_elm_lang$core$Tuple$second(_user$project$Constants$constants.heart_report_range),
+						_p8.heart_ago)),
+				_1: {
+					ctor: '::',
+					_0: A5(
+						_user$project$Views_PatientInfoCard$CardBodyCell,
+						'心超报告',
+						_p8.heart_text,
+						'',
+						6,
+						{
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A5(
+							_user$project$Views_PatientInfoCard$CardBodyCell,
+							'心超日期',
+							_user$project$Data_Date$dateToString(_p8.heart_dt),
+							'',
+							6,
+							{
+								ctor: '::',
+								_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A5(
+								_user$project$Views_PatientInfoCard$CardBodyCell,
+								'左心射血分数',
+								_p8.heart_percentage,
+								'%',
+								6,
+								{
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			},
+			_elm_lang$core$Native_Utils.eq(_p8.heart_remarks, '') ? {ctor: '[]'} : {
+				ctor: '::',
+				_0: A5(
+					_user$project$Views_PatientInfoCard$CardBodyCell,
+					'备注',
+					_p8.heart_remarks,
+					'',
+					12,
+					{
+						ctor: '::',
+						_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+		var dInfoList = A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
+				ctor: '::',
+				_0: A5(
+					_user$project$Views_PatientInfoCard$CardBodyCell,
+					'距离下次用药',
+					_elm_lang$core$Basics$toString(_p8.dose_ago),
+					'天',
+					6,
+					(_elm_lang$core$Native_Utils.cmp(_p8.dose_ago, 0) > -1) ? {
+						ctor: '::',
+						_0: _debois$elm_mdl$Material_Color$background(
+							A2(_debois$elm_mdl$Material_Color$color, _debois$elm_mdl$Material_Color$LightBlue, _debois$elm_mdl$Material_Color$S50)),
+						_1: {ctor: '[]'}
+					} : {
+						ctor: '::',
+						_0: _debois$elm_mdl$Material_Color$background(
+							A2(_debois$elm_mdl$Material_Color$color, _debois$elm_mdl$Material_Color$DeepOrange, _debois$elm_mdl$Material_Color$S300)),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A5(
+						_user$project$Views_PatientInfoCard$CardBodyCell,
+						'距离本药到期',
+						_elm_lang$core$Basics$toString(_p8.expiry_ago),
+						'天',
+						6,
+						(_elm_lang$core$Native_Utils.cmp(_p8.expiry_ago, 0) > -1) ? {
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Color$background(
+								A2(_debois$elm_mdl$Material_Color$color, _debois$elm_mdl$Material_Color$LightBlue, _debois$elm_mdl$Material_Color$S50)),
+							_1: {ctor: '[]'}
+						} : {
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Color$background(
+								A2(_debois$elm_mdl$Material_Color$color, _debois$elm_mdl$Material_Color$DeepOrange, _debois$elm_mdl$Material_Color$S300)),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A5(
+							_user$project$Views_PatientInfoCard$CardBodyCell,
+							'最新用药日期',
+							_user$project$Data_Date$dateToString(_p8.dose_dt),
+							'',
+							6,
+							{
+								ctor: '::',
+								_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A5(
+								_user$project$Views_PatientInfoCard$CardBodyCell,
+								'下次用药日期',
+								_user$project$Data_Date$dateToString(_p8.dose_next_appointment_dt),
+								'',
+								6,
+								{
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A5(
+									_user$project$Views_PatientInfoCard$CardBodyCell,
+									'本药开封日期',
+									_user$project$Data_Date$dateToString(_p8.dose_dt_opened),
+									'',
+									6,
+									{
+										ctor: '::',
+										_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A5(
+										_user$project$Views_PatientInfoCard$CardBodyCell,
+										'本药到期日期',
+										_user$project$Data_Date$dateToString(_p8.dose_dt_opened_expiry),
+										'',
+										6,
+										{
+											ctor: '::',
+											_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A5(
+											_user$project$Views_PatientInfoCard$CardBodyCell,
+											'体重',
+											_elm_lang$core$Basics$toString(_p8.dose_weight),
+											'公斤',
+											4,
+											{
+												ctor: '::',
+												_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A5(
+												_user$project$Views_PatientInfoCard$CardBodyCell,
+												'剂量',
+												_elm_lang$core$Basics$toString(_p8.dose_amount),
+												'毫克',
+												4,
+												{
+													ctor: '::',
+													_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A5(
+													_user$project$Views_PatientInfoCard$CardBodyCell,
+													'使用后剩余量',
+													_elm_lang$core$Basics$toString(_p8.dose_remaining_dose),
+													'毫克',
+													4,
+													{
+														ctor: '::',
+														_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A5(
+														_user$project$Views_PatientInfoCard$CardBodyCell,
+														'第几次用药',
+														_elm_lang$core$Basics$toString(_p8.dose_number),
+														'',
+														4,
+														{
+															ctor: '::',
+															_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_user$project$Data_Patient$frequencyToShouldBeHidden(_p8.patient_frequency) ? {ctor: '[]'} : {
+					ctor: '::',
+					_0: A5(
+						_user$project$Views_PatientInfoCard$CardBodyCell,
+						'周期内第几次用药',
+						_elm_lang$core$Basics$toString(_p8.dose_number_cycle),
+						'',
+						4,
+						{
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				},
+				_elm_lang$core$Native_Utils.eq(_p8.dose_remarks, '') ? {ctor: '[]'} : {
+					ctor: '::',
+					_0: A5(
+						_user$project$Views_PatientInfoCard$CardBodyCell,
+						'备注',
+						_p8.dose_remarks,
+						'',
+						12,
+						{
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}));
+		var pInfoList = {
+			ctor: '::',
+			_0: A5(
+				_user$project$Views_PatientInfoCard$CardBodyCell,
+				'姓名',
+				_p8.patient_name,
+				'',
+				4,
+				{
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A5(
+					_user$project$Views_PatientInfoCard$CardBodyCell,
+					'年龄',
+					_p8.patient_age,
+					'岁',
+					4,
+					{
+						ctor: '::',
+						_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A5(
+						_user$project$Views_PatientInfoCard$CardBodyCell,
+						'磁卡号',
+						_p8.patient_card,
+						'',
+						4,
+						{
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A5(
+							_user$project$Views_PatientInfoCard$CardBodyCell,
+							'化疗方案',
+							_p8.patient_therapy,
+							'',
+							4,
+							{
+								ctor: '::',
+								_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A5(
+								_user$project$Views_PatientInfoCard$CardBodyCell,
+								'剂量频率',
+								_p8.patient_frequency,
+								'',
+								8,
+								{
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A5(
+									_user$project$Views_PatientInfoCard$CardBodyCell,
+									'首次剂量',
+									_elm_lang$core$Basics$toString(_p8.patient_initial_dose),
+									'',
+									4,
+									{
+										ctor: '::',
+										_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A5(
+										_user$project$Views_PatientInfoCard$CardBodyCell,
+										'维持剂量',
+										_elm_lang$core$Basics$toString(_p8.patient_maintenance_dose),
+										'',
+										4,
+										{
+											ctor: '::',
+											_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A5(
+											_user$project$Views_PatientInfoCard$CardBodyCell,
+											'氯化钠注射液',
+											_elm_lang$core$Basics$toString(_p8.patient_nacl_amount),
+											'ml',
+											4,
+											{
+												ctor: '::',
+												_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A5(
+												_user$project$Views_PatientInfoCard$CardBodyCell,
+												'首次剂量时期',
+												_user$project$Data_Date$dateToString(_p8.patient_initial_dose_dt),
+												'',
+												6,
+												{
+													ctor: '::',
+													_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$white),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		};
+		var doseAgoColorRanger = _elm_lang$core$Native_Utils.eq(_p8.patient_frequency, '三周一次') ? A2(_user$project$Page_Patient$colorRanger, 14, 18) : A2(_user$project$Page_Patient$colorRanger, 4, 6);
+		var ifIsActive = function (x) {
+			return _elm_lang$core$Native_Utils.eq(_p8.therapy_status, _user$project$Data_Patient$Active) ? x : {ctor: '[]'};
+		};
+		var pMenuList = A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
+				ctor: '::',
+				_0: A3(
+					_user$project$Views_PatientInfoCard$MenuBtn,
+					'history',
+					'查看历史',
+					_user$project$Page_Patient$External(
+						_user$project$Request_External$personalHistory(_p8.id))),
+				_1: {ctor: '[]'}
+			},
+			ifIsActive(
+				{
+					ctor: '::',
+					_0: A3(
+						_user$project$Views_PatientInfoCard$MenuBtn,
+						'add_circle_outline',
+						'记录新的消息',
+						_user$project$Page_Patient$ShowModal(
+							_user$project$Page_Patient$PersonalInfo(
+								A3(
+									_user$project$Views_PatientForms_PersonalInfo$initWithValues,
+									_p8,
+									_p8.id,
+									_user$project$Route$Patient(model.id))))),
+					_1: {ctor: '[]'}
+				}));
+		var dMenuList = A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
+				ctor: '::',
+				_0: A3(
+					_user$project$Views_PatientInfoCard$MenuBtn,
+					'history',
+					'查看历史',
+					_user$project$Page_Patient$External(
+						_user$project$Request_External$doseHistory(_p8.id))),
+				_1: {
+					ctor: '::',
+					_0: A3(
+						_user$project$Views_PatientInfoCard$MenuBtn,
+						'print',
+						'打印标签',
+						_user$project$Page_Patient$External(
+							_user$project$Request_External$print(_p8.id))),
+					_1: {ctor: '[]'}
+				}
+			},
+			ifIsActive(
+				function () {
+					var init = A2(
+						_user$project$Views_PatientForms_Dose$initFromPatient,
+						_p8,
+						_user$project$Route$Patient(model.id));
+					return {
+						ctor: '::',
+						_0: A3(
+							_user$project$Views_PatientInfoCard$MenuBtn,
+							'add_circle_outline',
+							'记录新的剂量',
+							_user$project$Page_Patient$ShowModal(
+								_user$project$Page_Patient$Dose(init))),
+						_1: {ctor: '[]'}
+					};
+				}()));
+		var hMenuList = A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
+				ctor: '::',
+				_0: A3(
+					_user$project$Views_PatientInfoCard$MenuBtn,
+					'history',
+					'查看历史',
+					_user$project$Page_Patient$External(
+						_user$project$Request_External$heartHistory(_p8.id))),
+				_1: {ctor: '[]'}
+			},
+			ifIsActive(
+				function () {
+					var _p6 = model.patient;
+					if (_p6.ctor === 'Nothing') {
+						return {ctor: '[]'};
+					} else {
+						var _p7 = _p6._0;
+						return {
+							ctor: '::',
+							_0: A3(
+								_user$project$Views_PatientInfoCard$MenuBtn,
+								'add_circle_outline',
+								'记录新的报告',
+								_user$project$Page_Patient$ShowModal(
+									_user$project$Page_Patient$Heart(
+										A4(
+											_user$project$Views_PatientForms_Heart$initWithValues,
+											_p7.id,
+											_p7.heart_ago,
+											_user$project$Data_Date$dateToString(model.dt_now),
+											_user$project$Route$Patient(model.id))))),
+							_1: {ctor: '[]'}
+						};
+					}
+				}()));
+		var menuRenderFunction = F2(
+			function (model, idx) {
+				return A3(
+					_debois$elm_mdl$Material_Menu$render,
+					_user$project$Page_Patient$Mdl,
+					{
+						ctor: '::',
+						_0: idx,
+						_1: {ctor: '[]'}
+					},
+					model.mdl);
+			});
+		return A2(
+			_rundis$elm_bootstrap$Bootstrap_Grid$container,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$style(
+							{
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'width', _1: '100%'},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'display', _1: 'flex'},
+									_1: {
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 'justify-content', _1: 'center'},
+										_1: {ctor: '[]'}
+									}
+								}
+							}),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_debois$elm_mdl$Material_Grid$grid,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: A2(
+									_debois$elm_mdl$Material_Grid$cell,
+									{
+										ctor: '::',
+										_0: A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$All, 6),
+										_1: {
+											ctor: '::',
+											_0: _debois$elm_mdl$Material_Grid$stretch,
+											_1: {
+												ctor: '::',
+												_0: _debois$elm_mdl$Material_Grid$align(_debois$elm_mdl$Material_Grid$Middle),
+												_1: {ctor: '[]'}
+											}
+										}
+									},
+									{
+										ctor: '::',
+										_0: A3(
+											_user$project$Views_PatientInfoCard$view,
+											A5(_user$project$Views_PatientInfoCard$PatientInfoCard, 'person', '基本信息', 1, pMenuList, pInfoList),
+											model,
+											menuRenderFunction),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$div,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$style(
+														{
+															ctor: '::',
+															_0: {ctor: '_Tuple2', _0: 'margin-top', _1: '15px'},
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: A3(
+														_user$project$Views_PatientInfoCard$view,
+														A5(_user$project$Views_PatientInfoCard$PatientInfoCard, 'favorite', '心超报告', 2, hMenuList, hInfoList),
+														model,
+														menuRenderFunction),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_debois$elm_mdl$Material_Grid$cell,
+										{
+											ctor: '::',
+											_0: A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$All, 6),
+											_1: {
+												ctor: '::',
+												_0: _debois$elm_mdl$Material_Grid$stretch,
+												_1: {
+													ctor: '::',
+													_0: _debois$elm_mdl$Material_Grid$align(_debois$elm_mdl$Material_Grid$Middle),
+													_1: {ctor: '[]'}
+												}
+											}
+										},
+										{
+											ctor: '::',
+											_0: A3(
+												_user$project$Views_PatientInfoCard$view,
+												A5(_user$project$Views_PatientInfoCard$PatientInfoCard, 'assignment', '用药信息', 3, dMenuList, dInfoList),
+												model,
+												menuRenderFunction),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$div,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$style(
+															{
+																ctor: '::',
+																_0: {ctor: '_Tuple2', _0: 'margin-top', _1: '15px'},
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: A3(
+															_user$project$Views_PatientInfoCard$view,
+															A5(_user$project$Views_PatientInfoCard$PatientInfoCard, 'autorenew', '治疗状态', 4, tMenuList, tInfoList),
+															model,
+															menuRenderFunction),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_debois$elm_mdl$Material_Grid$cell,
+											{
+												ctor: '::',
+												_0: A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$All, 12),
+												_1: {
+													ctor: '::',
+													_0: _debois$elm_mdl$Material_Grid$stretch,
+													_1: {
+														ctor: '::',
+														_0: _debois$elm_mdl$Material_Grid$align(_debois$elm_mdl$Material_Grid$Middle),
+														_1: {ctor: '[]'}
+													}
+												}
+											},
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$div,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$style(
+															{
+																ctor: '::',
+																_0: {ctor: '_Tuple2', _0: 'width', _1: '100%'},
+																_1: {
+																	ctor: '::',
+																	_0: {ctor: '_Tuple2', _0: 'display', _1: 'flex'},
+																	_1: {
+																		ctor: '::',
+																		_0: {ctor: '_Tuple2', _0: 'justify-content', _1: 'center'},
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: A2(
+															_rundis$elm_bootstrap$Bootstrap_Button$button,
+															{
+																ctor: '::',
+																_0: _rundis$elm_bootstrap$Bootstrap_Button$primary,
+																_1: {
+																	ctor: '::',
+																	_0: _rundis$elm_bootstrap$Bootstrap_Button$onClick(
+																		_user$project$Page_Patient$ChangePage(_user$project$Route$Patients)),
+																	_1: {
+																		ctor: '::',
+																		_0: _rundis$elm_bootstrap$Bootstrap_Button$attrs(
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$style(
+																					{
+																						ctor: '::',
+																						_0: {ctor: '_Tuple2', _0: 'margin', _1: '0 20px 0 20px'},
+																						_1: {ctor: '[]'}
+																					}),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															},
+															{
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$i,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$class('fas fa-users'),
+																		_1: {ctor: '[]'}
+																	},
+																	{ctor: '[]'}),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text(' 回到患者单'),
+																	_1: {ctor: '[]'}
+																}
+															}),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_rundis$elm_bootstrap$Bootstrap_Button$button,
+																{
+																	ctor: '::',
+																	_0: _rundis$elm_bootstrap$Bootstrap_Button$primary,
+																	_1: {
+																		ctor: '::',
+																		_0: _rundis$elm_bootstrap$Bootstrap_Button$onClick(
+																			_user$project$Page_Patient$ShowModal(
+																				_user$project$Page_Patient$Express(
+																					A4(
+																						_user$project$Views_ExpressForm$initWithValues,
+																						model.id,
+																						_p8,
+																						model.dt_now,
+																						_user$project$Route$PatientWithExpress(model.id))))),
+																		_1: {
+																			ctor: '::',
+																			_0: _rundis$elm_bootstrap$Bootstrap_Button$attrs(
+																				{
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$style(
+																						{
+																							ctor: '::',
+																							_0: {ctor: '_Tuple2', _0: 'margin', _1: '0 20px 0 20px'},
+																							_1: {ctor: '[]'}
+																						}),
+																					_1: {ctor: '[]'}
+																				}),
+																			_1: {ctor: '[]'}
+																		}
+																	}
+																},
+																{
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$i,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$class('fas fa-rocket'),
+																			_1: {ctor: '[]'}
+																		},
+																		{ctor: '[]'}),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text(' 快速检查'),
+																		_1: {ctor: '[]'}
+																	}
+																}),
+															_1: {ctor: '[]'}
+														}
+													}),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: renderModal,
+					_1: {
+						ctor: '::',
+						_0: _user$project$Util$debug(
+							_elm_lang$core$Basics$toString(model)),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$br,
+								{ctor: '[]'},
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$br,
+									{ctor: '[]'},
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$br,
+										{ctor: '[]'},
+										{ctor: '[]'}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$br,
+											{ctor: '[]'},
+											{ctor: '[]'}),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}
+				}
+			});
+	}
+};
+var _user$project$Page_Patient$FetchedDose = function (a) {
+	return {ctor: 'FetchedDose', _0: a};
+};
+var _user$project$Page_Patient$FetchedExpress = function (a) {
+	return {ctor: 'FetchedExpress', _0: a};
+};
+var _user$project$Page_Patient$Fetched = function (a) {
+	return {ctor: 'Fetched', _0: a};
+};
+var _user$project$Page_Patient$update = F2(
+	function (msg, model) {
+		var toModal = F5(
+			function (toModel, toMsg, subUpdate, subMsg, subModel) {
+				var _p9 = A2(subUpdate, subMsg, subModel);
+				var newModel = _p9._0;
+				var newCmd = _p9._1;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							modal: toModel(newModel)
+						}),
+					_1: A2(_elm_lang$core$Platform_Cmd$map, toMsg, newCmd)
+				};
+			});
+		var _p10 = {ctor: '_Tuple2', _0: msg, _1: model.modal};
+		_v5_18:
+		do {
+			if (_p10.ctor === '_Tuple2') {
+				switch (_p10._0.ctor) {
+					case 'GetPatient':
+						var dt_now = _elm_lang$core$Date$fromTime(_p10._0._0);
+						return A2(
+							_user$project$Util_ops['=>'],
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{dt_now: dt_now}),
+							_elm_lang$core$Platform_Cmd$batch(
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$http$Http$send,
+										_user$project$Page_Patient$Fetched,
+										A2(_user$project$Request_Patient$get, model.id, dt_now)),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$http$Http$send,
+											_user$project$Page_Patient$FetchedDose,
+											A2(_user$project$Request_Dose$get, model.id, dt_now)),
+										_1: {ctor: '[]'}
+									}
+								}));
+					case 'Fetched':
+						if (_p10._0._0.ctor === 'Err') {
+							return A2(
+								_user$project$Util_ops['=>'],
+								_elm_lang$core$Native_Utils.update(
+									model,
+									{
+										error: _elm_lang$core$Maybe$Just(
+											_elm_lang$core$Basics$toString(_p10._0._0._0))
+									}),
+								_elm_lang$core$Platform_Cmd$none);
+						} else {
+							return A2(
+								_user$project$Util_ops['=>'],
+								_elm_lang$core$Native_Utils.update(
+									model,
+									{
+										patient: _elm_lang$core$Maybe$Just(_p10._0._0._0)
+									}),
+								_elm_lang$core$Platform_Cmd$none);
+						}
+					case 'FetchedDose':
+						if (_p10._0._0.ctor === 'Err') {
+							return A2(
+								_user$project$Util_ops['=>'],
+								_elm_lang$core$Native_Utils.update(
+									model,
+									{
+										error: _elm_lang$core$Maybe$Just(
+											_elm_lang$core$Basics$toString(_p10._0._0._0))
+									}),
+								_elm_lang$core$Platform_Cmd$none);
+						} else {
+							return A2(
+								_user$project$Util_ops['=>'],
+								_elm_lang$core$Native_Utils.update(
+									model,
+									{doses: _p10._0._0._0}),
+								_elm_lang$core$Platform_Cmd$none);
+						}
+					case 'GetPatientExpress':
+						var dt_now = _elm_lang$core$Date$fromTime(_p10._0._0);
+						return A2(
+							_user$project$Util_ops['=>'],
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{dt_now: dt_now}),
+							A2(
+								_elm_lang$http$Http$send,
+								_user$project$Page_Patient$FetchedExpress,
+								A2(_user$project$Request_Patient$get, model.id, dt_now)));
+					case 'FetchedExpress':
+						if (_p10._0._0.ctor === 'Err') {
+							return A2(
+								_user$project$Util_ops['=>'],
+								_elm_lang$core$Native_Utils.update(
+									model,
+									{
+										error: _elm_lang$core$Maybe$Just(
+											_elm_lang$core$Basics$toString(_p10._0._0._0))
+									}),
+								_elm_lang$core$Platform_Cmd$none);
+						} else {
+							var _p11 = _p10._0._0._0;
+							return A2(
+								_user$project$Util_ops['=>'],
+								_elm_lang$core$Native_Utils.update(
+									model,
+									{
+										patient: _elm_lang$core$Maybe$Just(_p11),
+										modal: _user$project$Page_Patient$Express(
+											A4(
+												_user$project$Views_ExpressForm$initWithValues,
+												model.id,
+												_p11,
+												model.dt_now,
+												_user$project$Route$PatientWithExpress(model.id)))
+									}),
+								_elm_lang$core$Platform_Cmd$none);
+						}
+					case 'CloseModal':
+						return A2(
+							_user$project$Util_ops['=>'],
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{modal: _user$project$Page_Patient$Hidden}),
+							_elm_lang$core$Platform_Cmd$none);
+					case 'ShowModal':
+						return A2(
+							_user$project$Util_ops['=>'],
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{modal: _p10._0._0}),
+							_elm_lang$core$Platform_Cmd$none);
+					case 'PersonalInfoMsg':
+						if (_p10._1.ctor === 'PersonalInfo') {
+							return A5(toModal, _user$project$Page_Patient$PersonalInfo, _user$project$Page_Patient$PersonalInfoMsg, _user$project$Views_PatientForms_PersonalInfo$update, _p10._0._0, _p10._1._0);
+						} else {
+							break _v5_18;
+						}
+					case 'DoseMsg':
+						if (_p10._1.ctor === 'Dose') {
+							return A5(toModal, _user$project$Page_Patient$Dose, _user$project$Page_Patient$DoseMsg, _user$project$Views_PatientForms_Dose$update, _p10._0._0, _p10._1._0);
+						} else {
+							break _v5_18;
+						}
+					case 'HeartMsg':
+						if (_p10._1.ctor === 'Heart') {
+							return A5(toModal, _user$project$Page_Patient$Heart, _user$project$Page_Patient$HeartMsg, _user$project$Views_PatientForms_Heart$update, _p10._0._0, _p10._1._0);
+						} else {
+							break _v5_18;
+						}
+					case 'TherapyStatusMsg':
+						if (_p10._1.ctor === 'TherapyStatus') {
+							return A5(toModal, _user$project$Page_Patient$TherapyStatus, _user$project$Page_Patient$TherapyStatusMsg, _user$project$Views_PatientForms_TherapyStatus$update, _p10._0._0, _p10._1._0);
+						} else {
+							break _v5_18;
+						}
+					case 'ExpressMsg':
+						if (_p10._1.ctor === 'Express') {
+							return A5(toModal, _user$project$Page_Patient$Express, _user$project$Page_Patient$ExpressMsg, _user$project$Views_ExpressForm$update, _p10._0._0, _p10._1._0);
+						} else {
+							break _v5_18;
+						}
+					case 'Mdl':
+						return A3(_debois$elm_mdl$Material$update, _user$project$Page_Patient$Mdl, _p10._0._0, model);
+					case 'External':
+						return A2(
+							_user$project$Util_ops['=>'],
+							model,
+							_elm_lang$navigation$Navigation$load(_p10._0._0));
+					case 'ChangePage':
+						return A2(
+							_user$project$Util_ops['=>'],
+							model,
+							_user$project$Route$newUrl(_p10._0._0));
+					default:
+						break _v5_18;
+				}
+			} else {
+				break _v5_18;
+			}
+		} while(false);
+		return A2(_user$project$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
+	});
+var _user$project$Page_Patient$GetPatient = function (a) {
+	return {ctor: 'GetPatient', _0: a};
+};
+var _user$project$Page_Patient$initTask = A2(_elm_lang$core$Task$perform, _user$project$Page_Patient$GetPatient, _elm_lang$core$Time$now);
+var _user$project$Page_Patient$UpdateNow = function (a) {
+	return {ctor: 'UpdateNow', _0: a};
+};
+var _user$project$Page_Patient$Blank = {ctor: 'Blank'};

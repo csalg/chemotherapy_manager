@@ -1,0 +1,23 @@
+{% extends "patient_update_dose.html" %}
+
+{% block bottle_opened %}
+
+	<div class="row">	
+		<label class="control-label col-sm-3 form_label">新药开封日期：</label>
+		<div class="col-sm-4">
+			<input type="date" value="{{ suggested.dose_dt }}" name="dose_dt_opened" class="form-control">
+		</div>
+
+		<label class="control-label col-sm-2 form_label">新药有效期:</label>
+		<div class="col-sm-3">
+			<input class="form-control" value="{{ suggested.bottle_expiry }}" disabled>
+		</div>
+	</div>	
+		
+
+{% endblock %}
+
+
+
+{% block send_to %}/patient/{{patient.id}}/updateBottle/{% endblock %}
+

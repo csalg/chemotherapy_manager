@@ -1,0 +1,111 @@
+{% extends "print_base.html" %}
+
+{% block body %}
+
+<div class="page">
+
+	<div class="hospital-name">
+		<span>{{patient.hospital.name}}</span>
+	</div>
+
+	<hr class="hr--extra-margin">
+
+	<div style="text-align: center; font-size:1.5rem; font-weight:bold; letter-spacing: 2px;">
+		{{patient.patient_name}}
+	</div>
+	
+	<hr class="hr--extra-margin" >
+
+	<!-- <table> -->
+<!-- 		<tr class="">
+			<td class="">患者姓名: </td>
+			<td class="">{{patient.patient_name}}
+			</td>
+		</tr> -->
+<!-- 		<tr>
+			<td>患者姓名: </td>
+			<td>{{patient.id}}
+			</td>
+		</tr> -->
+<!-- 		氯化钠注射液 0.9% {{patient.dose_amount}} mg
+		赫塞汀注射液 -->
+		<div style="padding: 5px 0 5px 0;">
+			<div class="bottle-info-label">本次剂量</div>
+			<div class="bottle-info-data">
+				{{patient.dose_amount}} mg ({{patient.getDoseAmountMg}} ml) 
+			</div>
+		</div>
+
+		<div style="padding: 5px 0 5px 0;">
+			<div class="bottle-info-label">本瓶使用剂量</div>
+			<div class="bottle-info-data">
+				{{bottle.amount}} mg ({{bottle.getDoseAmountMl}} ml)
+			</div>
+		</div>
+		<div style="padding: 5px 0 5px 0;">
+			<div class="bottle-info-label">瓶数</div>
+			<div class="bottle-info-data">{{bottle.number}}/{{bottle_count}}
+			</div>
+		</div>
+<!-- 		<div style="padding: 5px 0 5px 0;">
+			<div class="bottle-info-data">氯化钠注射液 0.9% </div>
+			<div class="bottle-info-label">
+				{{patient.dose_amount}} mg
+			</div> -->
+		<!-- </div> -->
+		<div style="padding: 5px 0 5px 0;">
+			<div class="bottle-info-label">剩余剂量 </div>
+			<div style="width:200px; font-weight: bold; letter-spacing: 2px; display:inline-block;">
+				{{bottle.remaining}} mg
+			</div>
+		</div>
+
+
+		<div style="padding: 5px 0 5px 0;">
+			<div class="bottle-info-label" style="width:100px;">使用日期 </div>
+			<div class="bottle-info-data" style="width:200px;">
+				{{dose_dt}}
+			</div>
+		</div>
+	<br>	
+	护士签名: 
+	<br>
+	<br>
+	<!-- <br> -->
+
+	患方签名: 
+
+	<br>
+	<br>
+
+
+	<div style="text-align: center;">
+	{% load qr_code %}
+	<div>
+		<img src="http://202.120.38.3:8080/patient/{{patient.id}}/qr" style="width:190px; height:190px;" style="display:block;">
+		<!-- <br> -->
+	</div>
+	<div style="margin:-15px">
+	{{patient.id}}  
+		
+	</div>
+	</div>
+<!-- 	<hr style="margin: 20px 0 20px 0;">
+	<div style="line-height: 2px; font-size: 0.8rem;">
+<p>使用日期: {{dose_dt}}</p>
+<p>有效时期: {{patient.dose_dt_opened}} 到 {{expiration_date}}</p>
+	</div> -->
+	<hr style="margin-top: 20px;">
+		<div style="padding: 5px 0 5px 0; text-align: center;">
+			<div class="bottle-info-label" style="width:80px; padding: 2px;">开封日期 </div>
+			<div class="bottle-info-data" style="width:220px; padding: 2px;">
+				{{bottle.opened | date:"Y-m-d H:i" }}
+			</div>
+
+			<div class="bottle-info-label" style="width:80px">失效日期 </div>
+			<div class="bottle-info-data" style="width:220px;">
+				{{bottle.expiry | date:"Y-m-d H:i" }}
+			</div>
+		</div>
+</div>
+{% endblock %}

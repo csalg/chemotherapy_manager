@@ -1,0 +1,43 @@
+{% extends "base.html"%}
+
+{% block head_title %}患者 {% endblock %}
+{% block content %}
+{% csrf_token %}
+
+<div class="container" id='embedElm'>
+	
+{{ pid }} 
+
+</div>
+<script src="/static/elm/patient.js"></script>
+  	<!-- <script type="text/javascript">Elm.Main.fullscreen()</script> -->
+
+  <script type="text/javascript">
+  	var csrf_token = document.querySelector("input[name='csrfmiddlewaretoken']").value
+  	var pid = {{ pid }} 
+  	console.log(csrf_token)
+  	var node = document.getElementById('embedElm');
+  	var app = Elm.Main.embed(node, {'token': csrf_token, 'patientID': pid });
+
+  </script>
+
+  <script>
+
+  	function addDays(theDate, days) {
+	    return new Date(theDate.getTime() + days*24*60*60*1000);
+	}
+
+	function formatDate(someDate) {
+		var dd = someDate.getDate();
+		var mm = someDate.getMonth() + 1;
+		var y = someDate.getFullYear();
+
+		return someFormattedDate = y + '年' + mm + '月' + dd + '日';
+	}
+$("input[name='dose_dt_opened']").change(function(){
+  var date = new Date($("input[name='dose_dt_opened']").val());
+  date = addDays(date, 28)               
+  $("input[name='dose_dt_opened_expiry']").val(formatDate(date)); 
+});
+						</script>
+{%endblock%}

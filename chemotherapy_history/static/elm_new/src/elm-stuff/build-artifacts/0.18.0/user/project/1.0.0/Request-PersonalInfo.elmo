@@ -1,0 +1,16 @@
+var _user$project$Request_PersonalInfo$post = F3(
+	function (pid, pInfo, responseMsg) {
+		var url = _user$project$Request_Helpers$apiUrl(
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				'/updatePersonalInfo/',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(pid),
+					'/')));
+		return A3(
+			_user$project$Request_Helpers$post,
+			url,
+			responseMsg,
+			_user$project$Data_PersonalInfo$encode(pInfo));
+	});

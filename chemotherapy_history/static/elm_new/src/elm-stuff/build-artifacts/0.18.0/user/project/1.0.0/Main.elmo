@@ -1,0 +1,216 @@
+var _user$project$Main$Model = F4(
+	function (a, b, c, d) {
+		return {page: a, patients: b, dt_now: c, csrf: d};
+	});
+var _user$project$Main$NewPatient = function (a) {
+	return {ctor: 'NewPatient', _0: a};
+};
+var _user$project$Main$Patient = function (a) {
+	return {ctor: 'Patient', _0: a};
+};
+var _user$project$Main$Patients = function (a) {
+	return {ctor: 'Patients', _0: a};
+};
+var _user$project$Main$NotFound = {ctor: 'NotFound'};
+var _user$project$Main$Blank = {ctor: 'Blank'};
+var _user$project$Main$initialPage = _user$project$Main$Blank;
+var _user$project$Main$DTNow = function (a) {
+	return {ctor: 'DTNow', _0: a};
+};
+var _user$project$Main$NewPatientMsg = function (a) {
+	return {ctor: 'NewPatientMsg', _0: a};
+};
+var _user$project$Main$PatientMsg = function (a) {
+	return {ctor: 'PatientMsg', _0: a};
+};
+var _user$project$Main$PatientsMsg = function (a) {
+	return {ctor: 'PatientsMsg', _0: a};
+};
+var _user$project$Main$view = function (model) {
+	var _p0 = model.page;
+	switch (_p0.ctor) {
+		case 'NotFound':
+			return _user$project$Page_NotFound$view;
+		case 'Blank':
+			return _elm_lang$html$Html$text('');
+		case 'Patients':
+			return A2(
+				_elm_lang$html$Html$map,
+				_user$project$Main$PatientsMsg,
+				_user$project$Page_Patients$view(_p0._0));
+		case 'Patient':
+			return A2(
+				_elm_lang$html$Html$map,
+				_user$project$Main$PatientMsg,
+				_user$project$Page_Patient$view(_p0._0));
+		default:
+			return A2(
+				_elm_lang$html$Html$map,
+				_user$project$Main$NewPatientMsg,
+				_user$project$Page_NewPatient$view(_p0._0));
+	}
+};
+var _user$project$Main$setRoute = F2(
+	function (maybeRoute, model) {
+		var _p1 = maybeRoute;
+		if (_p1.ctor === 'Nothing') {
+			return A2(
+				_user$project$Util_ops['=>'],
+				_elm_lang$core$Native_Utils.update(
+					model,
+					{page: _user$project$Main$NotFound}),
+				_elm_lang$core$Platform_Cmd$none);
+		} else {
+			switch (_p1._0.ctor) {
+				case 'Root':
+					return A2(
+						_user$project$Util_ops['=>'],
+						model,
+						_user$project$Route$modifyUrl(_user$project$Route$Patients));
+				case 'Patients':
+					return A2(
+						_user$project$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								page: _user$project$Main$Patients(_user$project$Page_Patients$init)
+							}),
+						A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$PatientsMsg, _user$project$Page_Patients$initTask));
+				case 'PatientsWithExpress':
+					return A2(
+						_user$project$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								page: _user$project$Main$Patients(_user$project$Page_Patients$init)
+							}),
+						A2(
+							_elm_lang$core$Platform_Cmd$map,
+							_user$project$Main$PatientsMsg,
+							_user$project$Page_Patients$initTaskWithExpress(_p1._0._0)));
+				case 'Patient':
+					return A2(
+						_user$project$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								page: _user$project$Main$Patient(
+									_user$project$Page_Patient$init(_p1._0._0))
+							}),
+						A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$PatientMsg, _user$project$Page_Patient$initTask));
+				case 'PatientWithExpress':
+					return A2(
+						_user$project$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								page: _user$project$Main$Patient(
+									_user$project$Page_Patient$init(_p1._0._0))
+							}),
+						A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$PatientMsg, _user$project$Page_Patient$initTaskExpressModal));
+				default:
+					return A2(
+						_user$project$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								page: _user$project$Main$NewPatient(_user$project$Page_NewPatient$init)
+							}),
+						A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$NewPatientMsg, _user$project$Page_NewPatient$initTask));
+			}
+		}
+	});
+var _user$project$Main$init = F2(
+	function (val, location) {
+		return A2(
+			_user$project$Main$setRoute,
+			_user$project$Route$fromLocation(location),
+			{page: _user$project$Main$initialPage, patients: _elm_lang$core$Maybe$Nothing, dt_now: 0, csrf: val});
+	});
+var _user$project$Main$update = F2(
+	function (msg, model) {
+		var toPage = F5(
+			function (toModel, toMsg, subUpdate, subMsg, subModel) {
+				var _p2 = A2(subUpdate, subMsg, subModel);
+				var newModel = _p2._0;
+				var newCmd = _p2._1;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							page: toModel(newModel)
+						}),
+					_1: A2(_elm_lang$core$Platform_Cmd$map, toMsg, newCmd)
+				};
+			});
+		var page = model.page;
+		var _p3 = {ctor: '_Tuple2', _0: msg, _1: page};
+		_v2_6:
+		do {
+			_v2_4:
+			do {
+				switch (_p3._0.ctor) {
+					case 'SetRoute':
+						return A2(_user$project$Main$setRoute, _p3._0._0, model);
+					case 'PatientsMsg':
+						switch (_p3._1.ctor) {
+							case 'Patients':
+								return A5(toPage, _user$project$Main$Patients, _user$project$Main$PatientsMsg, _user$project$Page_Patients$update, _p3._0._0, _p3._1._0);
+							case 'NotFound':
+								break _v2_4;
+							default:
+								break _v2_6;
+						}
+					case 'PatientMsg':
+						switch (_p3._1.ctor) {
+							case 'Patient':
+								return A5(toPage, _user$project$Main$Patient, _user$project$Main$PatientMsg, _user$project$Page_Patient$update, _p3._0._0, _p3._1._0);
+							case 'NotFound':
+								break _v2_4;
+							default:
+								break _v2_6;
+						}
+					case 'NewPatientMsg':
+						switch (_p3._1.ctor) {
+							case 'NewPatient':
+								return A5(toPage, _user$project$Main$NewPatient, _user$project$Main$NewPatientMsg, _user$project$Page_NewPatient$update, _p3._0._0, _p3._1._0);
+							case 'NotFound':
+								break _v2_4;
+							default:
+								break _v2_6;
+						}
+					default:
+						if (_p3._1.ctor === 'NotFound') {
+							break _v2_4;
+						} else {
+							return A2(
+								_user$project$Util_ops['=>'],
+								_elm_lang$core$Native_Utils.update(
+									model,
+									{dt_now: _p3._0._0}),
+								_elm_lang$core$Platform_Cmd$none);
+						}
+				}
+			} while(false);
+			return A2(_user$project$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
+		} while(false);
+		return A2(_user$project$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
+	});
+var _user$project$Main$SetRoute = function (a) {
+	return {ctor: 'SetRoute', _0: a};
+};
+var _user$project$Main$main = A2(
+	_elm_lang$navigation$Navigation$programWithFlags,
+	function (_p4) {
+		return _user$project$Main$SetRoute(
+			_user$project$Route$fromLocation(_p4));
+	},
+	{
+		init: _user$project$Main$init,
+		view: _user$project$Main$view,
+		update: _user$project$Main$update,
+		subscriptions: function (_p5) {
+			return _elm_lang$core$Platform_Sub$none;
+		}
+	})(_elm_lang$core$Json_Decode$string);

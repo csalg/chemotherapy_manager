@@ -1,0 +1,599 @@
+var _user$project$Views_PatientForms_Dose$calculateNextAppointment_ = F2(
+	function (frequency, model) {
+		var getModel = model.model;
+		var days = A3(_user$project$Data_Patient$doseFrequencyToDays, frequency, model.model.dose_number_cycle, model.model.dose_number);
+		var next_appointment = A2(_user$project$Data_Date$addDays, days, model.model.dose_dt);
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				model: _elm_lang$core$Native_Utils.update(
+					getModel,
+					{dose_next_appointment_dt: next_appointment})
+			});
+	});
+var _user$project$Views_PatientForms_Dose$calculateNextAppointment = function (model) {
+	return A2(_user$project$Views_PatientForms_Dose$calculateNextAppointment_, model.frequency, model);
+};
+var _user$project$Views_PatientForms_Dose$setBottlesFromAlgo_ = F2(
+	function (new_opened_dt, model) {
+		var bottles = A4(_user$project$Data_Bottle$calculateBottles, model.model.dose_amount, model.previous_remaining, model.previous_opened_dt, new_opened_dt);
+		var model_ = model.model;
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				model: _elm_lang$core$Native_Utils.update(
+					model_,
+					{bottles: bottles})
+			});
+	});
+var _user$project$Views_PatientForms_Dose$setBottlesFromAlgoUsingDoseDT = function (model) {
+	return A2(_user$project$Views_PatientForms_Dose$setBottlesFromAlgo_, model.model.dose_dt, model);
+};
+var _user$project$Views_PatientForms_Dose$setBottlesFromAlgo = function (model) {
+	return A2(_user$project$Views_PatientForms_Dose$setBottlesFromAlgo_, model.model.dose_dt_opened, model);
+};
+var _user$project$Views_PatientForms_Dose$view = function (model) {
+	return _user$project$Views_PatientForms_Base$view(model.fc);
+};
+var _user$project$Views_PatientForms_Dose$setRemaining = function (model) {
+	var getModel = model.model;
+	return _elm_lang$core$Native_Utils.update(
+		model,
+		{
+			model: _elm_lang$core$Native_Utils.update(
+				getModel,
+				{
+					dose_remaining_dose: _user$project$Data_Bottle$lastBottleRemaining(model.model.bottles)
+				})
+		});
+};
+var _user$project$Views_PatientForms_Dose$setOpenedFromLastBottle = function (model) {
+	var getModel = model.model;
+	return _elm_lang$core$Native_Utils.update(
+		model,
+		{
+			model: _elm_lang$core$Native_Utils.update(
+				getModel,
+				{
+					dose_dt_opened: _user$project$Data_Bottle$lastBottleDate(model.model.bottles)
+				})
+		});
+};
+var _user$project$Views_PatientForms_Dose$calculateExpiry = function (model) {
+	var getModel = model.model;
+	return _elm_lang$core$Native_Utils.update(
+		model,
+		{
+			model: _elm_lang$core$Native_Utils.update(
+				getModel,
+				{
+					dose_dt_opened_expiry: A2(_user$project$Data_Date$addDays, _user$project$Constants$constants.drug_shelf_life_days, getModel.dose_dt_opened)
+				})
+		});
+};
+var _user$project$Views_PatientForms_Dose$fc = _elm_lang$core$Dict$fromList(
+	{
+		ctor: '::',
+		_0: {
+			ctor: '_Tuple2',
+			_0: 'dose_weight',
+			_1: _elm_lang$core$Native_Utils.update(
+				_user$project$Views_PatientForms_Base$formControlDefault,
+				{
+					fieldName: 'dose_weight',
+					labelText: '体重(kg)： ',
+					min: 30,
+					max: 130,
+					inputType: _user$project$Views_PatientForms_Base$Inpt('number'),
+					order: 1,
+					width: 3
+				})
+		},
+		_1: {
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'dose_amount',
+				_1: _elm_lang$core$Native_Utils.update(
+					_user$project$Views_PatientForms_Base$formControlDefault,
+					{
+						fieldName: 'dose_amount',
+						labelText: '剂量(mg)：',
+						max: 700,
+						inputType: _user$project$Views_PatientForms_Base$Inpt('number'),
+						order: 2,
+						width: 3
+					})
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'dose_previous_remaining_dose',
+					_1: _elm_lang$core$Native_Utils.update(
+						_user$project$Views_PatientForms_Base$formControlDefault,
+						{
+							fieldName: 'dose_previous_remaining_dose',
+							labelText: '使用前剩余剂量(mg)：',
+							max: 440,
+							inputType: _user$project$Views_PatientForms_Base$Inpt('number'),
+							order: 3,
+							width: 3
+						})
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'dose_remaining_dose',
+						_1: _elm_lang$core$Native_Utils.update(
+							_user$project$Views_PatientForms_Base$formControlDefault,
+							{
+								fieldName: 'dose_remaining_dose',
+								labelText: '使用后剩余剂量(mg)：',
+								max: 440,
+								inputType: _user$project$Views_PatientForms_Base$Inpt('number'),
+								order: 4,
+								width: 3,
+								displayOnly: true
+							})
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'dose_dt_opened',
+							_1: _elm_lang$core$Native_Utils.update(
+								_user$project$Views_PatientForms_Base$formControlDefault,
+								{fieldName: 'dose_dt_opened', labelText: '开封日期：', inputType: _user$project$Views_PatientForms_Base$DateInput, order: 7, width: 6, disabled: false, displayOnly: false})
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'dose_dt_opened_expiry',
+								_1: _elm_lang$core$Native_Utils.update(
+									_user$project$Views_PatientForms_Base$formControlDefault,
+									{fieldName: 'dose_dt_opened_expiry', labelText: '药到期：', disabled: true, displayOnly: true, order: 8, width: 6})
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'dose_dt',
+									_1: _elm_lang$core$Native_Utils.update(
+										_user$project$Views_PatientForms_Base$formControlDefault,
+										{
+											fieldName: 'dose_dt',
+											inputType: _user$project$Views_PatientForms_Base$DateInput,
+											options: {
+												ctor: '::',
+												_0: '1',
+												_1: {
+													ctor: '::',
+													_0: '2',
+													_1: {
+														ctor: '::',
+														_0: '3',
+														_1: {ctor: '[]'}
+													}
+												}
+											},
+											labelText: '用药日期',
+											width: 6,
+											order: 5,
+											displayOnly: false,
+											disabled: false
+										})
+								},
+								_1: {
+									ctor: '::',
+									_0: {
+										ctor: '_Tuple2',
+										_0: 'dose_next_appointment_dt',
+										_1: _elm_lang$core$Native_Utils.update(
+											_user$project$Views_PatientForms_Base$formControlDefault,
+											{fieldName: 'dose_next_appointment_dt', inputType: _user$project$Views_PatientForms_Base$DateInput, labelText: '下次用药日期:', width: 6, order: 6, displayOnly: false, disabled: false})
+									},
+									_1: {
+										ctor: '::',
+										_0: {
+											ctor: '_Tuple2',
+											_0: 'dose_number',
+											_1: _elm_lang$core$Native_Utils.update(
+												_user$project$Views_PatientForms_Base$formControlDefault,
+												{
+													fieldName: 'dose_number',
+													inputType: _user$project$Views_PatientForms_Base$Inpt('number'),
+													labelText: '第几次用药',
+													width: 4,
+													order: 10,
+													displayOnly: false,
+													disabled: false
+												})
+										},
+										_1: {
+											ctor: '::',
+											_0: {
+												ctor: '_Tuple2',
+												_0: 'dose_number_cycle',
+												_1: _elm_lang$core$Native_Utils.update(
+													_user$project$Views_PatientForms_Base$formControlDefault,
+													{
+														fieldName: 'dose_number_cycle',
+														inputType: _user$project$Views_PatientForms_Base$OptionsInput,
+														options: {
+															ctor: '::',
+															_0: '1',
+															_1: {
+																ctor: '::',
+																_0: '2',
+																_1: {
+																	ctor: '::',
+																	_0: '3',
+																	_1: {ctor: '[]'}
+																}
+															}
+														},
+														labelText: '周期内第几次用药',
+														width: 4,
+														order: 11,
+														displayOnly: false,
+														disabled: false
+													})
+											},
+											_1: {
+												ctor: '::',
+												_0: {
+													ctor: '_Tuple2',
+													_0: 'dose_remarks',
+													_1: _elm_lang$core$Native_Utils.update(
+														_user$project$Views_PatientForms_Base$formControlDefault,
+														{fieldName: 'dose_remarks', labelText: '备注：', width: 12, order: 10, required: false})
+												},
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	});
+var _user$project$Views_PatientForms_Dose$fcNewPatient = A2(
+	_elm_lang$core$Dict$remove,
+	'dose_previous_remaining_dose',
+	A2(_elm_lang$core$Dict$remove, 'dose_weight', _user$project$Views_PatientForms_Dose$fc));
+var _user$project$Views_PatientForms_Dose$single_bottle_dosage = _user$project$Constants$constants.single_bottle_dosage;
+var _user$project$Views_PatientForms_Dose$Model = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return function (n) {
+														return function (o) {
+															return {model: a, fc: b, id: c, submitted: d, notifications: e, error: f, previous_remaining: g, patient_maintenance_dose: h, previous_opened_dt: i, multiplier: j, calculate_dose_algo: k, calculate_remaining_from_dose: l, frequency: m, dose_number_cycle: n, endRoute: o};
+														};
+													};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Views_PatientForms_Dose$Manual = {ctor: 'Manual'};
+var _user$project$Views_PatientForms_Dose$init = {
+	model: _user$project$Data_Dose$init,
+	fc: _user$project$Views_PatientForms_Dose$fc,
+	id: _elm_lang$core$Maybe$Nothing,
+	submitted: false,
+	notifications: '',
+	error: '',
+	previous_remaining: 0,
+	patient_maintenance_dose: 0,
+	previous_opened_dt: _elm_lang$core$Date$fromTime(0),
+	multiplier: 0,
+	calculate_dose_algo: _user$project$Views_PatientForms_Dose$Manual,
+	calculate_remaining_from_dose: false,
+	frequency: '',
+	dose_number_cycle: 0,
+	endRoute: _user$project$Route$Patients
+};
+var _user$project$Views_PatientForms_Dose$initNewPatient = A3(
+	_user$project$Views_PatientForms_Base$changeWidth,
+	'dose_next_appointment_dt',
+	4,
+	A3(
+		_user$project$Views_PatientForms_Base$changeWidth,
+		'dose_dt',
+		4,
+		A3(
+			_user$project$Views_PatientForms_Base$changeWidth,
+			'dose_dt_opened',
+			4,
+			A3(
+				_user$project$Views_PatientForms_Base$toggleHidden,
+				'dose_number_cycle',
+				true,
+				A2(
+					_user$project$Views_PatientForms_Base$removeField,
+					'dose_previous_remaining_dose',
+					A2(
+						_user$project$Views_PatientForms_Base$removeField,
+						'dose_dt_opened_expiry',
+						A2(_user$project$Views_PatientForms_Base$removeField, 'dose_weight', _user$project$Views_PatientForms_Dose$init)))))));
+var _user$project$Views_PatientForms_Dose$initFromPatient = F2(
+	function (patient, endRoute) {
+		var getModel = _user$project$Views_PatientForms_Dose$init.model;
+		var new_model = _user$project$Views_PatientForms_Dose$setRemaining(
+			_user$project$Views_PatientForms_Dose$calculateExpiry(
+				_user$project$Views_PatientForms_Dose$setBottlesFromAlgo(
+					_user$project$Views_PatientForms_Dose$setOpenedFromLastBottle(
+						_user$project$Views_PatientForms_Dose$setBottlesFromAlgoUsingDoseDT(
+							_user$project$Views_PatientForms_Dose$calculateNextAppointment(
+								_elm_lang$core$Native_Utils.update(
+									_user$project$Views_PatientForms_Dose$init,
+									{
+										model: _elm_lang$core$Native_Utils.update(
+											getModel,
+											{
+												dose_dt: patient.dt_now,
+												dose_amount: patient.patient_maintenance_dose,
+												dose_weight: patient.dose_weight,
+												dose_remaining_dose: patient.dose_remaining_dose + 1,
+												dose_number: patient.dose_number + 1,
+												dose_number_cycle: A2(_user$project$Data_Patient$increaseDoseNumberCycle, patient.dose_number_cycle, patient.patient_frequency)
+											}),
+										previous_remaining: patient.dose_remaining_dose,
+										previous_opened_dt: patient.dose_dt_opened,
+										frequency: patient.patient_frequency,
+										id: _elm_lang$core$Maybe$Just(patient.id),
+										endRoute: endRoute
+									})))))));
+		return new_model;
+	});
+var _user$project$Views_PatientForms_Dose$FromWeight = {ctor: 'FromWeight'};
+var _user$project$Views_PatientForms_Dose$FromMaintenance = {ctor: 'FromMaintenance'};
+var _user$project$Views_PatientForms_Dose$SubmitHttp = function (a) {
+	return {ctor: 'SubmitHttp', _0: a};
+};
+var _user$project$Views_PatientForms_Dose$update = F2(
+	function (msg, model) {
+		var getModel = model.model;
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'ValChanged':
+				var _p2 = _p0._1;
+				var new_model = function () {
+					var _p1 = _p0._0;
+					switch (_p1) {
+						case 'dose_dt':
+							return _user$project$Views_PatientForms_Dose$setOpenedFromLastBottle(
+								_user$project$Views_PatientForms_Dose$setBottlesFromAlgoUsingDoseDT(
+									_user$project$Views_PatientForms_Dose$calculateNextAppointment(
+										_elm_lang$core$Native_Utils.update(
+											model,
+											{
+												model: _elm_lang$core$Native_Utils.update(
+													getModel,
+													{
+														dose_dt: _user$project$Data_Date$stringToDate(_p2)
+													})
+											}))));
+						case 'dose_previous_remaining_dose':
+							return _user$project$Views_PatientForms_Dose$setRemaining(
+								_user$project$Views_PatientForms_Dose$calculateExpiry(
+									_user$project$Views_PatientForms_Dose$setOpenedFromLastBottle(
+										_user$project$Views_PatientForms_Dose$setBottlesFromAlgoUsingDoseDT(
+											_elm_lang$core$Native_Utils.update(
+												model,
+												{
+													previous_remaining: _user$project$Util$stringToInt(_p2)
+												})))));
+						case 'dose_dt_opened':
+							return _user$project$Views_PatientForms_Dose$setRemaining(
+								_user$project$Views_PatientForms_Dose$calculateExpiry(
+									_user$project$Views_PatientForms_Dose$setBottlesFromAlgo(
+										_elm_lang$core$Native_Utils.update(
+											model,
+											{
+												model: _elm_lang$core$Native_Utils.update(
+													getModel,
+													{
+														dose_dt_opened: _user$project$Data_Date$stringToDate(_p2)
+													})
+											}))));
+						case 'dose_weight':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									model: _elm_lang$core$Native_Utils.update(
+										getModel,
+										{
+											dose_weight: _user$project$Util$stringToInt(_p2)
+										})
+								});
+						case 'dose_amount':
+							return _user$project$Views_PatientForms_Dose$setRemaining(
+								_user$project$Views_PatientForms_Dose$setOpenedFromLastBottle(
+									_user$project$Views_PatientForms_Dose$setBottlesFromAlgoUsingDoseDT(
+										_elm_lang$core$Native_Utils.update(
+											model,
+											{
+												model: _elm_lang$core$Native_Utils.update(
+													getModel,
+													{
+														dose_amount: _user$project$Util$stringToInt(_p2)
+													})
+											}))));
+						case 'dose_remarks':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									model: _elm_lang$core$Native_Utils.update(
+										getModel,
+										{dose_remarks: _p2})
+								});
+						case 'dose_next_appointment_dt':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									model: _elm_lang$core$Native_Utils.update(
+										getModel,
+										{
+											dose_next_appointment_dt: _user$project$Data_Date$stringToDate(_p2)
+										})
+								});
+						case 'dose_number':
+							return _user$project$Views_PatientForms_Dose$calculateNextAppointment(
+								_elm_lang$core$Native_Utils.update(
+									model,
+									{
+										model: _elm_lang$core$Native_Utils.update(
+											getModel,
+											{
+												dose_number: _user$project$Util$stringToInt(_p2)
+											})
+									}));
+						case 'dose_number_cycle':
+							return _user$project$Views_PatientForms_Dose$calculateNextAppointment(
+								_elm_lang$core$Native_Utils.update(
+									model,
+									{
+										model: _elm_lang$core$Native_Utils.update(
+											getModel,
+											{
+												dose_number_cycle: _user$project$Util$stringToInt(_p2)
+											})
+									}));
+						default:
+							return model;
+					}
+				}();
+				return A2(_user$project$Util_ops['=>'], new_model, _elm_lang$core$Platform_Cmd$none);
+			case 'Submit':
+				return A2(
+					_user$project$Util_ops['=>'],
+					model,
+					A3(
+						_user$project$Request_Dose$post,
+						A2(_elm_lang$core$Maybe$withDefault, 0, model.id),
+						model.model,
+						_user$project$Views_PatientForms_Dose$SubmitHttp));
+			case 'SubmitHttp':
+				if (_p0._0.ctor === 'Err') {
+					return A2(
+						_user$project$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								error: _elm_lang$core$Basics$toString(_p0._0._0)
+							}),
+						_elm_lang$core$Platform_Cmd$none);
+				} else {
+					return A2(
+						_user$project$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								notifications: _user$project$Data_DjangoResponse$toString(_p0._0._0),
+								submitted: true
+							}),
+						_user$project$Route$modifyUrl(model.endRoute));
+				}
+			default:
+				return A2(_user$project$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
+		}
+	});
+var _user$project$Views_PatientForms_Dose$Submit = {ctor: 'Submit'};
+var _user$project$Views_PatientForms_Dose$buttons = _user$project$Views_PatientForms_Base$buttons(_user$project$Views_PatientForms_Dose$Submit);
+var _user$project$Views_PatientForms_Dose$ValChanged = F2(
+	function (a, b) {
+		return {ctor: 'ValChanged', _0: a, _1: b};
+	});
+var _user$project$Views_PatientForms_Dose$withMsg = _user$project$Util$withMsg_(_user$project$Views_PatientForms_Dose$ValChanged);
+var _user$project$Views_PatientForms_Dose$viewAsForm = function (model) {
+	var notifications = {ctor: '[]'};
+	var valueOf = function (str) {
+		var _p3 = str;
+		switch (_p3) {
+			case 'dose_previous_remaining_dose':
+				return _elm_lang$core$Basics$toString(model.previous_remaining);
+			case 'dose_dt_opened_expiry':
+				return A2(_user$project$Data_Dose$getValue, model.model, str);
+			default:
+				return A2(_user$project$Data_Dose$getValueJS, model.model, str);
+		}
+	};
+	var isNewBottle = A3(_user$project$Data_Bottle$isNewBottle, model.previous_opened_dt, model.model.dose_dt_opened, model.model.bottles);
+	var fc_with_vals = (_user$project$Data_Patient$frequencyToShouldBeHidden(model.frequency) ? _elm_lang$core$Dict$remove('dose_number_cycle') : _elm_lang$core$Basics$identity)(
+		(isNewBottle ? _elm_lang$core$Basics$identity : _elm_lang$core$Dict$remove('dose_dt_opened_expiry'))(
+			(isNewBottle ? _elm_lang$core$Basics$identity : _elm_lang$core$Dict$remove('dose_dt_opened'))(
+				_elm_lang$core$Dict$fromList(
+					A2(
+						_elm_lang$core$List$map,
+						function (_p4) {
+							var _p5 = _p4;
+							var _p6 = _p5._1;
+							return A2(
+								_user$project$Util_ops['=>'],
+								_p5._0,
+								_elm_lang$core$Native_Utils.update(
+									_p6,
+									{
+										inputArgs: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$value(
+												valueOf(_p6.fieldName)),
+											_1: {ctor: '[]'}
+										}
+									}));
+						},
+						_elm_lang$core$Dict$toList(model.fc))))));
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A3(
+				_user$project$Views_PatientForms_Base$viewAsForm,
+				_user$project$Views_PatientForms_Dose$withMsg(fc_with_vals),
+				notifications,
+				_user$project$Views_PatientForms_Dose$Submit),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Views_Bottle$view(model.model.bottles),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Util$debug(
+						_elm_lang$core$Basics$toString(model.model)),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _user$project$Views_PatientForms_Dose$Placeholder = function (a) {
+	return {ctor: 'Placeholder', _0: a};
+};
+var _user$project$Views_PatientForms_Dose$FormControlMsg = function (a) {
+	return {ctor: 'FormControlMsg', _0: a};
+};
+var _user$project$Views_PatientForms_Dose$Nope = {ctor: 'Nope'};

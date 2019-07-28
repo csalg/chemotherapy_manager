@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+
+{% block head_extra %}
+	{% load static %}
+
+	<link rel="stylesheet" href={% static "css/hospital_admin.css" %}>
+	 <script src={% static "vendors/mdl/material.min.js" %}></script>
+{% endblock %}
+
+
+{% block content %}
+<div class="adminPanelWrapper">
+	<div class="sidebar">
+		
+	</div>
+	<div class="content">
+		<div class="flex-container header">
+			<i class="fas fa-users-cog settings-header settings-header-icon"></i>
+			<h4 style="settings-header">
+				新建用户项
+			</h4>
+		</div>
+		<hr class="settings-division-hr">
+		<div class="">
+			<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
+			<input type="checkbox" id="switch-1" class="mdl-switch__input" checked>
+			<span class="mdl-switch__label">允许开放注册（任何人都可以注册，管理员需要批准新帐户才能激活）</span>
+			</label>
+		</div>
+		<div class="" style="padding:10px 0 0 0;">
+			{# <a href=""> #}
+				<a class="mdl-button mdl-js-button mdl-button--primary" style="color: rgb(33,150,243);">
+  <i class="fas fa-user-plus "></i>
+						新建新的用户
+</a>
+						
+				{# </a> #}
+		</div>
+		
+	</div>
+
+</div>
+{%endblock%}

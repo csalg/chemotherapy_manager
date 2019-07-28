@@ -1,0 +1,31 @@
+
+{% extends "base.html"%}
+{% block personal_panel_end %}
+
+
+<div class="panel-footer">
+	<div class="row">
+
+
+
+			<button id="editPersonalInfo" type="button" class="btn btn-default btn-inline" onclick="location.href='/patient/{{patient.id}}/main';">
+				<i class="fas fa-undo-alt"></i> 回到患者消息
+			</button>
+
+
+	</div>
+</div>
+</div>
+</form>
+
+
+
+{% endblock %}
+{% block content %}
+<div class="" style="padding:10px 50px 10px 50px;">
+	{% with table as table %}
+	{% include 'components/table.html' %}
+	{% endwith %}
+	</div>
+{% endblock %}
+

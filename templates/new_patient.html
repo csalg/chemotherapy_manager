@@ -1,0 +1,161 @@
+
+{% extends "base.html"%}
+{% block content %}
+
+      <div class="modal-header">
+
+      	<h4 class="modal-title" id="modalLabel">新建患者</h4>
+      </div>
+
+
+
+      <div class="form_padded">
+                  <div class="panel panel-default" style="{% block errorStyle %}display: none;{% endblock %}">
+                        <div class="panel-heading">Errors</div>
+                        <div class="panel-body">
+
+
+                              <div class="col-sm-12">
+                              {{ form.non_field_errors }}
+                              {% for field in form %}
+                                  <div class="fieldWrapper">
+                                      {{ field.label_tag }}
+                                      {{ field.errors }}
+                                      {% if field.help_text %}
+                                      <p class="help">{{ field.help_text|safe }}</p>
+                                      {% endif %}
+                                  </div>
+                              {% endfor %}
+                              </div>
+                        </div>
+                  </div>
+      	<form class="form .form-horizontal" action="/newPatientForm/" method="post">
+                  {% csrf_token %}
+			<div class="panel panel-default">
+				<div class="panel-heading">基本信息</div>
+				<div class="panel-body">
+
+
+					<div class="row">
+
+						<label class="control-label col-sm-2 form_label">姓名：</label>
+						<div class="col-sm-2">
+							<input type="text" name="patient_name" class="form-control" placeholder="姓名">
+						</div>
+
+						<label class="control-label col-sm-2 form_label">年龄：</label>
+						<div class="col-sm-2">
+							<input type="text" name="patient_age" class="form-control" placeholder="年龄">
+						</div>
+
+						<label class="control-label col-sm-2 form_label">体重(kg)：</label>
+						<div class="col-sm-2">
+							<input type="text" name="dose_weight" class="form-control" placeholder="体重">
+						</div>
+					</div>
+
+					<div class="row">
+						<label class="control-label col-sm-2 form_label">磁卡号：</label>
+						<div class="col-sm-4">
+							<input type="text" name="patient_card" class="form-control" placeholder="磁卡号">
+						</div>
+
+						<label class="control-label col-sm-2 form_label">化疗方案：</label>
+						<div class="col-sm-4">
+							<select name="patient_therapy" class="form-control" name="therapy">
+								<option value="Therapy 1"> </option>
+								<option value="Therapy 2">EC-T(H)</option>
+								<option value="Therapy 3">T(H)</option>
+								<option value="Therapy 4">TCb(H)</option>
+							</select>	
+						</div>
+					</div>	
+				</div>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">使用前检查信息</div>
+				<div class="panel-body">
+
+					<div class="row">
+						<label class="control-label col-sm-2 form_label">心超报告：</label>
+						<div class="col-sm-10">
+							<select name="heart_text" class="form-control" name="therapy">
+								<option value="Therapy 1"> </option>
+								<option value="Therapy 2">EC-T(H)</option>
+								<option value="Therapy 3">T(H)</option>
+								<option value="Therapy 4">TCb(H)</option>
+							</select>	
+						</div>
+					</div>
+						<div class="row">
+
+							<label class="control-label col-sm-3 form_label">左心射血分数(%)：</label>
+							<div class="col-sm-2">
+								<input type="text" name="heart_percentage" class="form-control" placeholder="射血分数">
+							</div>
+							<label class="control-label col-sm-3 form_label">首次心超日期：</label>
+							<div class="col-sm-4">
+								<input type="date" name="heart_date" class="form-control" placeholder="">
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">用药信息</div>
+				<div class="panel-body">
+
+					<div class="row">
+						<label class="control-label col-sm-2 form_label">首次使用剂量(mg)：</label>
+						<div class="col-sm-2">
+							<input type="text" name="dose_initial_dose" class="form-control" placeholder="剂量(mg)">
+						</div>
+
+						<label class="control-label col-sm-2 form_label">维持剂量(mg)：</label>
+						<div class="col-sm-2">
+							<input type="text" name="dose_maintenance_dose" class="form-control" placeholder="剂量(mg)">
+						</div>
+
+						<label class="control-label col-sm-2 form_label">使用后剩余剂量(mg)：</label>
+						<div class="col-sm-2">
+							<input type="text" name="dose_remaining_dose" class="form-control" placeholder="剩余剂量(mg)">
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-sm-8 form_label">首次使用时间： </label>
+						<div class="col-sm-4">
+							<input type="date" name="dose_bottle_expiry_date" class="form-control" placeholder="">
+						</div>
+					</div>
+					
+
+				</div>
+			</div>
+
+                  <div class="panel panel-default">
+                        <div class="panel-heading">备注</div>
+                        <div class="panel-body">
+
+
+                              <div class="col-sm-12">
+                                    <input type="text" name="dose_remarks" class="form-control" placeholder="备注">
+                              </div>
+                        </div>
+                  </div>
+
+
+			<div class="modal-footer" style="justify-content: right;">
+
+				<input type="submit" value="提交" />
+					
+
+			</div>
+
+		</form>
+	</div>
+
+  {% block endofbody %}
+  {% endblock %}
+{% endblock %}

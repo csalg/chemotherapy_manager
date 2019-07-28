@@ -1,0 +1,13 @@
+{% extends 'print/base.html' %}
+
+{% block body %}
+
+	{% for bottle in bottles %}
+		{% include 'print/pages/bottle.html' %}
+	{% endfor %}
+
+{% include 'print/pages/personal.html' %}
+{% include 'print/pages/nacl.html' %}
+{% include 'print/pages/liquids.html' %}
+
+{% endblock %}

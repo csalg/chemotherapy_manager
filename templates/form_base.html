@@ -1,0 +1,82 @@
+{% extends "base.html"%}
+
+{% load macros %}
+
+{% macro personal_disabled %}
+{%block personal_disabled%}{%endblock%}
+{% endmacro %}`
+
+{% macro dose_disabled %}
+{%block dose_disabled%}{%endblock%}
+{% endmacro %}`
+
+{% macro heart_disabled %}
+{%block heart_disabled%}{%endblock%}
+{% endmacro %}`
+
+{% block head_title %}患者 {% endblock %}
+{% block content %}
+
+	
+
+  <div class="container">
+<div class="row">
+	<div class="col-lg-2">
+	</div>
+	<div class="col-lg-8 profile-content">
+		<br>
+      <div class="modal-header">
+
+      	<h4 class="modal-title" id="modalLabel">
+
+      		{% block title %}
+      			<i class="fas fa-user"></i> 患者消息 
+      		{% endblock %} </h4>
+      </div>
+
+
+					{% block errors_panel %}
+					{% if errors %}
+							<div class="panel panel-default">
+							    <div class="panel-heading"><i class="fas fa-exclamation-triangle"></i> 验证错误</div>
+							    <div class="panel-body">
+
+
+
+							          <div class="col-sm-12">
+							          {{ form.non_field_errors }}
+							          {% for field in form %}
+							              <div class="fieldWrapper">
+							                  {{ field.label_tag }}
+							                  {{ field.errors }}
+							                  {% if field.help_text %}
+							                  <p class="help">{{ field.help_text|safe }}</p>
+							                  {% endif %}
+							              </div>
+							          {% endfor %}
+							          </div>
+							    </div>
+							</div>					
+					{%endif%}
+							{% endblock %}
+
+{% block panels %}
+
+{% endblock%}
+
+{% block footer %}
+{% endblock %}
+
+		
+
+<br>
+	</div>
+<div class="col-lg-2"></div>
+</div>
+  {% block endofbody %}
+  {% endblock %}
+<br>
+<br>
+
+{% endblock %} {# ends content block #}
+

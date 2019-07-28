@@ -1,0 +1,47 @@
+{% extends 'form_base.html' %}
+
+{# {{ user.id }}
+{{ user.name }}
+{{ user.email }}
+{{ user.hospital }}
+ #}
+
+{% block title %}
+	<i class="far fa-user"></i> {{title}}
+{% endblock %}
+
+
+{% block content %}
+{% load my_filters %}		
+
+
+
+ 		 	{% autoescape off%}
+ <div class="panel panel-default">
+
+ 	<div class="panel-heading">
+ 		{{form.header.render}}
+ 	</div>
+                  {% csrf_token %}
+
+
+ 	<div class="panel-body">
+ 		{% for row in form.contentRows %}
+ 		 <div class="row">
+ 		 	{% for element in row %}
+				{{element.render}}
+ 			{%endfor%}
+ 		</div>
+ 		{%endfor%}
+	</div>
+
+	<div class="panel-footer" style="text-align: right;">
+ 		{% for button in form.footer %}
+ 			{{ button.render }}
+		{%endfor%}
+	</div>
+
+	</form>
+</div>
+ {% endautoescape %}
+{% endblock %}

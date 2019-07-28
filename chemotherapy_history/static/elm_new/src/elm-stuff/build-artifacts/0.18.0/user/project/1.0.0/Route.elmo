@@ -1,0 +1,142 @@
+var _user$project$Route$routeToString = function (page) {
+	var pieces = function () {
+		var _p0 = page;
+		switch (_p0.ctor) {
+			case 'Root':
+				return {ctor: '[]'};
+			case 'Patients':
+				return {
+					ctor: '::',
+					_0: 'patients',
+					_1: {ctor: '[]'}
+				};
+			case 'PatientsWithExpress':
+				return {
+					ctor: '::',
+					_0: 'patients',
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$core$Basics$toString(_p0._0),
+						_1: {ctor: '[]'}
+					}
+				};
+			case 'Patient':
+				return {
+					ctor: '::',
+					_0: 'patient',
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$core$Basics$toString(_p0._0),
+						_1: {ctor: '[]'}
+					}
+				};
+			case 'PatientWithExpress':
+				return {
+					ctor: '::',
+					_0: 'patient',
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$core$Basics$toString(_p0._0),
+						_1: {
+							ctor: '::',
+							_0: 'express',
+							_1: {ctor: '[]'}
+						}
+					}
+				};
+			default:
+				return {
+					ctor: '::',
+					_0: 'newpatient',
+					_1: {ctor: '[]'}
+				};
+		}
+	}();
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		'#/',
+		A2(_elm_lang$core$String$join, '/', pieces));
+};
+var _user$project$Route$href = function (route) {
+	return _elm_lang$html$Html_Attributes$href(
+		_user$project$Route$routeToString(route));
+};
+var _user$project$Route$modifyUrl = function (_p1) {
+	return _elm_lang$navigation$Navigation$modifyUrl(
+		_user$project$Route$routeToString(_p1));
+};
+var _user$project$Route$newUrl = function (_p2) {
+	return _elm_lang$navigation$Navigation$newUrl(
+		_user$project$Route$routeToString(_p2));
+};
+var _user$project$Route$NewPatient = {ctor: 'NewPatient'};
+var _user$project$Route$PatientWithExpress = function (a) {
+	return {ctor: 'PatientWithExpress', _0: a};
+};
+var _user$project$Route$Patient = function (a) {
+	return {ctor: 'Patient', _0: a};
+};
+var _user$project$Route$PatientsWithExpress = function (a) {
+	return {ctor: 'PatientsWithExpress', _0: a};
+};
+var _user$project$Route$Patients = {ctor: 'Patients'};
+var _user$project$Route$Root = {ctor: 'Root'};
+var _user$project$Route$route = _evancz$url_parser$UrlParser$oneOf(
+	{
+		ctor: '::',
+		_0: A2(
+			_evancz$url_parser$UrlParser$map,
+			_user$project$Route$Root,
+			_evancz$url_parser$UrlParser$s('')),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_evancz$url_parser$UrlParser$map,
+				_user$project$Route$Patients,
+				_evancz$url_parser$UrlParser$s('patients')),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_evancz$url_parser$UrlParser$map,
+					_user$project$Route$PatientsWithExpress,
+					A2(
+						_evancz$url_parser$UrlParser_ops['</>'],
+						_evancz$url_parser$UrlParser$s('patients'),
+						_evancz$url_parser$UrlParser$int)),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_evancz$url_parser$UrlParser$map,
+						_user$project$Route$Patient,
+						A2(
+							_evancz$url_parser$UrlParser_ops['</>'],
+							_evancz$url_parser$UrlParser$s('patient'),
+							_evancz$url_parser$UrlParser$int)),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_evancz$url_parser$UrlParser$map,
+							_user$project$Route$PatientWithExpress,
+							A2(
+								_evancz$url_parser$UrlParser_ops['</>'],
+								_evancz$url_parser$UrlParser$s('patient'),
+								A2(
+									_evancz$url_parser$UrlParser_ops['</>'],
+									_evancz$url_parser$UrlParser$int,
+									_evancz$url_parser$UrlParser$s('express')))),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_evancz$url_parser$UrlParser$map,
+								_user$project$Route$NewPatient,
+								_evancz$url_parser$UrlParser$s('newpatient')),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		}
+	});
+var _user$project$Route$fromLocation = function (location) {
+	return _elm_lang$core$String$isEmpty(location.hash) ? _elm_lang$core$Maybe$Just(_user$project$Route$Root) : A2(_evancz$url_parser$UrlParser$parseHash, _user$project$Route$route, location);
+};

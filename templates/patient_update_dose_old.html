@@ -1,0 +1,133 @@
+
+	<div class="row">
+		<form role="form">
+  <div class="form-group col-sm-6">
+    <label class="control-label" for="inputWarning">本次用药日期：</label>
+    <input type="date" value="{{ suggested.dose_dt }}"  name="dose_dt" class="form-control" placeholder="" >
+    <span class="help-block">请选择一个月内的日期</span>
+  </div>
+  <div class="form-group has-error col-sm-6">
+    <label class="control-label" for="inputError">本次体重(公斤)：</label>
+			<input type="text" name="dose_weight" class="form-control" placeholder="体重" value="{{ suggested.dose_weight }}" >
+			    <span class="help-block">可接受范围: 30 - 90 公斤</span>
+  </div>
+
+  <div class="form-group col-sm-12">
+    <input type="checkbox" id="manualInput">
+  	<label class="control-label" for="openNew">开新支药？</label>
+  </div>
+  <div class="form-group col-sm-6" style="display: none;">
+    <label class="control-label" for="inputWarning">新药开封日期：</label>
+    <input type="date" value="{{ suggested.dose_dt }}"  name="dose_dt" class="form-control" placeholder="" >
+    <span class="help-block">请选择一个月内的日期</span>
+  </div>
+    <div class="form-group col-sm-6" style="display: none;">
+    <label class="control-label" for="inputWarning">本药有效期： </label>
+    <input type="date" value="{{ suggested.dose_dt }}"  name="dose_dt" class="form-control" placeholder="" disabled>
+    <span class="help-block">请选择一个月内的日期</span>
+  </div>
+
+  <div class="form-group has-info col-sm-6">
+    <label class="control-label" for="inputError">本次剂量(毫克)：</label>
+    <input type="text" class="form-control" id="inputError">
+ <div class="row">
+ <div class="col-sm-8">
+
+    <span class="help-block">算法：体重*6</span>
+</div>
+<div class="col-sm-4">
+    <input type="checkbox" id="manualInput">
+    <label for="manualInput">直接收入</label>
+</div>
+</div>
+</div>
+  <div class="form-group has-info col-sm-6">
+    <label class="control-label" for="inputError">本次使用后剩余剂量(毫克)：</label>
+    <input type="text" class="form-control" id="inputError">
+    <span class="help-block">算法：上次的340毫克 - 本次的240毫克</span>
+</div>
+<div class="col-sm-12 align-center">
+    <span class="help-block"><i class="fas fa-exclamation-circle"></i> 剩余剂量不够，请直接收入本次剂量</span>
+    <span class="help-block"><i class="fas fa-exclamation-circle"></i> 药已经过期了，请开新支药</span>
+</div>
+
+</div> <!-- row -->
+
+<!-- 
+	<div class="row">	
+		<label class="control-label col-sm-3 form_label">本次用药日期：</label>
+		<div class="col-sm-4">
+			<input type="date" value="{{ suggested.dose_dt }}"  name="dose_dt" class="form-control" placeholder="" >
+		</div>
+
+		<label class="control-label col-sm-2 form_label">本次体重(kg)：</label>
+		<div class="col-sm-2">
+			<input type="text" name="dose_weight" class="form-control" placeholder="体重" value="{{ suggested.dose_weight }}" >
+		</div>
+	</div>	
+
+
+		{% block bottle_opened %}
+			<input type="hidden" value="{{ patient.dose_dt_opened }}" name="dose_dt_opened">
+		{% endblock %}
+
+
+	<div class="row">
+
+		<label class="control-label col-sm-3 form_label">本次剂量(mg)：</label>
+		<div class="col-sm-3">
+			<input value="{{ suggested.dose_amount }}" type="text" name="dose_amount" id="dose_amount" class="form-control" placeholder="剂量(mg)">
+		</div>
+
+		<label class="control-label col-sm-3 form_label">本次使用后剩余剂量(mg)：</label>
+		<div class="col-sm-3">
+			<input value="{{ suggested.dose_remaining_dose }}"   type="text" name="dose_remaining_dose" id="dose_remaining_dose" class="form-control" placeholder="剩余剂量(mg)" disabled>
+		</div>
+	</div>
+
+	<script>
+
+		$('#dose_amount').change(function(){
+				$('#dose_remaining_dose').attr('value', parseInt({{suggested.previous_dose}}) - parseInt($('#dose_amount').val())); 
+			})
+	</script>
+
+	<div class="row">
+
+	</div>
+ -->
+<!-- 	<div class="row">
+		<div class="col-sm-3">
+			<label class="control-label col-sm-8 form_label">本次备注: </label>
+		</div>
+		<div class="col-sm-9">
+			<input type="text" value=" " class="form-control" name="dose_remarks" placeholder="备注">
+		</div>
+	</div>
+	 -->
+</div>
+
+
+
+<div class="panel-footer">
+	<div class="row">
+		<div class="col-sm-8"></div>
+
+		<div class="col-sm-2">
+			<button id="editPersonalInfo" type="button" class="btn btn-default" onclick="location.href='/patient/{{patient.id}}/main';">
+				<i class="fas fa-undo-alt"></i> 回到患者消息
+			</button>
+		</div>
+
+
+
+		<div class="col-sm-2">
+
+			<button type="submit" class="btn btn-default">
+				<i class="fas fa-check"></i> 提交
+			</button>
+
+		</div>
+	</div>
+</div>
+</form>

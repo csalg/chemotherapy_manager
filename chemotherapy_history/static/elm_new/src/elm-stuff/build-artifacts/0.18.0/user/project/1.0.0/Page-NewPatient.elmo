@@ -1,0 +1,1192 @@
+var _user$project$Page_NewPatient$doseDTChanged = F2(
+	function (dt_, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				dose_dt_opened: _user$project$Data_Date$stringToDate(dt_),
+				dose_dt_opened_expiry: A2(_user$project$Data_Date$addDaysFromString, _user$project$Constants$constants.drug_shelf_life_days, dt_)
+			});
+	});
+var _user$project$Page_NewPatient$setOpenedDTFromDoseDT = function (model) {
+	var getModel = model.model;
+	return _elm_lang$core$Native_Utils.update(
+		model,
+		{
+			model: _elm_lang$core$Native_Utils.update(
+				getModel,
+				{dose_dt_opened: getModel.dose_dt})
+		});
+};
+var _user$project$Page_NewPatient$calculateNextAppointment = function (model) {
+	return A2(_user$project$Views_PatientForms_Dose$calculateNextAppointment_, model.model.patient_frequency, model);
+};
+var _user$project$Page_NewPatient$getModel = function (model) {
+	return model.model;
+};
+var _user$project$Page_NewPatient$inheritDoseAmount = function (model) {
+	var getModel = model.model;
+	return (!model.allowAuto) ? model : _elm_lang$core$Native_Utils.update(
+		model,
+		{
+			model: _elm_lang$core$Native_Utils.update(
+				getModel,
+				{
+					dose_amount: model.firstTime ? getModel.patient_initial_dose : getModel.patient_maintenance_dose
+				})
+		});
+};
+var _user$project$Page_NewPatient$calculateDosesAccordingToWeight = function (model) {
+	var getModel = model.model;
+	var frequencyAsRF = _user$project$Data_Patient$frequencyToDoseFrequency(model.model.patient_frequency);
+	var initial_dose = frequencyAsRF.initialMultiplier * model.model.dose_weight;
+	var maintenance_dose = frequencyAsRF.nextMultiplier * model.model.dose_weight;
+	return (!model.allowAuto) ? model : _elm_lang$core$Native_Utils.update(
+		model,
+		{
+			model: _elm_lang$core$Native_Utils.update(
+				getModel,
+				{patient_initial_dose: initial_dose, patient_maintenance_dose: maintenance_dose})
+		});
+};
+var _user$project$Page_NewPatient$maintenanceFromWeight = F2(
+	function (weight, frequency) {
+		return _user$project$Data_Patient$frequencyToDoseFrequency(frequency).nextMultiplier * weight;
+	});
+var _user$project$Page_NewPatient$initialFromWeight = F2(
+	function (weight, frequency) {
+		return _user$project$Data_Patient$frequencyToDoseFrequency(frequency).initialMultiplier * weight;
+	});
+var _user$project$Page_NewPatient$manualInputAction = F2(
+	function (fieldName, msg) {
+		return {
+			ctor: '::',
+			_0: A4(
+				_user$project$Views_PatientForms_Base$Action,
+				'',
+				'checkbox',
+				'直接输入',
+				function (val) {
+					return A2(msg, fieldName, val);
+				}),
+			_1: {ctor: '[]'}
+		};
+	});
+var _user$project$Page_NewPatient$changeActions = F2(
+	function (args, record) {
+		return _elm_lang$core$Native_Utils.update(
+			record,
+			{actions: args});
+	});
+var _user$project$Page_NewPatient$toggleDisplayOnly = function (record) {
+	return _elm_lang$core$Native_Utils.update(
+		record,
+		{displayOnly: !record.displayOnly});
+};
+var _user$project$Page_NewPatient$displayOnly = F2(
+	function (args, record) {
+		return _elm_lang$core$Native_Utils.update(
+			record,
+			{displayOnly: args});
+	});
+var _user$project$Page_NewPatient$actions = F2(
+	function (args, record) {
+		return _elm_lang$core$Native_Utils.update(
+			record,
+			{actions: args});
+	});
+var _user$project$Page_NewPatient$hidden = F2(
+	function (args, record) {
+		return _elm_lang$core$Native_Utils.update(
+			record,
+			{hidden: args});
+	});
+var _user$project$Page_NewPatient$value_ = F2(
+	function (args, record) {
+		return _elm_lang$core$Native_Utils.update(
+			record,
+			{
+				inputArgs: A2(
+					_elm_lang$core$Basics_ops['++'],
+					record.inputArgs,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$value(args),
+						_1: {ctor: '[]'}
+					})
+			});
+	});
+var _user$project$Page_NewPatient$inputArgs = F2(
+	function (args, record) {
+		return _elm_lang$core$Native_Utils.update(
+			record,
+			{inputArgs: args});
+	});
+var _user$project$Page_NewPatient$modifyHeart = F3(
+	function (recordModifierFunction, fieldName, model) {
+		var entry = A2(_elm_lang$core$Dict$get, fieldName, model.heart);
+		var _p0 = entry;
+		if (_p0.ctor === 'Just') {
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{
+					heart: A3(
+						_elm_lang$core$Dict$insert,
+						fieldName,
+						recordModifierFunction(_p0._0),
+						model.heart)
+				});
+		} else {
+			return model;
+		}
+	});
+var _user$project$Page_NewPatient$modifyDose = F3(
+	function (recordModifierFunction, fieldName, model) {
+		var entry = A2(_elm_lang$core$Dict$get, fieldName, model.dose);
+		var _p1 = entry;
+		if (_p1.ctor === 'Just') {
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{
+					dose: A3(
+						_elm_lang$core$Dict$insert,
+						fieldName,
+						recordModifierFunction(_p1._0),
+						model.dose)
+				});
+		} else {
+			return model;
+		}
+	});
+var _user$project$Page_NewPatient$firstTimeChanged = F2(
+	function (val, model) {
+		return val ? _elm_lang$core$Native_Utils.update(
+			model,
+			{dose_amount: model.initial_dose, firstTime: val}) : A3(
+			_user$project$Page_NewPatient$modifyDose,
+			_user$project$Page_NewPatient$value_(
+				_elm_lang$core$Basics$toString(model.maintenance_dose)),
+			'dose_amount',
+			_elm_lang$core$Native_Utils.update(
+				model,
+				{dose_amount: model.maintenance_dose, firstTime: val}));
+	});
+var _user$project$Page_NewPatient$firstTimeChangedFromDate = function (model) {
+	return A2(
+		_user$project$Page_NewPatient$firstTimeChanged,
+		_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$Date$toTime(model.dt_now) - _elm_lang$core$Date$toTime(model.model.patient_initial_dose_dt),
+			((24 * 60) * 60) * 1000) < 0,
+		model);
+};
+var _user$project$Page_NewPatient$modifyPersonal = F3(
+	function (recordModifierFunction, fieldName, model) {
+		var entry = A2(_elm_lang$core$Dict$get, fieldName, model.personal);
+		var _p2 = entry;
+		if (_p2.ctor === 'Just') {
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{
+					personal: A3(
+						_elm_lang$core$Dict$insert,
+						fieldName,
+						recordModifierFunction(_p2._0),
+						model.personal)
+				});
+		} else {
+			return model;
+		}
+	});
+var _user$project$Page_NewPatient$accordingToWeight = F2(
+	function (weight_, model) {
+		var _p3 = A2(
+			_user$project$Util_ops['=>'],
+			A2(_user$project$Page_NewPatient$maintenanceFromWeight, weight_, model.model.patient_frequency),
+			A2(_user$project$Page_NewPatient$initialFromWeight, weight_, model.model.patient_frequency));
+		var new_maintenance = _p3._0;
+		var new_initial = _p3._1;
+		return A3(
+			_user$project$Page_NewPatient$modifyDose,
+			_user$project$Page_NewPatient$value_(
+				_elm_lang$core$Basics$toString(new_maintenance)),
+			'dose_amount',
+			A3(
+				_user$project$Page_NewPatient$modifyPersonal,
+				_user$project$Page_NewPatient$value_(
+					_elm_lang$core$Basics$toString(new_initial)),
+				'patient_initial_dose',
+				A3(
+					_user$project$Page_NewPatient$modifyPersonal,
+					_user$project$Page_NewPatient$value_(
+						_elm_lang$core$Basics$toString(new_maintenance)),
+					'patient_maintenance_dose',
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{weight: weight_, initial_dose: new_initial, maintenance_dose: new_maintenance}))));
+	});
+var _user$project$Page_NewPatient$firstTimeFC = _elm_lang$core$Dict$fromList(
+	{
+		ctor: '::',
+		_0: {
+			ctor: '_Tuple2',
+			_0: 'previous_remaining',
+			_1: _elm_lang$core$Native_Utils.update(
+				_user$project$Views_PatientForms_Base$formControlDefault,
+				{
+					fieldName: 'previous_remaining',
+					labelText: '上次剩余剂量',
+					min: 0,
+					max: 440,
+					inputType: _user$project$Views_PatientForms_Base$Inpt('number'),
+					order: -2
+				})
+		},
+		_1: {
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'previous_opened_dt',
+				_1: _elm_lang$core$Native_Utils.update(
+					_user$project$Views_PatientForms_Base$formControlDefault,
+					{fieldName: 'previous_opened_dt', labelText: '上次药开封日期', inputType: _user$project$Views_PatientForms_Base$DateInput, order: -1})
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'dose_number',
+					_1: _elm_lang$core$Native_Utils.update(
+						_user$project$Views_PatientForms_Base$formControlDefault,
+						{
+							fieldName: 'dose_number',
+							labelText: '第几次用药',
+							inputType: _user$project$Views_PatientForms_Base$Inpt('number'),
+							order: -3
+						})
+				},
+				_1: {ctor: '[]'}
+			}
+		}
+	});
+var _user$project$Page_NewPatient$Model = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return function (n) {
+														return function (o) {
+															return function (p) {
+																return function (q) {
+																	return function (r) {
+																		return function (s) {
+																			return {mdl: a, personal: b, dose: c, heart: d, weight: e, initial_dose: f, maintenance_dose: g, dose_amount: h, firstTime: i, allowAuto: j, dt_now: k, dose_dt_opened: l, dose_dt_opened_expiry: m, model: n, error: o, previous_remaining: p, previous_opened_dt: q, error: r, notifications: s};
+																		};
+																	};
+																};
+															};
+														};
+													};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Page_NewPatient$init = function () {
+	var hfc = _user$project$Views_PatientForms_Heart$fc;
+	var dfc = _user$project$Views_PatientForms_Dose$fcNewPatient;
+	var pfc = _user$project$Views_PatientForms_PersonalInfo$fcs;
+	return _user$project$Page_NewPatient$Model(_debois$elm_mdl$Material$model)(pfc)(dfc)(hfc)(0)(0)(0)(0)(true)(true)(
+		_elm_lang$core$Date$fromTime(0))(
+		_elm_lang$core$Date$fromTime(0))(
+		_elm_lang$core$Date$fromTime(0))(_user$project$Data_Patient$init)('')(440)(
+		_elm_lang$core$Date$fromTime(0))('')('');
+}();
+var _user$project$Page_NewPatient$SubmitHttp = function (a) {
+	return {ctor: 'SubmitHttp', _0: a};
+};
+var _user$project$Page_NewPatient$Submit = {ctor: 'Submit'};
+var _user$project$Page_NewPatient$ValChanged = F2(
+	function (a, b) {
+		return {ctor: 'ValChanged', _0: a, _1: b};
+	});
+var _user$project$Page_NewPatient$withMsg = _user$project$Util$withMsg_(_user$project$Page_NewPatient$ValChanged);
+var _user$project$Page_NewPatient$AllowManualInputPersonal = F2(
+	function (a, b) {
+		return {ctor: 'AllowManualInputPersonal', _0: a, _1: b};
+	});
+var _user$project$Page_NewPatient$AllowManualInputHeart = F2(
+	function (a, b) {
+		return {ctor: 'AllowManualInputHeart', _0: a, _1: b};
+	});
+var _user$project$Page_NewPatient$AllowManualInputDose = F2(
+	function (a, b) {
+		return {ctor: 'AllowManualInputDose', _0: a, _1: b};
+	});
+var _user$project$Page_NewPatient$SetDTNow = function (a) {
+	return {ctor: 'SetDTNow', _0: a};
+};
+var _user$project$Page_NewPatient$initTask = A2(_elm_lang$core$Task$perform, _user$project$Page_NewPatient$SetDTNow, _elm_lang$core$Time$now);
+var _user$project$Page_NewPatient$Mdl = function (a) {
+	return {ctor: 'Mdl', _0: a};
+};
+var _user$project$Page_NewPatient$update = F2(
+	function (msg, model) {
+		var getModel = model.model;
+		var _p4 = msg;
+		switch (_p4.ctor) {
+			case 'AllowManualInputDose':
+				return A2(
+					_user$project$Util_ops['=>'],
+					A3(
+						_user$project$Page_NewPatient$modifyDose,
+						_user$project$Page_NewPatient$displayOnly(!_p4._1),
+						_p4._0,
+						model),
+					_elm_lang$core$Platform_Cmd$none);
+			case 'AllowManualInputHeart':
+				return A2(
+					_user$project$Util_ops['=>'],
+					A3(
+						_user$project$Page_NewPatient$modifyHeart,
+						_user$project$Page_NewPatient$displayOnly(!_p4._1),
+						_p4._0,
+						model),
+					_elm_lang$core$Platform_Cmd$none);
+			case 'AllowManualInputPersonal':
+				return A2(
+					_user$project$Util_ops['=>'],
+					A3(
+						_user$project$Page_NewPatient$modifyPersonal,
+						_user$project$Page_NewPatient$displayOnly(!_p4._1),
+						_p4._0,
+						model),
+					_elm_lang$core$Platform_Cmd$none);
+			case 'Mdl':
+				return A3(_debois$elm_mdl$Material$update, _user$project$Page_NewPatient$Mdl, _p4._0, model);
+			case 'ValChanged':
+				var _p7 = _p4._1;
+				var _p6 = _p4._0;
+				var new_model = function () {
+					var _p5 = _p6;
+					switch (_p5) {
+						case 'patient_name':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									model: _elm_lang$core$Native_Utils.update(
+										getModel,
+										{patient_name: _p7})
+								});
+						case 'patient_age':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									model: _elm_lang$core$Native_Utils.update(
+										getModel,
+										{patient_age: _p7})
+								});
+						case 'patient_card':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									model: _elm_lang$core$Native_Utils.update(
+										getModel,
+										{patient_card: _p7})
+								});
+						case 'patient_therapy':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									model: _elm_lang$core$Native_Utils.update(
+										getModel,
+										{patient_therapy: _p7})
+								});
+						case 'patient_frequency':
+							return _user$project$Views_PatientForms_Dose$setRemaining(
+								_user$project$Views_PatientForms_Dose$setBottlesFromAlgo(
+									_user$project$Views_PatientForms_Dose$calculateExpiry(
+										_user$project$Page_NewPatient$inheritDoseAmount(
+											_user$project$Page_NewPatient$calculateDosesAccordingToWeight(
+												_user$project$Page_NewPatient$calculateNextAppointment(
+													_elm_lang$core$Native_Utils.update(
+														model,
+														{
+															model: _elm_lang$core$Native_Utils.update(
+																getModel,
+																{patient_frequency: _p7})
+														})))))));
+						case 'patient_initial_dose':
+							return _user$project$Views_PatientForms_Dose$setBottlesFromAlgo(
+								_user$project$Page_NewPatient$inheritDoseAmount(
+									_elm_lang$core$Native_Utils.update(
+										model,
+										{
+											model: _elm_lang$core$Native_Utils.update(
+												getModel,
+												{
+													patient_initial_dose: _user$project$Util$stringToInt(_p7)
+												})
+										})));
+						case 'patient_initial_dose_dt':
+							var val_ = _user$project$Data_Date$stringToDate(_p7);
+							return _user$project$Page_NewPatient$firstTimeChangedFromDate(
+								_elm_lang$core$Native_Utils.update(
+									model,
+									{
+										model: _elm_lang$core$Native_Utils.update(
+											getModel,
+											{patient_initial_dose_dt: val_, dose_dt: val_, heart_dt: val_}),
+										previous_opened_dt: val_
+									}));
+						case 'patient_maintenance_dose':
+							return _user$project$Views_PatientForms_Dose$setBottlesFromAlgo(
+								_user$project$Page_NewPatient$inheritDoseAmount(
+									_elm_lang$core$Native_Utils.update(
+										model,
+										{
+											model: _elm_lang$core$Native_Utils.update(
+												getModel,
+												{
+													patient_maintenance_dose: _user$project$Util$stringToInt(_p7)
+												})
+										})));
+						case 'patient_nacl_amount':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									model: _elm_lang$core$Native_Utils.update(
+										getModel,
+										{
+											patient_nacl_amount: _user$project$Util$stringToInt(_p7)
+										})
+								});
+						case 'dose_dt':
+							return _user$project$Page_NewPatient$setOpenedDTFromDoseDT(
+								_user$project$Page_NewPatient$calculateNextAppointment(
+									_user$project$Views_PatientForms_Dose$setBottlesFromAlgo(
+										_elm_lang$core$Native_Utils.update(
+											model,
+											{
+												model: _elm_lang$core$Native_Utils.update(
+													getModel,
+													{
+														dose_dt: _user$project$Data_Date$stringToDate(_p7)
+													})
+											}))));
+						case 'dose_dt_opened':
+							return _user$project$Views_PatientForms_Dose$calculateExpiry(
+								_elm_lang$core$Native_Utils.update(
+									model,
+									{
+										model: _elm_lang$core$Native_Utils.update(
+											getModel,
+											{
+												dose_dt_opened: _user$project$Data_Date$stringToDate(_p7)
+											})
+									}));
+						case 'dose_weight':
+							return _user$project$Views_PatientForms_Dose$setRemaining(
+								_user$project$Views_PatientForms_Dose$setBottlesFromAlgo(
+									_user$project$Page_NewPatient$inheritDoseAmount(
+										_user$project$Page_NewPatient$calculateDosesAccordingToWeight(
+											_elm_lang$core$Native_Utils.update(
+												model,
+												{
+													model: _elm_lang$core$Native_Utils.update(
+														getModel,
+														{
+															dose_weight: _user$project$Util$stringToInt(_p7)
+														})
+												})))));
+						case 'dose_amount':
+							return _user$project$Views_PatientForms_Dose$setRemaining(
+								_user$project$Views_PatientForms_Dose$setBottlesFromAlgo(
+									_user$project$Page_NewPatient$calculateDosesAccordingToWeight(
+										_elm_lang$core$Native_Utils.update(
+											model,
+											{
+												model: _elm_lang$core$Native_Utils.update(
+													getModel,
+													{
+														dose_amount: _user$project$Util$stringToInt(_p7)
+													})
+											}))));
+						case 'dose_remaining_dose':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									model: _elm_lang$core$Native_Utils.update(
+										getModel,
+										{
+											dose_remaining_dose: _user$project$Util$stringToInt(_p7)
+										})
+								});
+						case 'dose_remarks':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									model: _elm_lang$core$Native_Utils.update(
+										getModel,
+										{dose_remarks: _p7})
+								});
+						case 'dose_next_appointment_dt':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									model: _elm_lang$core$Native_Utils.update(
+										getModel,
+										{
+											dose_next_appointment_dt: _user$project$Data_Date$stringToDate(_p7)
+										})
+								});
+						case 'dose_number':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									model: _elm_lang$core$Native_Utils.update(
+										getModel,
+										{
+											dose_number: _user$project$Util$stringToInt(_p7)
+										})
+								});
+						case 'dose_number_cycle':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									model: _elm_lang$core$Native_Utils.update(
+										getModel,
+										{
+											dose_number_cycle: _user$project$Util$stringToInt(_p7)
+										})
+								});
+						case 'heart_text':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									model: _elm_lang$core$Native_Utils.update(
+										getModel,
+										{heart_text: _p7})
+								});
+						case 'heart_dt':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									model: _elm_lang$core$Native_Utils.update(
+										getModel,
+										{
+											heart_dt: _user$project$Data_Date$stringToDate(_p7)
+										})
+								});
+						case 'heart_percentage':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									model: _elm_lang$core$Native_Utils.update(
+										getModel,
+										{heart_percentage: _p7})
+								});
+						case 'heart_remarks':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									model: _elm_lang$core$Native_Utils.update(
+										getModel,
+										{heart_remarks: _p7})
+								});
+						case 'therapy_dt':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									model: _elm_lang$core$Native_Utils.update(
+										getModel,
+										{
+											therapy_dt: _user$project$Data_Date$stringToDate(_p7)
+										})
+								});
+						case 'therapy_reason':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									model: _elm_lang$core$Native_Utils.update(
+										getModel,
+										{therapy_reason: _p7})
+								});
+						case 'therapy_remarks':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									model: _elm_lang$core$Native_Utils.update(
+										getModel,
+										{therapy_remarks: _p7})
+								});
+						case 'previous_remaining':
+							return _user$project$Views_PatientForms_Dose$setRemaining(
+								_user$project$Views_PatientForms_Dose$setBottlesFromAlgo(
+									_elm_lang$core$Native_Utils.update(
+										model,
+										{
+											previous_remaining: _user$project$Util$stringToInt(_p7)
+										})));
+						case 'previous_opened_dt':
+							return _user$project$Views_PatientForms_Dose$setRemaining(
+								_user$project$Views_PatientForms_Dose$setBottlesFromAlgo(
+									_elm_lang$core$Native_Utils.update(
+										model,
+										{
+											previous_opened_dt: _user$project$Data_Date$stringToDate(_p7)
+										})));
+						default:
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									error: A2(
+										_elm_lang$core$Basics_ops['++'],
+										_p6,
+										A2(_elm_lang$core$Basics_ops['++'], ' not Found for. val is ', _p7))
+								});
+					}
+				}();
+				return A2(_user$project$Util_ops['=>'], new_model, _elm_lang$core$Platform_Cmd$none);
+			case 'FirstTimeChanged':
+				return A2(
+					_user$project$Util_ops['=>'],
+					_user$project$Page_NewPatient$inheritDoseAmount(
+						A2(_user$project$Page_NewPatient$firstTimeChanged, !model.firstTime, model)),
+					_elm_lang$core$Platform_Cmd$none);
+			case 'DoseAmountChanged':
+				return A2(
+					_user$project$Util_ops['=>'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							dose_amount: _user$project$Util$stringToInt(_p4._0)
+						}),
+					_elm_lang$core$Platform_Cmd$none);
+			case 'DoseDTOpenedChanged':
+				return A2(_user$project$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
+			case 'SetDTNow':
+				var _p8 = _p4._0;
+				return A2(
+					_user$project$Util_ops['=>'],
+					_user$project$Views_PatientForms_Dose$setRemaining(
+						_user$project$Views_PatientForms_Dose$setBottlesFromAlgo(
+							_user$project$Views_PatientForms_Dose$calculateExpiry(
+								_user$project$Page_NewPatient$inheritDoseAmount(
+									_user$project$Page_NewPatient$calculateNextAppointment(
+										_user$project$Page_NewPatient$calculateDosesAccordingToWeight(
+											_elm_lang$core$Native_Utils.update(
+												model,
+												{
+													dt_now: _elm_lang$core$Date$fromTime(_p8),
+													previous_opened_dt: _elm_lang$core$Date$fromTime(_p8),
+													model: _elm_lang$core$Native_Utils.update(
+														getModel,
+														{
+															patient_initial_dose_dt: _elm_lang$core$Date$fromTime(_p8),
+															dose_dt: _elm_lang$core$Date$fromTime(_p8),
+															dose_dt_opened: _elm_lang$core$Date$fromTime(_p8),
+															dose_dt_opened_expiry: _elm_lang$core$Date$fromTime(_p8),
+															heart_dt: _elm_lang$core$Date$fromTime(_p8),
+															therapy_dt: _elm_lang$core$Date$fromTime(_p8)
+														})
+												}))))))),
+					_elm_lang$core$Platform_Cmd$none);
+			case 'Submit':
+				return A2(
+					_user$project$Util_ops['=>'],
+					model,
+					A2(_user$project$Request_Patient$post, model.model, _user$project$Page_NewPatient$SubmitHttp));
+			case 'SubmitHttp':
+				if (_p4._0.ctor === 'Err') {
+					return A2(
+						_user$project$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								error: _elm_lang$core$Basics$toString(_p4._0._0)
+							}),
+						_elm_lang$core$Platform_Cmd$none);
+				} else {
+					var _p9 = _p4._0._0;
+					if (_p9.ctor === 'Err') {
+						return A2(
+							_user$project$Util_ops['=>'],
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{notifications: _p9._0}),
+							_elm_lang$core$Platform_Cmd$none);
+					} else {
+						return A2(
+							_user$project$Util_ops['=>'],
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{notifications: _p9._0}),
+							_user$project$Route$modifyUrl(_user$project$Route$Patients));
+					}
+				}
+			default:
+				return A2(_user$project$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
+		}
+	});
+var _user$project$Page_NewPatient$FirstTimeChanged = {ctor: 'FirstTimeChanged'};
+var _user$project$Page_NewPatient$view = function (model_) {
+	var model = A3(
+		_user$project$Page_NewPatient$modifyHeart,
+		_user$project$Page_NewPatient$value_(
+			_user$project$Data_Date$dateToStringJS(model_.model.heart_dt)),
+		'heart_dt',
+		A3(
+			_user$project$Page_NewPatient$modifyDose,
+			_user$project$Page_NewPatient$hidden(
+				_user$project$Data_Patient$frequencyToShouldBeHidden(model_.model.patient_frequency)),
+			'dose_number_cycle',
+			A3(
+				_user$project$Page_NewPatient$modifyDose,
+				_user$project$Page_NewPatient$value_(
+					_user$project$Data_Date$dateToString(model_.model.dose_dt_opened_expiry)),
+				'dose_dt_opened_expiry',
+				A3(
+					_user$project$Page_NewPatient$modifyDose,
+					_user$project$Page_NewPatient$value_(
+						_user$project$Data_Date$dateToStringJS(model_.model.dose_dt_opened)),
+					'dose_dt_opened',
+					A3(
+						_user$project$Page_NewPatient$modifyDose,
+						_user$project$Page_NewPatient$value_(
+							_elm_lang$core$Basics$toString(model_.model.dose_remaining_dose)),
+						'dose_remaining_dose',
+						A3(
+							_user$project$Page_NewPatient$modifyDose,
+							_user$project$Page_NewPatient$value_(
+								_user$project$Data_Date$dateToStringJS(model_.model.dose_dt)),
+							'dose_dt',
+							A3(
+								_user$project$Page_NewPatient$modifyDose,
+								_user$project$Page_NewPatient$value_(
+									_user$project$Data_Date$dateToStringJS(model_.model.dose_next_appointment_dt)),
+								'dose_next_appointment_dt',
+								A3(
+									_user$project$Page_NewPatient$modifyDose,
+									_user$project$Page_NewPatient$value_(
+										_elm_lang$core$Basics$toString(model_.model.dose_amount)),
+									'dose_amount',
+									A3(
+										_user$project$Page_NewPatient$modifyPersonal,
+										_user$project$Page_NewPatient$value_(
+											_elm_lang$core$Basics$toString(model_.model.patient_maintenance_dose)),
+										'patient_maintenance_dose',
+										A3(
+											_user$project$Page_NewPatient$modifyPersonal,
+											_user$project$Page_NewPatient$value_(
+												_elm_lang$core$Basics$toString(model_.model.patient_initial_dose)),
+											'patient_initial_dose',
+											A3(
+												_user$project$Page_NewPatient$modifyPersonal,
+												_user$project$Page_NewPatient$value_(
+													_user$project$Data_Date$dateToStringJS(model_.model.patient_initial_dose_dt)),
+												'patient_initial_dose_dt',
+												_elm_lang$core$Native_Utils.update(
+													model_,
+													{
+														personal: _user$project$Page_NewPatient$withMsg(model_.personal),
+														heart: _user$project$Page_NewPatient$withMsg(model_.heart),
+														dose: _user$project$Page_NewPatient$withMsg(model_.dose)
+													}))))))))))));
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('container'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$style(
+					A2(_elm_lang$core$Basics_ops['++'], _user$project$Styles$newPatientContainer, _user$project$Styles$padding40)),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h4,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$style(_user$project$Styles$newPatientBigHeader),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$i,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('fas fa-user-plus'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$style(_user$project$Styles$newPatientBigHeaderIcon),
+								_1: {ctor: '[]'}
+							}
+						},
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('新建患者'),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$form,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$method('post'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onSubmit(_user$project$Page_NewPatient$Submit),
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$h5,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$style(_user$project$Styles$newPatientHeader),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$i,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('far fa-address-card'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$style(_user$project$Styles$newPatientHeaderIcon),
+											_1: {ctor: '[]'}
+										}
+									},
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$span,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$style(_user$project$Styles$newPatientHeaderText),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(' 基本信息'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Views_PatientForms_Base$view(model.personal),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$h5,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$style(_user$project$Styles$newPatientHeader),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$i,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('fas fa-medkit'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$style(_user$project$Styles$newPatientHeaderIcon),
+													_1: {ctor: '[]'}
+												}
+											},
+											{ctor: '[]'}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$span,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$style(_user$project$Styles$newPatientHeaderText),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text(' 用药信息'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: A5(
+												_debois$elm_mdl$Material_Toggles$switch,
+												_user$project$Page_NewPatient$Mdl,
+												{
+													ctor: '::',
+													_0: 1,
+													_1: {ctor: '[]'}
+												},
+												model.mdl,
+												{
+													ctor: '::',
+													_0: _debois$elm_mdl$Material_Options$onToggle(_user$project$Page_NewPatient$FirstTimeChanged),
+													_1: {
+														ctor: '::',
+														_0: A2(_debois$elm_mdl$Material_Options$css, 'color', 'hsl(200,10%,41%)'),
+														_1: {
+															ctor: '::',
+															_0: A2(_debois$elm_mdl$Material_Options$css, 'font-weight', '450'),
+															_1: {
+																ctor: '::',
+																_0: _debois$elm_mdl$Material_Toggles$ripple,
+																_1: {
+																	ctor: '::',
+																	_0: _debois$elm_mdl$Material_Toggles$value(model.firstTime),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}
+													}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('是否第一次用药'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: model.firstTime ? _elm_lang$html$Html$text('') : _user$project$Views_PatientForms_Base$view(
+											_user$project$Page_NewPatient$withMsg(_user$project$Page_NewPatient$firstTimeFC)),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Views_PatientForms_Base$view(model.dose),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Views_Bottle$view(model.model.bottles),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$h5,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$style(_user$project$Styles$newPatientHeader),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$i,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$class('fas fa-heartbeat'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$style(_user$project$Styles$newPatientHeaderIcon),
+																		_1: {ctor: '[]'}
+																	}
+																},
+																{ctor: '[]'}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$span,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$style(_user$project$Styles$newPatientHeaderText),
+																		_1: {ctor: '[]'}
+																	},
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text(' 使用前检查信息'),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {ctor: '[]'}
+															}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Views_PatientForms_Base$view(model.heart),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$input,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$type_('hidden'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$name('patient_maintenance_dose'),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$value(
+																				_elm_lang$core$Basics$toString(model.maintenance_dose)),
+																			_1: {ctor: '[]'}
+																		}
+																	}
+																},
+																{ctor: '[]'}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$input,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$type_('hidden'),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$name('patient_initial_dose'),
+																			_1: {
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$value(
+																					_elm_lang$core$Basics$toString(model.initial_dose)),
+																				_1: {ctor: '[]'}
+																			}
+																		}
+																	},
+																	{ctor: '[]'}),
+																_1: {
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$input,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$type_('hidden'),
+																			_1: {
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$name('dose_amount'),
+																				_1: {
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$value(
+																						_elm_lang$core$Basics$toString(model.dose_amount)),
+																					_1: {ctor: '[]'}
+																				}
+																			}
+																		},
+																		{ctor: '[]'}),
+																	_1: {
+																		ctor: '::',
+																		_0: A2(
+																			_elm_lang$html$Html$span,
+																			{ctor: '[]'},
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html$text(model.notifications),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {
+																			ctor: '::',
+																			_0: A2(
+																				_elm_lang$html$Html$span,
+																				{ctor: '[]'},
+																				{
+																					ctor: '::',
+																					_0: _elm_lang$html$Html$text(model.error),
+																					_1: {ctor: '[]'}
+																				}),
+																			_1: {
+																				ctor: '::',
+																				_0: A2(
+																					_elm_lang$html$Html$div,
+																					{
+																						ctor: '::',
+																						_0: _elm_lang$html$Html_Attributes$style(_user$project$Styles$newPatientFooter),
+																						_1: {ctor: '[]'}
+																					},
+																					{
+																						ctor: '::',
+																						_0: A2(
+																							_elm_lang$html$Html$button,
+																							{
+																								ctor: '::',
+																								_0: _elm_lang$html$Html_Attributes$action('submit'),
+																								_1: {
+																									ctor: '::',
+																									_0: _elm_lang$html$Html_Attributes$class('btn btn-primary new-patient-button '),
+																									_1: {ctor: '[]'}
+																								}
+																							},
+																							{
+																								ctor: '::',
+																								_0: A2(
+																									_elm_lang$html$Html$i,
+																									{
+																										ctor: '::',
+																										_0: _elm_lang$html$Html_Attributes$class('fas fa-paper-plane new-patient-footer-icon '),
+																										_1: {ctor: '[]'}
+																									},
+																									{ctor: '[]'}),
+																								_1: {
+																									ctor: '::',
+																									_0: _elm_lang$html$Html$text(' 提交'),
+																									_1: {ctor: '[]'}
+																								}
+																							}),
+																						_1: {ctor: '[]'}
+																					}),
+																				_1: {
+																					ctor: '::',
+																					_0: _user$project$Util$debug(
+																						_elm_lang$core$Basics$toString(model)),
+																					_1: {ctor: '[]'}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Page_NewPatient$DoseDTOpenedChanged = function (a) {
+	return {ctor: 'DoseDTOpenedChanged', _0: a};
+};
+var _user$project$Page_NewPatient$DoseAmountChanged = function (a) {
+	return {ctor: 'DoseAmountChanged', _0: a};
+};
+var _user$project$Page_NewPatient$Nothing_ = {ctor: 'Nothing_'};

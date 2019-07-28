@@ -1,0 +1,218 @@
+var _user$project$Constants$constants = {
+	chemotherapy_protocols: {
+		ctor: '::',
+		_0: 'EC-T(H)',
+		_1: {
+			ctor: '::',
+			_0: 'T(H)',
+			_1: {
+				ctor: '::',
+				_0: 'TCb(H)',
+				_1: {
+					ctor: '::',
+					_0: 'EC-Wp(H)',
+					_1: {
+						ctor: '::',
+						_0: 'P(H)',
+						_1: {
+							ctor: '::',
+							_0: 'PCb(H)',
+							_1: {
+								ctor: '::',
+								_0: 'EC-wPCb(H)',
+								_1: {
+									ctor: '::',
+									_0: 'TC(H)',
+									_1: {
+										ctor: '::',
+										_0: 'N(H)',
+										_1: {
+											ctor: '::',
+											_0: 'X(H)',
+											_1: {
+												ctor: '::',
+												_0: 'FEC - T(H)',
+												_1: {
+													ctor: '::',
+													_0: 'ddAC - Wp(H)',
+													_1: {
+														ctor: '::',
+														_0: 'ddAC - ddP(H)',
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	injection_frequency: {
+		ctor: '::',
+		_0: '一周一次',
+		_1: {
+			ctor: '::',
+			_0: '三周一次',
+			_1: {
+				ctor: '::',
+				_0: '一周一次 (三周用药，一周停药)',
+				_1: {
+					ctor: '::',
+					_0: '12周三周一次， 后来一周一次',
+					_1: {
+						ctor: '::',
+						_0: '8周两周一次， 后来一周一次',
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}
+	},
+	echocardiography_reports: {
+		ctor: '::',
+		_0: '遵医嘱',
+		_1: {
+			ctor: '::',
+			_0: '二尖瓣狭窄',
+			_1: {
+				ctor: '::',
+				_0: '三尖瓣狭窄',
+				_1: {
+					ctor: '::',
+					_0: '二尖瓣关闭不全',
+					_1: {
+						ctor: '::',
+						_0: '三尖瓣关闭不全',
+						_1: {
+							ctor: '::',
+							_0: '主动脉关闭不全',
+							_1: {
+								ctor: '::',
+								_0: '二尖瓣反流',
+								_1: {
+									ctor: '::',
+									_0: '三尖瓣反流',
+									_1: {
+										ctor: '::',
+										_0: '室间隔缺损',
+										_1: {
+											ctor: '::',
+											_0: '肺动脉高压',
+											_1: {
+												ctor: '::',
+												_0: '主动脉内径增宽',
+												_1: {
+													ctor: '::',
+													_0: '右室增大与肥厚',
+													_1: {
+														ctor: '::',
+														_0: '左心房增大',
+														_1: {
+															ctor: '::',
+															_0: '无明显异常',
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	links: {namePDF: 'printPersonal', dosePDF: 'printDose', doseHistory: 'doseHistory', heartHistory: 'heartHistory', personalHistory: 'personalHistory', therapyHistory: 'therapyHistory'},
+	postTo: {updatePersonal: 'updatePersonalInfo/', updateDose: 'updateDoseReport/', updateStop: 'updateStop/', updateHeart: 'updateHeart/', newPatient: '/patient/'},
+	drug_stop_reasons: {
+		ctor: '::',
+		_0: '经济原因',
+		_1: {
+			ctor: '::',
+			_0: '患者不愿继续完成',
+			_1: {
+				ctor: '::',
+				_0: '家属原因',
+				_1: {
+					ctor: '::',
+					_0: '医生建议',
+					_1: {
+						ctor: '::',
+						_0: '心超结果',
+						_1: {
+							ctor: '::',
+							_0: '药物过敏',
+							_1: {
+								ctor: '::',
+								_0: '其他药物副反应',
+								_1: {
+									ctor: '::',
+									_0: '药物过期',
+									_1: {
+										ctor: '::',
+										_0: '药物结冰',
+										_1: {
+											ctor: '::',
+											_0: '其他药物原因',
+											_1: {
+												ctor: '::',
+												_0: '其他原因',
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	therapy_states: {
+		ctor: '::',
+		_0: '治疗中',
+		_1: {
+			ctor: '::',
+			_0: '暂停治疗',
+			_1: {
+				ctor: '::',
+				_0: '终止',
+				_1: {
+					ctor: '::',
+					_0: '完成所有治疗',
+					_1: {ctor: '[]'}
+				}
+			}
+		}
+	},
+	multiplier: {
+		initial: {weekly: 6, triweekly: 8},
+		maintenance: {weekly: 4, triweekly: 6}
+	},
+	single_bottle_dosage: 440,
+	drug_shelf_life: (((28 * 24) * 60) * 60) * 1000,
+	drug_shelf_life_days: 28,
+	heart_report_frequency: (((90 * 24) * 60) * 60) * 1000,
+	heart_report_frequency_days: 90,
+	heart_report_range: {ctor: '_Tuple2', _0: 25, _1: 0},
+	take_dose_buffer: 3,
+	debug_mode: false,
+	nacl_amounts: {
+		ctor: '::',
+		_0: '250',
+		_1: {
+			ctor: '::',
+			_0: '100',
+			_1: {ctor: '[]'}
+		}
+	}
+};

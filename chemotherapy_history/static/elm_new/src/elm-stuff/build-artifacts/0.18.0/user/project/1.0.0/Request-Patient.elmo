@@ -1,0 +1,26 @@
+var _user$project$Request_Patient$post = F2(
+	function (patient, responseMsg) {
+		var url = _user$project$Request_Helpers$apiUrl('/newpatient/');
+		return A3(
+			_user$project$Request_Helpers$post,
+			url,
+			responseMsg,
+			_user$project$Data_Patient$encode(patient));
+	});
+var _user$project$Request_Patient$apiEndpoint = function (p) {
+	return _user$project$Request_Helpers$apiUrl(
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			'/patient/',
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Basics$toString(p),
+				'/')));
+};
+var _user$project$Request_Patient$get = F2(
+	function (p, dt_now) {
+		return A2(
+			_elm_lang$http$Http$get,
+			_user$project$Request_Patient$apiEndpoint(p),
+			_user$project$Data_Patient$patientDecoder(dt_now));
+	});

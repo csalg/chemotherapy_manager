@@ -1,0 +1,8 @@
+var _user$project$Request_Patients$apiEndpoint = _user$project$Request_Helpers$apiUrl('/patients/');
+var _user$project$Request_Patients$get = function (dt_now) {
+	var d = _elm_lang$core$Debug$log(_user$project$Request_Patients$apiEndpoint);
+	return A2(
+		_elm_lang$http$Http$get,
+		_user$project$Request_Patients$apiEndpoint,
+		_user$project$Data_Patients$patientsDecoder(dt_now));
+};

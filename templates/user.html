@@ -1,0 +1,79 @@
+{% extends "base.html"%}
+
+{% block head_title %}
+	用户区 
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+
+<div class="row">
+		
+</div>
+<div class="row">
+		<div class="col-lg-2">
+		</div>
+		<div class="col-lg-8">
+{% if newUsers%}
+<div class="mdl-card mdl-shadow--4dp" style="width:auto;">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">有新的用户!</h2>
+  </div>
+  <div class="mdl-card__supporting-text">
+新用户正在等待审核。您应该查看用户表以激活或暂停其帐户。
+  </div>
+
+
+
+<div class="mdl-card__actions mdl-card--border">
+    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-color-text--pink-700" href={% url "users_new" %}>查看新用户单</a>
+
+</div>
+
+
+
+
+
+</div>
+{%endif%}
+
+
+
+
+
+		<br>
+			<div class="profile-content">
+			<div class="modal-header">
+
+				<h4 class="modal-title" id="modalLabel">
+					{% block title %}
+					<i class="far fa-user"></i> {{form.title}}
+					{% endblock %} 
+				</h4>
+
+			</div>
+
+			{% with form as form%}
+			{% include 'RuijinFormTemplate.html' %}
+			{% endwith %}
+
+
+
+			{% block footer %}
+			{% endblock %}
+
+			<br>
+		</div>
+		<div class="col-lg-2"></div>
+	</div>
+</div>
+	{% block endofbody %}
+	{% endblock %}
+	<br>
+	<br>
+</div>
+
+	{% endblock %} {# ends content block #}
+
+

@@ -1,0 +1,222 @@
+{% extends "patient_base.html" %}
+
+<!-- Window title -->
+{% block head_title %} {{ patient.patient_name }} {% endblock %}
+
+Page title, changes if inactive user
+
+
+{% block title %}
+<div class="">
+	<i class="fas fa-user"></i> 患者消息 
+</div>
+{% if patient.patient_active == False %}
+<div class="" style="text-align: center; color: #222;">
+	<i class="fas fa-archive"></i> 本患者已停药了。 只能查看个人资料信息。
+</div>
+{% endif %}
+{% endblock %} </h4>
+
+
+<!-- Panel input fields (enabled or disabled) -->
+{% block personal_disabled %}disabled{%endblock%}
+{% block dose_disabled %}disabled{%endblock%}
+{% block heart_disabled %}disabled{%endblock%}
+
+<!-- All the different values for the disabled input fields (boilerplate) -->
+{% block patient_name %}  value="{{ patient.patient_name }}" {% endblock %}
+{% block patient_age %}  value="{{ patient.patient_age }}" {% endblock %}
+{% block dose_weight %}  value="{{ patient.dose_weight }}" {% endblock %}
+{% block patient_card %}  value="{{ patient.patient_card }}" {% endblock %}
+
+{% block patient_therapy %} <input class="form-control"  value="{{ patient.patient_therapy }}" disabled> {%endblock %}
+{% block patient_initial_dose %}  value="{{ patient.patient_initial_dose }}" {% endblock %}
+{% block patient_dt_initial_dose %}  value="{{ patient.patient_dt_initial_dose }}" {% endblock %}
+{% block patient_maintenance_dose %}  value="{{ patient.patient_maintenance_dose }}" {% endblock %}
+
+{% block dose_initial_dose %}  value="{{ patient.dose_initial_dose }}" {% endblock %}
+{% block dose_dt %}  value="{{ patient.dose_dt }}" {% endblock %}
+{% block dose_dt_opened %}  value="{{ patient.dose_dt_opened }}" {% endblock %}
+{% block dose_maintenance_dose %}  value="{{ patient.dose_maintenance_dose }}" {% endblock %}
+{% block dose_remaining_dose %}  value="{{ patient.dose_remaining_dose }}" {% endblock %}
+{% block dose_amount %}  value="{{ patient.dose_amount }}" {% endblock %}
+{% block dose_remarks %}  value="{{ patient.dose_remarks }}" {% endblock %}
+
+{% block heart_text %} <input class="form-control"  value="{{ patient.heart_text }}" disabled> {%endblock %}
+{% block heart_remarks %} value="{{ patient.heart_remarks }}" {%endblock %}
+{% block heart_percentage %} value="{{ patient.heart_percentage }}" {%endblock %}
+{% block heart_dt %} value="{{ patient.heart_dt }}" {%endblock %}
+
+{% block heart_date_label %}最新心超日期{%endblock%}
+
+
+<!-- All the footers with all the options for the three panels -->
+
+{% block personal_panel_end %}
+<div class="panel-footer" style="text-align: right;">
+	<div class="row">
+
+
+
+			<button type="button" class="btn  btn-default btn-inline" onclick="location.href='/patient/{{patient.id}}/personalHistory';">
+				<i class="fas fa-clock"></i> 查看历史
+			</button>
+
+
+
+
+			<button type="button" class="btn  btn-default btn-inline" onclick="location.href='/patient/{{patient.id}}/printPersonal';">
+				<i class="fas fa-print"></i> 打印标签
+			</button>
+
+		
+
+{% if patient.patient_active %}
+
+
+			<button type="button" class="btn  btn-default btn-inline" onclick="location.href='/patient/{{patient.id}}/updatePersonalInfo';">
+				<i class="far fa-plus-square"></i> 添加更新
+			</button>
+{% endif %}
+
+
+	</div>
+</div>
+</form>		
+{% endblock %}
+
+
+{% block dose_panel_expiration_date %}
+
+<label class="control-label col-sm-2 form_label">本药有效期:</label>
+<div class="col-sm-3">
+	<input class="form-control"  value="{{ expiration_date }}" disabled>
+</div>
+{% endblock %}
+
+{% block dose_panel_end %}
+
+{% if patient.patient_active == False %}
+
+<br>
+<hr>
+<br>
+<div class="panel-body">
+	
+
+{% load my_filters %}
+
+
+
+<div class="row">
+
+	<label class="control-label form_label col-sm-3">				
+		{{ patient.translation|lookup:'drug_stop_reasons' }}
+	</label>
+	<div class="col-sm-9">
+		<input class="col-sm-9 form-control" type="text" value="{{patient.patient_stop_drug_reason}}" disabled>
+
+	</div>
+</div>
+
+<div class="row">
+
+
+	<label class="control-label form_label col-sm-3">				
+
+		{{ patient.translation|lookup:'drug_stop_reasons_temp' }}
+
+	</label>
+
+	<div class="col-sm-9">
+		<input class="col-sm-9 form-control" type="text" value="{{patient.patient_stop_drug_temporary_reason}}" disabled>
+
+	</div>
+	<br>
+	
+	<hr>
+	<br>
+</div>
+
+</div>
+
+{% endif%}
+
+<div class="panel-footer">
+	<div class="row" style="text-align: right;">
+{% if patient.patient_active %}
+
+			<button type="button" class="btn  btn-default btn-inline" onclick="location.href='/patient/{{patient.id}}/updateStop';">
+		        <i class="far fa-times-circle"></i>   停药
+				</button>
+
+			<button type="button" class="btn  btn-default btn-inline" onclick="location.href='/patient/{{patient.id}}/updateBottle';">
+				<i class="fas fa-vial"></i> 开封新药
+			</button>
+
+{% endif %}
+
+
+			<button type="button" class="btn  btn-default btn-inline" onclick="location.href='/patient/{{patient.id}}/doseHistory';">
+				<i class="fas fa-clock"></i> 查看历史
+			</button>
+
+
+
+			<button type="button" class="btn  btn-default btn-inline" onclick="location.href='/patient/{{patient.id}}/printDose';">
+				<i class="fas fa-print"></i> 打印单子
+			</button>
+
+
+{% if patient.patient_active %}
+
+			<button type="button" class="btn  btn-default btn-inline" onclick="location.href='/patient/{{patient.id}}/updateDoseReport';">
+				<i class="far fa-file"></i> 记录剂量
+			</button>
+{% endif %}
+
+	</div>
+</div>
+{% endblock %}
+
+
+
+{% block heart_panel_end %}
+
+<div class="blue-bg panel-footer">
+	<div class="row" style="text-align: right;">
+
+			<button type="button" class="btn  btn-default btn-inline" onclick="location.href='/patient/{{patient.id}}/heartHistory';">
+				<i class="fas fa-clock"></i> 查看历史
+			</button>
+{% if patient.patient_active %}
+
+
+
+			<button type="button" class="btn  btn-default btn-inline" onclick="location.href='/patient/{{patient.id}}/updateHeart';">
+				<i class="far fa-file"></i> 记录新的报告
+			</button>
+
+
+{% endif %}
+
+	</div>
+</div>
+
+
+{% endblock %}
+
+{% block footer %}
+<div class="modal-footer" style="text-align: left;">
+	<div class="col-sm-2">
+
+		<button type="button" class="btn  btn-default btn-inline" onclick="location.href='/index';">
+			<i class="fas fa-home"></i> 回到主页
+		</button>
+	</div>
+
+	<div class="col-sm-8" style="text-align: right;"></div>
+
+</div>
+{% endblock %}
+

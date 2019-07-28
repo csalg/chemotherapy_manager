@@ -1,0 +1,94 @@
+:root {
+	--gray-2: hsla(198, 4%, 79%, 1);
+	--gray-7: hsla(198, 4%, 33%, 1);
+	--blue-primary-4: hsla(208, 75%, 67%, 1);
+	--green-lime: hsla(129, 67%, 60%, 1);
+	--orange-energy: hsla(37, 106%, 61%, 1);
+	--orange-didi: hsla(24, 89%, 57%, 1);
+	}
+
+.gray-7 {color: var(--gray-7);}
+.blue-primary-4 {color: var(--blue-primary-4);}
+.green-lime {color: var(--green-lime);}
+.orange-didi {color: var(--orange-didi);}
+
+.modal{
+    display: block !important; /* I added this to see the modal, you don't need this */
+}
+
+/* Important part */
+.modal-dialog{
+    overflow-y: initial !important
+}
+.modal-body{
+    max-height: 60vh;
+    overflow-y: auto;
+}
+.navbar-custom {
+    background-color: white;
+    height: 40px;
+    display: flex;
+    justify-content: stretch;
+    font-weight: 200;
+    font-family: "Helvetica","Arial",sans-serif;
+    border-bottom: 1px solid var(--gray-2);
+    border-radius: 0;
+    margin-bottom: 0;
+    }
+
+.navbar-hospital-name {
+font-family: Helvetica;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    color: hsla(209, 3%, 59%, 1);
+    /* color: var(--gray-7); */
+    padding-top: 13px;
+    font-weight: 300;
+}
+
+.navbar-item-custom {
+    font-size: 16px;
+    letter-spacing: 1.2px;
+    font-weight: 340;
+    padding: 0 15px 0 15px;
+    /*color: hsla(218, 71%, 98%, 1);*/
+    /* background-color: hsla(207, 10%, 60%, 1); */
+    /*color: hsla(207, 23%, 97%, 1);*/
+    color: var(--grey-7);
+    margin-right: 10px;
+}
+
+.navbar-item-custom-selected {
+    padding-bottom: 3px;
+    border-bottom: 2px solid var(--primary);
+}
+.navbar-item-custom:hover {
+	color: var(--grey-7);
+    font-weight: 440;
+	text-decoration: none;
+
+}
+
+.navbar-item-icon {
+    margin-right: 5px;
+    font-size: 1.2rem;
+    opacity: 0.95;
+}
+
+.navbar-item-text {
+    font-size: 0.8rem;
+}
+
+.container-custom {
+	padding: 20px 50px 50px;
+    background-color: hsla(207, 19%, 95%, 1);
+}
+
+.navbar-start {
+	justify-content: flex-end;
+	flex: 1;
+}
+.navbar-end {
+	justify-content: flex-start;
+	flex: 1;
+}

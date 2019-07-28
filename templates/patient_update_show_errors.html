@@ -1,0 +1,19 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><i class="fas fa-exclamation-triangle"></i> 验证错误</div>
+    <div class="panel-body">
+
+
+          <div class="col-sm-12">
+          {{ form.non_field_errors }}
+          {% for field in form %}
+              <div class="fieldWrapper">
+                  {{ field.label_tag }}
+                  {{ field.errors }}
+                  {% if field.help_text %}
+                  <p class="help">{{ field.help_text|safe }}</p>
+                  {% endif %}
+              </div>
+          {% endfor %}
+          </div>
+    </div>
+</div>

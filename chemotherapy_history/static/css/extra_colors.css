@@ -1,0 +1,16 @@
+/*自定义*热情的粉红*文本/边框/背景色*/
+.text-hotpink,a.text-hotpink:link,a.text-hotpink:visited,.button.border-hotpink,blockquote.border-hotpink,.pager.border-hotpink a,.pager-prev.border-hotpink,.pager-next.border-hotpink {	color: #ff69b4;}
+.border-hotpink,.border-hotpink .button,.border-hotpink .tab-nav li a,.border-hotpink .tab-body,.button.bg-hotpink,.selected.border-hotpink,.pointer.border-hotpink li,.nav.border-hotpink .active a,.nav.nav-tabs.border-hotpink,.nav-main.border-hotpink a,.nav-main.border-hotpink .nav-head,.pagination.border-hotpink li,.pager.border-hotpink a {	border-color: #ff69b4;}
+.bg-hotpink,.border-hotpink .button.active,.pointer.border-hotpink .active,.nav-pills.border-hotpink .active a,.nav-hotpink.border-hotpink .nav-head,.pagination.border-hotpink .active {	background-color: #ff69b4;}
+
+/*自定义*春天的绿色*文本/边框/背景色*/
+.text-springgreen,a.text-springgreen:link,a.text-springgreen:visited,.button.border-springgreen,blockquote.border-springgreen,.pager.border-springgreen a,.pager-prev.border-springgreen,.pager-next.border-springgreen {	color: #3cb371;}
+.border-springgreen,.border-springgreen .button,.border-springgreen .tab-nav li a,.border-springgreen .tab-body,.button.bg-springgreen,.selected.border-springgreen,.pointer.border-springgreen li,.nav.border-springgreen .active a,.nav.nav-tabs.border-springgreen,.nav-main.border-springgreen a,.nav-main.border-springgreen .nav-head,.pagination.border-springgreen li,.pager.border-springgreen a {	border-color: #3cb371;}
+.bg-springgreen,.border-springgreen .button.active,.pointer.border-springgreen .active,.nav-pills.border-springgreen .active a,.nav-springgreen.border-springgreen .nav-head,.pagination.border-springgreen .active {	background-color: #3cb371;}
+
+/*自定义*皇军蓝*文本/边框/背景色*/
+.text-royalblue,a.text-royalblue:link,a.text-royalblue:visited,.button.border-royalblue,blockquote.border-royalblue,.pager.border-royalblue a,.pager-prev.border-royalblue,.pager-next.border-royalblue {	color: #4169e1;}
+.border-royalblue,.border-royalblue .button,.border-royalblue .tab-nav li a,.border-royalblue .tab-body,.button.bg-royalblue,.selected.border-royalblue,.pointer.border-royalblue li,.nav.border-royalblue .active a,.nav.nav-tabs.border-royalblue,.nav-main.border-royalblue a,.nav-main.border-royalblue .nav-head,.pagination.border-royalblue li,.pager.border-royalblue a {	border-color: #4169e1;}
+.bg-royalblue,.border-royalblue .button.active,.pointer.border-royalblue .active,.nav-pills.border-royalblue .active a,.nav-royalblue.border-royalblue .nav-head,.pagination.border-royalblue .active {	background-color: #4169e1;}
+
+

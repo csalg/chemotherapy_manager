@@ -1,0 +1,12 @@
+/*@page {
+  size: 10cm 10cm;
+  margin: 5cm;
+}*/
+/*
+body {
+	background-color: red;
+}*/
+
+.important>tr {
+	font-size: 20px;
+}

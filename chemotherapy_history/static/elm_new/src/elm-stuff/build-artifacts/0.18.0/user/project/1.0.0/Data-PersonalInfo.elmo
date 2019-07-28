@@ -1,0 +1,84 @@
+var _user$project$Data_PersonalInfo$encode = function (pInfo) {
+	var d = _elm_lang$core$Debug$log(
+		_elm_lang$core$Basics$toString(pInfo));
+	return _elm_lang$http$Http$jsonBody(
+		_elm_lang$core$Json_Encode$object(
+			{
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'patient_name',
+					_1: _elm_lang$core$Json_Encode$string(pInfo.patient_name)
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'patient_age',
+						_1: _elm_lang$core$Json_Encode$string(pInfo.patient_age)
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'patient_card',
+							_1: _elm_lang$core$Json_Encode$string(pInfo.patient_card)
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'patient_therapy',
+								_1: _elm_lang$core$Json_Encode$string(pInfo.patient_therapy)
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'patient_frequency',
+									_1: _elm_lang$core$Json_Encode$string(pInfo.patient_frequency)
+								},
+								_1: {
+									ctor: '::',
+									_0: {
+										ctor: '_Tuple2',
+										_0: 'patient_initial_dose_dt',
+										_1: _elm_lang$core$Json_Encode$string(pInfo.patient_initial_dose_dt)
+									},
+									_1: {
+										ctor: '::',
+										_0: {
+											ctor: '_Tuple2',
+											_0: 'patient_initial_dose',
+											_1: _elm_lang$core$Json_Encode$string(pInfo.patient_initial_dose)
+										},
+										_1: {
+											ctor: '::',
+											_0: {
+												ctor: '_Tuple2',
+												_0: 'patient_maintenance_dose',
+												_1: _elm_lang$core$Json_Encode$string(pInfo.patient_maintenance_dose)
+											},
+											_1: {
+												ctor: '::',
+												_0: {
+													ctor: '_Tuple2',
+													_0: 'patient_nacl_amount',
+													_1: _elm_lang$core$Json_Encode$string(pInfo.patient_nacl_amount)
+												},
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}));
+};
+var _user$project$Data_PersonalInfo$PersonalInfo = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {patient_name: a, patient_age: b, patient_card: c, patient_therapy: d, patient_frequency: e, patient_initial_dose_dt: f, patient_initial_dose: g, patient_maintenance_dose: h, patient_nacl_amount: i};
+	});
+var _user$project$Data_PersonalInfo$init = A9(_user$project$Data_PersonalInfo$PersonalInfo, '', '0', '0', '', '', '', '0', '0', '0');

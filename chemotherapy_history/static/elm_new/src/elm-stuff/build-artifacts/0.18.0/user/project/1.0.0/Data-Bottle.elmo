@@ -1,0 +1,208 @@
+var _user$project$Data_Bottle$lastBottleDate = function (bottleList) {
+	var _p0 = _elm_lang$core$List$head(
+		_elm_lang$core$List$reverse(bottleList));
+	if (_p0.ctor === 'Nothing') {
+		return _elm_lang$core$Date$fromTime(0);
+	} else {
+		return _p0._0.opened;
+	}
+};
+var _user$project$Data_Bottle$isNewBottle = F3(
+	function (previous_dt, new_dt, bottleLst) {
+		return !_elm_lang$core$Native_Utils.eq(
+			_elm_lang$core$Date$toTime(
+				_user$project$Data_Bottle$lastBottleDate(bottleLst)),
+			_elm_lang$core$Date$toTime(previous_dt));
+	});
+var _user$project$Data_Bottle$lastBottleRemaining = function (bottleList) {
+	var _p1 = _elm_lang$core$List$head(
+		_elm_lang$core$List$reverse(bottleList));
+	if (_p1.ctor === 'Nothing') {
+		return 0;
+	} else {
+		return _p1._0.remaining;
+	}
+};
+var _user$project$Data_Bottle$calculateBottles = F4(
+	function (dose_amount, dose_remaining_, first_bottle_dt_, dt) {
+		var innerFold = F4(
+			function (dose_left, dose_remaining_in_bottle, number, acc) {
+				innerFold:
+				while (true) {
+					if (_elm_lang$core$Native_Utils.eq(dose_left, 0)) {
+						return acc;
+					} else {
+						if (_elm_lang$core$Native_Utils.cmp(dose_remaining_in_bottle, dose_left) > 0) {
+							var _v2 = 0,
+								_v3 = dose_remaining_in_bottle - dose_left,
+								_v4 = number + 1,
+								_v5 = A2(
+								_elm_lang$core$Basics_ops['++'],
+								acc,
+								{
+									ctor: '::',
+									_0: {
+										amount: dose_left,
+										remaining: dose_remaining_in_bottle - dose_left,
+										dt: dt,
+										opened: dt,
+										expiry: A2(_user$project$Data_Date$addDays, _user$project$Constants$constants.drug_shelf_life_days, dt),
+										number: number
+									},
+									_1: {ctor: '[]'}
+								});
+							dose_left = _v2;
+							dose_remaining_in_bottle = _v3;
+							number = _v4;
+							acc = _v5;
+							continue innerFold;
+						} else {
+							if (_elm_lang$core$Native_Utils.cmp(dose_remaining_in_bottle, dose_left) < 0) {
+								var _v6 = dose_left - dose_remaining_in_bottle,
+									_v7 = 440,
+									_v8 = number + 1,
+									_v9 = A2(
+									_elm_lang$core$Basics_ops['++'],
+									acc,
+									{
+										ctor: '::',
+										_0: {
+											amount: dose_remaining_in_bottle,
+											remaining: 0,
+											dt: dt,
+											opened: dt,
+											expiry: A2(_user$project$Data_Date$addDays, _user$project$Constants$constants.drug_shelf_life_days, dt),
+											number: number
+										},
+										_1: {ctor: '[]'}
+									});
+								dose_left = _v6;
+								dose_remaining_in_bottle = _v7;
+								number = _v8;
+								acc = _v9;
+								continue innerFold;
+							} else {
+								var _v10 = dose_left,
+									_v11 = 440,
+									_v12 = number + 1,
+									_v13 = acc;
+								dose_left = _v10;
+								dose_remaining_in_bottle = _v11;
+								number = _v12;
+								acc = _v13;
+								continue innerFold;
+							}
+						}
+					}
+				}
+			});
+		var _p2 = (_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$Date$toTime(
+				A2(_user$project$Data_Date$addDays, _user$project$Constants$constants.drug_shelf_life_days, first_bottle_dt_)),
+			_elm_lang$core$Date$toTime(dt)) > 0) ? {ctor: '_Tuple2', _0: dose_remaining_, _1: first_bottle_dt_} : {ctor: '_Tuple2', _0: _user$project$Constants$constants.single_bottle_dosage, _1: dt};
+		var dose_remaining = _p2._0;
+		var first_bottle_dt = _p2._1;
+		return (_elm_lang$core$Native_Utils.cmp(dose_remaining - dose_amount, 0) > -1) ? {
+			ctor: '::',
+			_0: {
+				amount: dose_amount,
+				remaining: dose_remaining - dose_amount,
+				dt: dt,
+				opened: first_bottle_dt,
+				expiry: A2(_user$project$Data_Date$addDays, _user$project$Constants$constants.drug_shelf_life_days, first_bottle_dt),
+				number: 1
+			},
+			_1: {ctor: '[]'}
+		} : A4(
+			innerFold,
+			dose_amount - dose_remaining,
+			_user$project$Constants$constants.single_bottle_dosage,
+			2,
+			{
+				ctor: '::',
+				_0: {
+					amount: dose_remaining,
+					remaining: 0,
+					dt: dt,
+					opened: first_bottle_dt,
+					expiry: A2(_user$project$Data_Date$addDays, _user$project$Constants$constants.drug_shelf_life_days, first_bottle_dt),
+					number: 1
+				},
+				_1: {ctor: '[]'}
+			});
+	});
+var _user$project$Data_Bottle$encode = function (bottle_) {
+	var bottle = _elm_lang$core$Native_Utils.update(
+		bottle_,
+		{
+			dt: _user$project$Data_Date$dateToString(bottle_.dt),
+			opened: _user$project$Data_Date$dateToString(bottle_.opened),
+			expiry: _user$project$Data_Date$dateToString(bottle_.expiry)
+		});
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'amount',
+				_1: _elm_lang$core$Json_Encode$int(bottle.amount)
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'remaining',
+					_1: _elm_lang$core$Json_Encode$int(bottle.remaining)
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'dt',
+						_1: _elm_lang$core$Json_Encode$string(bottle.dt)
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'opened',
+							_1: _elm_lang$core$Json_Encode$string(bottle.opened)
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'expiry',
+								_1: _elm_lang$core$Json_Encode$string(bottle.expiry)
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'number',
+									_1: _elm_lang$core$Json_Encode$int(bottle.number)
+								},
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _user$project$Data_Bottle$encodeList = function (bottleLst) {
+	return _elm_lang$core$Json_Encode$list(
+		A2(_elm_lang$core$List$map, _user$project$Data_Bottle$encode, bottleLst));
+};
+var _user$project$Data_Bottle$Bottle = F6(
+	function (a, b, c, d, e, f) {
+		return {amount: a, remaining: b, dt: c, opened: d, expiry: e, number: f};
+	});
+var _user$project$Data_Bottle$init = A6(
+	_user$project$Data_Bottle$Bottle,
+	0,
+	0,
+	_elm_lang$core$Date$fromTime(0),
+	_elm_lang$core$Date$fromTime(0),
+	_elm_lang$core$Date$fromTime(0),
+	0);

@@ -1,0 +1,39 @@
+.adminPanelWrapper {
+	display:flex;
+	min-height: 100vh;
+    min-width: 90vw;
+}
+
+
+.content {
+    background: white;
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.sidebar {
+    min-width: 10vw;
+    flex-grow: 1;
+}
+
+.flex-container {
+	display: flex;
+	align-items: baseline;
+}
+
+.header {
+	margin: -10px 0 -15px 0;
+}
+.settings-header 	{
+	letter-spacing: 2px;
+	color: hsla(239, 10%, 29%, 1);
+}
+.settings-header-icon {
+	font-size: 24px;
+	margin: 0px 6px 0 0;
+    color: hsla(239, 10%, 58%, 1);
+	}
+
+.settings-header-hr {
+    width: 40%;
+    }

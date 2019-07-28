@@ -1,0 +1,95 @@
+var _user$project$Views_DoseTable$view = function (doses) {
+	var fields = {
+		ctor: '::',
+		_0: 'dose_number',
+		_1: {
+			ctor: '::',
+			_0: 'dose_amount',
+			_1: {
+				ctor: '::',
+				_0: 'dose_dt',
+				_1: {
+					ctor: '::',
+					_0: 'dose_remarks',
+					_1: {ctor: '[]'}
+				}
+			}
+		}
+	};
+	return A2(
+		_debois$elm_mdl$Material_Table$table,
+		{
+			ctor: '::',
+			_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '100%'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_debois$elm_mdl$Material_Table$thead,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: A2(
+						_debois$elm_mdl$Material_Table$tr,
+						{
+							ctor: '::',
+							_0: A2(_debois$elm_mdl$Material_Options$css, 'background-color', 'white'),
+							_1: {ctor: '[]'}
+						},
+						A2(
+							_elm_lang$core$List$map,
+							function (field_name) {
+								return A2(
+									_debois$elm_mdl$Material_Table$th,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(field_name),
+										_1: {ctor: '[]'}
+									});
+							},
+							A2(_elm_lang$core$List$map, _user$project$Data_Dose$toChinese, fields))),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_debois$elm_mdl$Material_Table$tbody,
+					{ctor: '[]'},
+					A2(
+						_elm_lang$core$List$map,
+						function (dose) {
+							return A2(
+								_debois$elm_mdl$Material_Table$tr,
+								{ctor: '[]'},
+								A2(
+									_elm_lang$core$List$map,
+									function (field_name) {
+										return A2(
+											_debois$elm_mdl$Material_Table$td,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text(
+													A2(_user$project$Data_Dose$getValue, dose, field_name)),
+												_1: {ctor: '[]'}
+											});
+									},
+									fields));
+						},
+						doses)),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Views_DoseTable$viewWithInit = _user$project$Views_DoseTable$view(
+	{
+		ctor: '::',
+		_0: _user$project$Data_Dose$init,
+		_1: {
+			ctor: '::',
+			_0: _user$project$Data_Dose$init,
+			_1: {ctor: '[]'}
+		}
+	});

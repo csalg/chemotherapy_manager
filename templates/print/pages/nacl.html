@@ -1,0 +1,52 @@
+{% extends "print_base.html" %}
+
+{% block body %}
+
+<div class="page">
+
+	<div class="hospital-name">
+		<span>{{patient.hospital.name}}</span>
+	</div>
+
+	<hr class="hr--extra-margin">
+
+	<div style="text-align: center; font-size:1.5rem; font-weight:bold; letter-spacing: 2px;">
+		{{patient.patient_name}}
+	</div>
+	
+	<hr class="hr--extra-margin" >
+	<br>
+
+	<!-- <table> -->
+<!-- 		<tr class="">
+			<td class="">患者姓名: </td>
+			<td class="">{{patient.patient_name}}
+			</td>
+		</tr> -->
+<!-- 		<tr>
+			<td>患者姓名: </td>
+			<td>{{patient.id}}
+			</td>
+		</tr> -->
+<!-- 		氯化钠注射液 0.9% {{patient.dose_amount}} mg
+		赫塞汀注射液 -->
+		<div style="padding: 5px 0 5px 0;">
+			<div style="width:200px; display:inline-block; font-size: 1.25rem">氯化钠注射液 0.9%</div>
+			<div style="width:100px; display:inline-block; font-size: 1.25rem">
+				100 ml
+			</div>
+		</div>
+		<br><br><br><br><br><br><br>
+		<br><br><br><br><br><br><br>
+		<br><br><br><br>
+
+		<div style="padding: 0px 0 0px 0; font-weight: bold; font-size: 1.25rem">QD</div>
+		<div style="padding: 0px 0 0px 0; font-weight: ; font-size: 1.25rem">静滴</div>
+
+	<hr style="margin-top: 20px;">
+		<div style="padding: 5px 0 5px 0; text-align: center; font-size: 1.25rem">
+				{{dose_dt}}
+			</div>
+		</div>
+</div>
+{% endblock %}

@@ -1,0 +1,165 @@
+var _rtfeldman$selectlist$SelectList$toList = function (_p0) {
+	var _p1 = _p0;
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		_p1._0,
+		{ctor: '::', _0: _p1._1, _1: _p1._2});
+};
+var _rtfeldman$selectlist$SelectList$selectHelp = F4(
+	function (isSelectable, beforeList, selectedElem, afterList) {
+		var _p2 = {ctor: '_Tuple2', _0: beforeList, _1: afterList};
+		if (_p2._0.ctor === '[]') {
+			if (_p2._1.ctor === '[]') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				var _p5 = _p2._1._1;
+				var _p4 = _p2._1._0;
+				if (isSelectable(selectedElem)) {
+					return _elm_lang$core$Maybe$Just(
+						{ctor: '_Tuple3', _0: beforeList, _1: selectedElem, _2: afterList});
+				} else {
+					if (isSelectable(_p4)) {
+						return _elm_lang$core$Maybe$Just(
+							{
+								ctor: '_Tuple3',
+								_0: A2(
+									_elm_lang$core$Basics_ops['++'],
+									beforeList,
+									{
+										ctor: '::',
+										_0: selectedElem,
+										_1: {ctor: '[]'}
+									}),
+								_1: _p4,
+								_2: _p5
+							});
+					} else {
+						var _p3 = A4(
+							_rtfeldman$selectlist$SelectList$selectHelp,
+							isSelectable,
+							{ctor: '[]'},
+							_p4,
+							_p5);
+						if (_p3.ctor === 'Nothing') {
+							return _elm_lang$core$Maybe$Nothing;
+						} else {
+							return _elm_lang$core$Maybe$Just(
+								{
+									ctor: '_Tuple3',
+									_0: {ctor: '::', _0: selectedElem, _1: _p3._0._0},
+									_1: _p3._0._1,
+									_2: _p3._0._2
+								});
+						}
+					}
+				}
+			}
+		} else {
+			var _p8 = _p2._0._1;
+			var _p7 = _p2._0._0;
+			if (isSelectable(_p7)) {
+				return _elm_lang$core$Maybe$Just(
+					{
+						ctor: '_Tuple3',
+						_0: {ctor: '[]'},
+						_1: _p7,
+						_2: A2(
+							_elm_lang$core$Basics_ops['++'],
+							_p8,
+							{ctor: '::', _0: selectedElem, _1: afterList})
+					});
+			} else {
+				var _p6 = A4(_rtfeldman$selectlist$SelectList$selectHelp, isSelectable, _p8, selectedElem, afterList);
+				if (_p6.ctor === 'Nothing') {
+					return _elm_lang$core$Maybe$Nothing;
+				} else {
+					return _elm_lang$core$Maybe$Just(
+						{
+							ctor: '_Tuple3',
+							_0: {ctor: '::', _0: _p7, _1: _p6._0._0},
+							_1: _p6._0._1,
+							_2: _p6._0._2
+						});
+				}
+			}
+		}
+	});
+var _rtfeldman$selectlist$SelectList$selected = function (_p9) {
+	var _p10 = _p9;
+	return _p10._1;
+};
+var _rtfeldman$selectlist$SelectList$after = function (_p11) {
+	var _p12 = _p11;
+	return _p12._2;
+};
+var _rtfeldman$selectlist$SelectList$before = function (_p13) {
+	var _p14 = _p13;
+	return _p14._0;
+};
+var _rtfeldman$selectlist$SelectList$SelectList = F3(
+	function (a, b, c) {
+		return {ctor: 'SelectList', _0: a, _1: b, _2: c};
+	});
+var _rtfeldman$selectlist$SelectList$singleton = function (sel) {
+	return A3(
+		_rtfeldman$selectlist$SelectList$SelectList,
+		{ctor: '[]'},
+		sel,
+		{ctor: '[]'});
+};
+var _rtfeldman$selectlist$SelectList$map = F2(
+	function (transform, _p15) {
+		var _p16 = _p15;
+		return A3(
+			_rtfeldman$selectlist$SelectList$SelectList,
+			A2(_elm_lang$core$List$map, transform, _p16._0),
+			transform(_p16._1),
+			A2(_elm_lang$core$List$map, transform, _p16._2));
+	});
+var _rtfeldman$selectlist$SelectList$fromLists = _rtfeldman$selectlist$SelectList$SelectList;
+var _rtfeldman$selectlist$SelectList$select = F2(
+	function (isSelectable, _p17) {
+		var _p18 = _p17;
+		var _p19 = A4(_rtfeldman$selectlist$SelectList$selectHelp, isSelectable, _p18._0, _p18._1, _p18._2);
+		if (_p19.ctor === 'Nothing') {
+			return _p18;
+		} else {
+			return A3(_rtfeldman$selectlist$SelectList$SelectList, _p19._0._0, _p19._0._1, _p19._0._2);
+		}
+	});
+var _rtfeldman$selectlist$SelectList$append = F2(
+	function (list, _p20) {
+		var _p21 = _p20;
+		return A3(
+			_rtfeldman$selectlist$SelectList$SelectList,
+			_p21._0,
+			_p21._1,
+			A2(_elm_lang$core$Basics_ops['++'], _p21._2, list));
+	});
+var _rtfeldman$selectlist$SelectList$prepend = F2(
+	function (list, _p22) {
+		var _p23 = _p22;
+		return A3(
+			_rtfeldman$selectlist$SelectList$SelectList,
+			A2(_elm_lang$core$Basics_ops['++'], list, _p23._0),
+			_p23._1,
+			_p23._2);
+	});
+var _rtfeldman$selectlist$SelectList$AfterSelected = {ctor: 'AfterSelected'};
+var _rtfeldman$selectlist$SelectList$Selected = {ctor: 'Selected'};
+var _rtfeldman$selectlist$SelectList$BeforeSelected = {ctor: 'BeforeSelected'};
+var _rtfeldman$selectlist$SelectList$mapBy = F2(
+	function (transform, _p24) {
+		var _p25 = _p24;
+		return A3(
+			_rtfeldman$selectlist$SelectList$SelectList,
+			A2(
+				_elm_lang$core$List$map,
+				transform(_rtfeldman$selectlist$SelectList$BeforeSelected),
+				_p25._0),
+			A2(transform, _rtfeldman$selectlist$SelectList$Selected, _p25._1),
+			A2(
+				_elm_lang$core$List$map,
+				transform(_rtfeldman$selectlist$SelectList$AfterSelected),
+				_p25._2));
+	});

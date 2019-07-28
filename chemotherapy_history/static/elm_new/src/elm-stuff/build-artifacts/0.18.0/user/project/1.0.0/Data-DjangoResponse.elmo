@@ -1,0 +1,36 @@
+var _user$project$Data_DjangoResponse$toString = function (res) {
+	var _p0 = res;
+	if (_p0.ctor === 'Err') {
+		return A2(_elm_lang$core$Basics_ops['++'], '服务器错误： ', _p0._0);
+	} else {
+		return A2(_elm_lang$core$Basics_ops['++'], '服务器成功： ', _p0._0);
+	}
+};
+var _user$project$Data_DjangoResponse$Success = function (a) {
+	return {ctor: 'Success', _0: a};
+};
+var _user$project$Data_DjangoResponse$Err = function (a) {
+	return {ctor: 'Err', _0: a};
+};
+var _user$project$Data_DjangoResponse$decode_ = function () {
+	var djangoDecoder = function (status) {
+		var _p1 = status;
+		if (_p1 === 'success') {
+			return A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'message',
+				_elm_lang$core$Json_Decode$string,
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Data_DjangoResponse$Success));
+		} else {
+			return A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'message',
+				_elm_lang$core$Json_Decode$string,
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Data_DjangoResponse$Err));
+		}
+	};
+	return A2(
+		_elm_lang$core$Json_Decode$andThen,
+		djangoDecoder,
+		A2(_elm_lang$core$Json_Decode$field, 'status', _elm_lang$core$Json_Decode$string));
+}();

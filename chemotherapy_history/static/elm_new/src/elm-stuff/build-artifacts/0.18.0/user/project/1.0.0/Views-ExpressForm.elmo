@@ -1,0 +1,1114 @@
+var _user$project$Views_ExpressForm$Model = F5(
+	function (a, b, c, d, e) {
+		return {id: a, patient: b, form: c, heartReportReminder: d, endRoute: e};
+	});
+var _user$project$Views_ExpressForm$initWithValues = F4(
+	function (id, patient, dt_now, endRoute) {
+		var shouldRemindHeartExam = (_elm_lang$core$Native_Utils.cmp(
+			patient.heart_ago,
+			_elm_lang$core$Tuple$first(_user$project$Constants$constants.heart_report_range)) < 0) && (_elm_lang$core$Native_Utils.cmp(
+			patient.heart_ago,
+			_elm_lang$core$Tuple$second(_user$project$Constants$constants.heart_report_range)) > 0);
+		return A5(
+			_user$project$Views_ExpressForm$Model,
+			id,
+			_elm_lang$core$Maybe$Just(patient),
+			_elm_lang$core$Maybe$Nothing,
+			shouldRemindHeartExam,
+			endRoute);
+	});
+var _user$project$Views_ExpressForm$ChangePage = function (a) {
+	return {ctor: 'ChangePage', _0: a};
+};
+var _user$project$Views_ExpressForm$TherapyStatusMsg = function (a) {
+	return {ctor: 'TherapyStatusMsg', _0: a};
+};
+var _user$project$Views_ExpressForm$HeartMsg = function (a) {
+	return {ctor: 'HeartMsg', _0: a};
+};
+var _user$project$Views_ExpressForm$DoseMsg = function (a) {
+	return {ctor: 'DoseMsg', _0: a};
+};
+var _user$project$Views_ExpressForm$PersonalInfoMsg = function (a) {
+	return {ctor: 'PersonalInfoMsg', _0: a};
+};
+var _user$project$Views_ExpressForm$SetForm = function (a) {
+	return {ctor: 'SetForm', _0: a};
+};
+var _user$project$Views_ExpressForm$TherapyStatus = function (a) {
+	return {ctor: 'TherapyStatus', _0: a};
+};
+var _user$project$Views_ExpressForm$Heart = function (a) {
+	return {ctor: 'Heart', _0: a};
+};
+var _user$project$Views_ExpressForm$Dose = function (a) {
+	return {ctor: 'Dose', _0: a};
+};
+var _user$project$Views_ExpressForm$decisionTree = F3(
+	function (patient, heartReminded, endRoute) {
+		var changeTemporaryHaltButton = A2(
+			_rundis$elm_bootstrap$Bootstrap_Button$button,
+			{
+				ctor: '::',
+				_0: _rundis$elm_bootstrap$Bootstrap_Button$danger,
+				_1: {
+					ctor: '::',
+					_0: _rundis$elm_bootstrap$Bootstrap_Button$onClick(
+						_user$project$Views_ExpressForm$SetForm(
+							_user$project$Views_ExpressForm$TherapyStatus(
+								A3(
+									_user$project$Views_PatientForms_TherapyStatus$initWithValuesTemporaryHalt,
+									patient.id,
+									_user$project$Data_Date$dateToString(patient.dt_now),
+									endRoute)))),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$i,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('fas fa-play-pause '),
+						_1: {ctor: '[]'}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(' 记录暂停用药原因'),
+					_1: {ctor: '[]'}
+				}
+			});
+		var changeTherapyStatusButton = A2(
+			_rundis$elm_bootstrap$Bootstrap_Button$button,
+			{
+				ctor: '::',
+				_0: _rundis$elm_bootstrap$Bootstrap_Button$primary,
+				_1: {
+					ctor: '::',
+					_0: _rundis$elm_bootstrap$Bootstrap_Button$onClick(
+						_user$project$Views_ExpressForm$SetForm(
+							_user$project$Views_ExpressForm$TherapyStatus(
+								A3(
+									_user$project$Views_PatientForms_TherapyStatus$initWithValues,
+									patient.id,
+									_user$project$Data_Date$dateToString(patient.dt_now),
+									endRoute)))),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$i,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('fas fa-play-circle '),
+						_1: {ctor: '[]'}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(' 改治疗状态'),
+					_1: {ctor: '[]'}
+				}
+			});
+		var newHeartButton = A2(
+			_rundis$elm_bootstrap$Bootstrap_Button$button,
+			{
+				ctor: '::',
+				_0: _rundis$elm_bootstrap$Bootstrap_Button$warning,
+				_1: {
+					ctor: '::',
+					_0: _rundis$elm_bootstrap$Bootstrap_Button$onClick(
+						_user$project$Views_ExpressForm$SetForm(
+							_user$project$Views_ExpressForm$Heart(
+								A4(
+									_user$project$Views_PatientForms_Heart$initWithValues,
+									patient.id,
+									patient.heart_ago,
+									_user$project$Data_Date$dateToString(patient.dt_now),
+									endRoute)))),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$i,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('fas fa-heart '),
+						_1: {ctor: '[]'}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(' 记录心超报告'),
+					_1: {ctor: '[]'}
+				}
+			});
+		var newHeartExpiredButton = A2(
+			_rundis$elm_bootstrap$Bootstrap_Button$button,
+			{
+				ctor: '::',
+				_0: _rundis$elm_bootstrap$Bootstrap_Button$danger,
+				_1: {
+					ctor: '::',
+					_0: _rundis$elm_bootstrap$Bootstrap_Button$onClick(
+						_user$project$Views_ExpressForm$SetForm(
+							_user$project$Views_ExpressForm$Heart(
+								A4(
+									_user$project$Views_PatientForms_Heart$initWithValues,
+									patient.id,
+									patient.heart_ago,
+									_user$project$Data_Date$dateToString(patient.dt_now),
+									endRoute)))),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$i,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('fas fa-heart '),
+						_1: {ctor: '[]'}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(' 记录心超迟到的原因'),
+					_1: {ctor: '[]'}
+				}
+			});
+		var _p0 = (_elm_lang$core$Native_Utils.cmp(
+			patient.heart_ago,
+			_elm_lang$core$Tuple$second(_user$project$Constants$constants.heart_report_range)) < 0) ? {
+			ctor: '_Tuple3',
+			_0: A5(
+				_user$project$Views_PatientInfoCard$ImportantItem,
+				_elm_lang$core$Maybe$Just(6),
+				'fas fa-heartbeat',
+				_user$project$Styles$colorDanger,
+				A2(
+					_elm_lang$html$Html$span,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('本次心超报告'),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$span,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$style(
+										A2(_elm_lang$core$Basics_ops['++'], _user$project$Styles$colorDanger, _user$project$Styles$horPadding1px)),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('超过时间'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				''),
+			_1: {
+				ctor: '::',
+				_0: newHeartExpiredButton,
+				_1: {ctor: '[]'}
+			},
+			_2: true
+		} : ((_elm_lang$core$Native_Utils.cmp(
+			patient.heart_ago,
+			_elm_lang$core$Tuple$first(_user$project$Constants$constants.heart_report_range)) > 0) ? {
+			ctor: '_Tuple3',
+			_0: A5(
+				_user$project$Views_PatientInfoCard$ImportantItem,
+				_elm_lang$core$Maybe$Just(6),
+				'fas fa-heartbeat',
+				_user$project$Styles$colorPrimary,
+				A2(
+					_elm_lang$html$Html$span,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('还有 '),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$span,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$style(
+										A2(_elm_lang$core$Basics_ops['++'], _user$project$Styles$colorPrimary, _user$project$Styles$horPadding1px)),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											_elm_lang$core$Basics$toString(patient.heart_ago),
+											' 天')),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(' 本次心超到期'),
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				''),
+			_1: {ctor: '[]'},
+			_2: false
+		} : {
+			ctor: '_Tuple3',
+			_0: A5(
+				_user$project$Views_PatientInfoCard$ImportantItem,
+				_elm_lang$core$Maybe$Just(6),
+				'fas fa-heartbeat',
+				_user$project$Styles$colorWarning,
+				A2(
+					_elm_lang$html$Html$span,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('只有 '),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$span,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$style(
+										A2(_elm_lang$core$Basics_ops['++'], _user$project$Styles$boldText, _user$project$Styles$horPadding1px)),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											_elm_lang$core$Basics$toString(patient.heart_ago),
+											' 天本次心超到期')),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				'alarm'),
+			_1: {
+				ctor: '::',
+				_0: newHeartButton,
+				_1: {ctor: '[]'}
+			},
+			_2: false
+		});
+		var heartItem = _p0._0;
+		var heartButton = _p0._1;
+		var heartOverrideOtherButtons = _p0._2;
+		var newDoseButton = function () {
+			var init = A2(_user$project$Views_PatientForms_Dose$initFromPatient, patient, endRoute);
+			return A2(
+				_rundis$elm_bootstrap$Bootstrap_Button$button,
+				{
+					ctor: '::',
+					_0: _rundis$elm_bootstrap$Bootstrap_Button$success,
+					_1: {
+						ctor: '::',
+						_0: _rundis$elm_bootstrap$Bootstrap_Button$onClick(
+							_user$project$Views_ExpressForm$SetForm(
+								_user$project$Views_ExpressForm$Dose(init))),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$i,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('fas fa-vial '),
+							_1: {ctor: '[]'}
+						},
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(' 记录用药'),
+						_1: {ctor: '[]'}
+					}
+				});
+		}();
+		var printButton = A2(
+			_elm_lang$html$Html$a,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$href(
+					_user$project$Request_External$print(patient.id)),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('btn btn-outline-primary'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$style(
+							{
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'display', _1: 'flex'},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'align-items', _1: 'center'},
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$i,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('material-icons'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$style(
+								{
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'padding-right', _1: '2px'},
+									_1: {
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 'font-size', _1: '18px'},
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('print'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(' 打印标签'),
+					_1: {ctor: '[]'}
+				}
+			});
+		var _p1 = (_elm_lang$core$Native_Utils.cmp(patient.dose_ago, 0 - _user$project$Constants$constants.take_dose_buffer) < 0) ? ((((_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$Basics$abs(
+				_elm_lang$core$Date$toTime(patient.therapy_dt) - _elm_lang$core$Date$toTime(patient.dt_now)),
+			((24 * 60) * 60) * 1000) > 0) && _elm_lang$core$Native_Utils.eq(patient.therapy_status, _user$project$Data_Patient$Active)) || ((_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$Basics$abs(
+				_elm_lang$core$Date$toTime(patient.therapy_dt) - _elm_lang$core$Date$toTime(patient.dt_now)),
+			((24 * 60) * 60) * 1000) < 0) && (!_elm_lang$core$Native_Utils.eq(patient.therapy_status, _user$project$Data_Patient$Active)))) ? {
+			ctor: '_Tuple3',
+			_0: A5(
+				_user$project$Views_PatientInfoCard$ImportantItem,
+				_elm_lang$core$Maybe$Just(6),
+				'fas fa-vial',
+				_user$project$Styles$colorDanger,
+				A2(
+					_elm_lang$html$Html$span,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('该患者'),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$span,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$style(
+										A2(_elm_lang$core$Basics_ops['++'], _user$project$Styles$colorDanger, _user$project$Styles$horPadding1px)),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('超过预约'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('用药时间'),
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				''),
+			_1: {
+				ctor: '::',
+				_0: changeTemporaryHaltButton,
+				_1: {ctor: '[]'}
+			},
+			_2: true
+		} : {
+			ctor: '_Tuple3',
+			_0: A5(
+				_user$project$Views_PatientInfoCard$ImportantItem,
+				_elm_lang$core$Maybe$Just(6),
+				'fas fa-vial',
+				_user$project$Styles$colorWarning,
+				A2(
+					_elm_lang$html$Html$span,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('该患者'),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$span,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$style(
+										A2(_elm_lang$core$Basics_ops['++'], _user$project$Styles$colorDanger, _user$project$Styles$horPadding1px)),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('超过预约'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('用药时间'),
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				''),
+			_1: {
+				ctor: '::',
+				_0: newDoseButton,
+				_1: {ctor: '[]'}
+			},
+			_2: false
+		}) : ((_elm_lang$core$Native_Utils.cmp(patient.dose_ago, _user$project$Constants$constants.take_dose_buffer) > 0) ? {
+			ctor: '_Tuple3',
+			_0: A5(
+				_user$project$Views_PatientInfoCard$ImportantItem,
+				_elm_lang$core$Maybe$Just(6),
+				'fas fa-vial',
+				_user$project$Styles$colorPrimary,
+				A2(
+					_elm_lang$html$Html$span,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('还有 '),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$span,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$style(
+										A2(_elm_lang$core$Basics_ops['++'], _user$project$Styles$colorPrimary, _user$project$Styles$horPadding1px)),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											_elm_lang$core$Basics$toString(patient.dose_ago - _user$project$Constants$constants.take_dose_buffer),
+											' 天')),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(' 患者能接受预约'),
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				''),
+			_1: {
+				ctor: '::',
+				_0: printButton,
+				_1: {ctor: '[]'}
+			},
+			_2: false
+		} : {
+			ctor: '_Tuple3',
+			_0: A5(
+				_user$project$Views_PatientInfoCard$ImportantItem,
+				_elm_lang$core$Maybe$Just(6),
+				'fas fa-vial',
+				_user$project$Styles$colorSuccess,
+				A2(
+					_elm_lang$html$Html$span,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('该患者'),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$span,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$style(
+										A2(_elm_lang$core$Basics_ops['++'], _user$project$Styles$colorSuccess, _user$project$Styles$horPadding1px)),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('能接受预约'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				''),
+			_1: {
+				ctor: '::',
+				_0: newDoseButton,
+				_1: {ctor: '[]'}
+			},
+			_2: false
+		});
+		var doseItem = _p1._0;
+		var doseButton = _p1._1;
+		var doseOverrideOtherButtons = _p1._2;
+		var patientProfileButton = A2(
+			_rundis$elm_bootstrap$Bootstrap_Button$button,
+			{
+				ctor: '::',
+				_0: _rundis$elm_bootstrap$Bootstrap_Button$outlinePrimary,
+				_1: {
+					ctor: '::',
+					_0: _rundis$elm_bootstrap$Bootstrap_Button$onClick(
+						_user$project$Views_ExpressForm$ChangePage(
+							_user$project$Route$Patient(patient.id))),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$i,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('fas fa-user'),
+						_1: {ctor: '[]'}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(' 查看患者材料'),
+					_1: {ctor: '[]'}
+				}
+			});
+		var _p2 = function () {
+			var _p3 = patient.therapy_status;
+			switch (_p3.ctor) {
+				case 'TemporaryHalt':
+					return A2(
+						_user$project$Util_ops['=>'],
+						{
+							ctor: '::',
+							_0: A5(
+								_user$project$Views_PatientInfoCard$ImportantItem,
+								_elm_lang$core$Maybe$Just(6),
+								'fas fa-pause',
+								_user$project$Styles$colorPrimary,
+								A2(
+									_elm_lang$html$Html$span,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('该患者'),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$span,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$style(
+														A2(_elm_lang$core$Basics_ops['++'], _user$project$Styles$boldText, _user$project$Styles$horPadding1px)),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('暂停治疗了'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}),
+								''),
+							_1: {
+								ctor: '::',
+								_0: A5(
+									_user$project$Views_PatientInfoCard$ImportantItem,
+									_elm_lang$core$Maybe$Just(6),
+									'fab fa-readme',
+									_user$project$Styles$colorPrimary,
+									A2(
+										_elm_lang$html$Html$span,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('原因： '),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$span,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$style(
+															A2(_elm_lang$core$Basics_ops['++'], _user$project$Styles$boldText, _user$project$Styles$horPadding1px)),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text(patient.therapy_reason),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}),
+									''),
+								_1: {ctor: '[]'}
+							}
+						},
+						{
+							ctor: '::',
+							_0: patientProfileButton,
+							_1: {
+								ctor: '::',
+								_0: changeTherapyStatusButton,
+								_1: {ctor: '[]'}
+							}
+						});
+				case 'Halt':
+					return A2(
+						_user$project$Util_ops['=>'],
+						{
+							ctor: '::',
+							_0: A5(
+								_user$project$Views_PatientInfoCard$ImportantItem,
+								_elm_lang$core$Maybe$Just(6),
+								'fas fa-stop',
+								_user$project$Styles$colorPrimary,
+								A2(
+									_elm_lang$html$Html$span,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('该患者'),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$span,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$style(
+														A2(_elm_lang$core$Basics_ops['++'], _user$project$Styles$boldText, _user$project$Styles$horPadding1px)),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('终止治疗了'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}),
+								''),
+							_1: {
+								ctor: '::',
+								_0: A5(
+									_user$project$Views_PatientInfoCard$ImportantItem,
+									_elm_lang$core$Maybe$Just(6),
+									'fab fa-readme',
+									_user$project$Styles$colorPrimary,
+									A2(
+										_elm_lang$html$Html$span,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('原因： '),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$span,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$style(
+															A2(_elm_lang$core$Basics_ops['++'], _user$project$Styles$boldText, _user$project$Styles$horPadding1px)),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text(patient.therapy_reason),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}),
+									''),
+								_1: {ctor: '[]'}
+							}
+						},
+						{
+							ctor: '::',
+							_0: patientProfileButton,
+							_1: {
+								ctor: '::',
+								_0: changeTherapyStatusButton,
+								_1: {ctor: '[]'}
+							}
+						});
+				case 'Finished':
+					return A2(
+						_user$project$Util_ops['=>'],
+						{
+							ctor: '::',
+							_0: A5(
+								_user$project$Views_PatientInfoCard$ImportantItem,
+								_elm_lang$core$Maybe$Just(12),
+								'fas fa-child',
+								_user$project$Styles$colorPrimary,
+								A2(
+									_elm_lang$html$Html$span,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('该患者已'),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$span,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$style(
+														A2(_elm_lang$core$Basics_ops['++'], _user$project$Styles$boldText, _user$project$Styles$horPadding1px)),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('完成所有治疗'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}),
+								''),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: patientProfileButton,
+							_1: {ctor: '[]'}
+						});
+				default:
+					var buttons = doseOverrideOtherButtons ? A2(
+						_elm_lang$core$Basics_ops['++'],
+						{
+							ctor: '::',
+							_0: patientProfileButton,
+							_1: {ctor: '[]'}
+						},
+						doseButton) : (heartOverrideOtherButtons ? A2(
+						_elm_lang$core$Basics_ops['++'],
+						{
+							ctor: '::',
+							_0: patientProfileButton,
+							_1: {ctor: '[]'}
+						},
+						heartButton) : A2(
+						_elm_lang$core$Basics_ops['++'],
+						{
+							ctor: '::',
+							_0: patientProfileButton,
+							_1: {ctor: '[]'}
+						},
+						A2(_elm_lang$core$Basics_ops['++'], heartButton, doseButton)));
+					return A2(
+						_user$project$Util_ops['=>'],
+						{
+							ctor: '::',
+							_0: doseItem,
+							_1: {
+								ctor: '::',
+								_0: heartItem,
+								_1: {ctor: '[]'}
+							}
+						},
+						buttons);
+			}
+		}();
+		var importantItems = _p2._0;
+		var footerButtons = _p2._1;
+		var infoItems = {
+			ctor: '::',
+			_0: A6(
+				_user$project$Views_PatientInfoCard$InfoItem,
+				_elm_lang$core$Maybe$Just(4),
+				{ctor: '[]'},
+				'fas fa-female',
+				_user$project$Styles$iconGray,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					patient.patient_name,
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						', ',
+						A2(_elm_lang$core$Basics_ops['++'], patient.patient_age, ' 岁'))),
+				_user$project$Styles$iconTxtGray),
+			_1: {
+				ctor: '::',
+				_0: A6(
+					_user$project$Views_PatientInfoCard$InfoItem,
+					_elm_lang$core$Maybe$Just(3),
+					{ctor: '[]'},
+					'fas fa-medkit',
+					_user$project$Styles$iconGray,
+					patient.patient_therapy,
+					_user$project$Styles$iconTxtGray),
+				_1: {
+					ctor: '::',
+					_0: A6(
+						_user$project$Views_PatientInfoCard$InfoItem,
+						_elm_lang$core$Maybe$Just(5),
+						{ctor: '[]'},
+						'far fa-calendar-alt',
+						_user$project$Styles$iconGray,
+						patient.patient_frequency,
+						_user$project$Styles$iconTxtGray),
+					_1: {ctor: '[]'}
+				}
+			}
+		};
+		return {ctor: '_Tuple3', _0: infoItems, _1: importantItems, _2: footerButtons};
+	});
+var _user$project$Views_ExpressForm$viewAsModal = F3(
+	function (closeMsg, msgWrapper, model) {
+		var _p4 = model.patient;
+		if (_p4.ctor === 'Nothing') {
+			return _elm_lang$html$Html$text('');
+		} else {
+			var renderer = A2(_user$project$Views_Modal$view, msgWrapper, closeMsg);
+			var _p5 = A3(_user$project$Views_ExpressForm$decisionTree, _p4._0, model.heartReportReminder, model.endRoute);
+			var infoItems = _p5._0;
+			var importantItems = _p5._1;
+			var footerButtons = _p5._2;
+			var renderBody = A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('container'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('container'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('mdl-cell--middle mdl-cell--stretch mdl-cell--12-col mdl-cell'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('mdl-grid'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$style(_user$project$Styles$spaceBetween),
+												_1: {ctor: '[]'}
+											}
+										},
+										A2(_elm_lang$core$List$map, _user$project$Views_PatientInfoCard$viewInfoItem, infoItems)),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$hr,
+							{ctor: '[]'},
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('container'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('mdl-cell--middle mdl-cell--stretch mdl-cell--12-col mdl-cell'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$div,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('mdl-grid'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$style(_user$project$Styles$spaceBetween),
+														_1: {ctor: '[]'}
+													}
+												},
+												A2(_elm_lang$core$List$map, _user$project$Views_PatientInfoCard$viewImportantItem, importantItems)),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				});
+			var _p6 = model.form;
+			if (_p6.ctor === 'Nothing') {
+				return A5(
+					renderer,
+					'fas fa-rocket',
+					'快速检查',
+					renderBody,
+					footerButtons,
+					function (x) {
+						return x;
+					});
+			} else {
+				var _p7 = _p6._0;
+				switch (_p7.ctor) {
+					case 'PersonalInfo':
+						return A5(
+							renderer,
+							'fa fa-user',
+							'记录新的基本消息',
+							_user$project$Views_PatientForms_PersonalInfo$viewAsForm(_p7._0),
+							_user$project$Views_PatientForms_PersonalInfo$buttons,
+							_user$project$Views_ExpressForm$PersonalInfoMsg);
+					case 'Dose':
+						return A5(
+							renderer,
+							'fas fa-vial',
+							'记录新的剂量',
+							_user$project$Views_PatientForms_Dose$viewAsForm(_p7._0),
+							_user$project$Views_PatientForms_Dose$buttons,
+							_user$project$Views_ExpressForm$DoseMsg);
+					case 'Heart':
+						return A5(
+							renderer,
+							'fas fa-heartbeat',
+							'记录新的报告',
+							_user$project$Views_PatientForms_Heart$viewAsForm(_p7._0),
+							_user$project$Views_PatientForms_Heart$buttons,
+							_user$project$Views_ExpressForm$HeartMsg);
+					default:
+						return A5(
+							renderer,
+							'far fa-play-circle',
+							'改变状态',
+							_user$project$Views_PatientForms_TherapyStatus$viewAsForm(_p7._0),
+							_user$project$Views_PatientForms_TherapyStatus$buttons,
+							_user$project$Views_ExpressForm$TherapyStatusMsg);
+				}
+			}
+		}
+	});
+var _user$project$Views_ExpressForm$PersonalInfo = function (a) {
+	return {ctor: 'PersonalInfo', _0: a};
+};
+var _user$project$Views_ExpressForm$update = F2(
+	function (msg, model) {
+		var toModal = F5(
+			function (toModel, toMsg, subUpdate, subMsg, subModel) {
+				var _p8 = A2(subUpdate, subMsg, subModel);
+				var newModel = _p8._0;
+				var newCmd = _p8._1;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							form: _elm_lang$core$Maybe$Just(
+								toModel(newModel))
+						}),
+					_1: A2(_elm_lang$core$Platform_Cmd$map, toMsg, newCmd)
+				};
+			});
+		var _p9 = {ctor: '_Tuple2', _0: msg, _1: model.form};
+		_v4_6:
+		do {
+			switch (_p9._0.ctor) {
+				case 'PersonalInfoMsg':
+					if ((_p9._1.ctor === 'Just') && (_p9._1._0.ctor === 'PersonalInfo')) {
+						return A5(toModal, _user$project$Views_ExpressForm$PersonalInfo, _user$project$Views_ExpressForm$PersonalInfoMsg, _user$project$Views_PatientForms_PersonalInfo$update, _p9._0._0, _p9._1._0._0);
+					} else {
+						break _v4_6;
+					}
+				case 'DoseMsg':
+					if ((_p9._1.ctor === 'Just') && (_p9._1._0.ctor === 'Dose')) {
+						return A5(toModal, _user$project$Views_ExpressForm$Dose, _user$project$Views_ExpressForm$DoseMsg, _user$project$Views_PatientForms_Dose$update, _p9._0._0, _p9._1._0._0);
+					} else {
+						break _v4_6;
+					}
+				case 'HeartMsg':
+					if ((_p9._1.ctor === 'Just') && (_p9._1._0.ctor === 'Heart')) {
+						return A5(toModal, _user$project$Views_ExpressForm$Heart, _user$project$Views_ExpressForm$HeartMsg, _user$project$Views_PatientForms_Heart$update, _p9._0._0, _p9._1._0._0);
+					} else {
+						break _v4_6;
+					}
+				case 'TherapyStatusMsg':
+					if ((_p9._1.ctor === 'Just') && (_p9._1._0.ctor === 'TherapyStatus')) {
+						return A5(toModal, _user$project$Views_ExpressForm$TherapyStatus, _user$project$Views_ExpressForm$TherapyStatusMsg, _user$project$Views_PatientForms_TherapyStatus$update, _p9._0._0, _p9._1._0._0);
+					} else {
+						break _v4_6;
+					}
+				case 'SetForm':
+					return A2(
+						_user$project$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								form: _elm_lang$core$Maybe$Just(_p9._0._0)
+							}),
+						_elm_lang$core$Platform_Cmd$none);
+				default:
+					return A2(
+						_user$project$Util_ops['=>'],
+						model,
+						_user$project$Route$newUrl(_p9._0._0));
+			}
+		} while(false);
+		return A2(_user$project$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
+	});

@@ -1,0 +1,13 @@
+		
+		<button id="someId" class="mdl-button mdl-js-button mdl-button--icon">
+			<i class="material-icons">more_vert</i>
+		</button>
+		
+		<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu" for="someId">
+		
+		{% for li in menu%}
+			<a href="{{li.href}}" class="mdl-menu__item mdl-js-ripple-effect">	{{li.txt}}
+			</a>
+		{% endfor %}
+		
+		</ul>

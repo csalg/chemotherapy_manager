@@ -1,0 +1,13 @@
+		<button id="{{element.id}}" class="mdl-button mdl-js-button mdl-button--icon">
+			<i class="material-icons">more_vert</i>
+		</button>
+		<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu" for="{{element.id}}">
+		{% for li in menu%}
+		<form method="post" action="{{ li.href }}/">
+			<input type="hidden" name="RowID" value="{{element.id}}">
+			{%csrf_token%}
+
+			<button type='submit' class="mdl-menu__item mdl-js-ripple-effect">{{li.txt}}</button></form>
+
+	{% endfor %}
+		</ul>

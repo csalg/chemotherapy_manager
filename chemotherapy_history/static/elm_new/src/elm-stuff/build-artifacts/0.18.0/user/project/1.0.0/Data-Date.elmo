@@ -1,0 +1,53 @@
+var _user$project$Data_Date$isExpired = F2(
+	function (dt, dt_now) {
+		var toTime = _elm_lang$core$Date$toTime;
+		return _elm_lang$core$Native_Utils.cmp(
+			toTime(dt),
+			toTime(dt_now)) < 0;
+	});
+var _user$project$Data_Date$addDays = F2(
+	function (days, dt) {
+		return _elm_lang$core$Date$fromTime(
+			function (d) {
+				return d + ((((days * 24) * 60) * 60) * 1000);
+			}(
+				_elm_lang$core$Date$toTime(dt)));
+	});
+var _user$project$Data_Date$dateToStringJS = _mgold$elm_date_format$Date_Format$format('%Y-%m-%dT%H:%M');
+var _user$project$Data_Date$dateToString = function (dt) {
+	return A2(
+		_elm_community$string_extra$String_Extra$unsurround,
+		'\"',
+		_elm_community$string_extra$String_Extra$unquote(
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				A3(_rluiten$elm_date_extra$Date_Extra_Format$format, _rluiten$elm_date_extra$Date_Extra_Config_Config_es_es$config, _rluiten$elm_date_extra$Date_Extra_Format$isoDateFormat, dt),
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					' ',
+					A3(_rluiten$elm_date_extra$Date_Extra_Format$format, _rluiten$elm_date_extra$Date_Extra_Config_Config_es_es$config, _rluiten$elm_date_extra$Date_Extra_Format$isoTimeFormat, dt)))));
+};
+var _user$project$Data_Date$stringToDate = function (dtString) {
+	var _p0 = _elm_lang$core$Date$fromString(dtString);
+	if (_p0.ctor === 'Ok') {
+		return _p0._0;
+	} else {
+		return _elm_lang$core$Date$fromTime(0);
+	}
+};
+var _user$project$Data_Date$stringToDateToString = function (dt) {
+	return _user$project$Data_Date$dateToString(
+		_user$project$Data_Date$stringToDate(dt));
+};
+var _user$project$Data_Date$addDaysFromString = F2(
+	function (days, dtString) {
+		return A2(
+			_user$project$Data_Date$addDays,
+			days,
+			_user$project$Data_Date$stringToDate(dtString));
+	});
+var _user$project$Data_Date$decoder = A2(
+	_elm_lang$core$Json_Decode$map,
+	_elm_lang$core$Result$withDefault(
+		_elm_lang$core$Date$fromTime(0)),
+	A2(_elm_lang$core$Json_Decode$map, _elm_lang$core$Date$fromString, _elm_lang$core$Json_Decode$string));

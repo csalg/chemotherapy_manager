@@ -1,0 +1,48 @@
+
+<html lang="ch-Hans">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<head>
+{% load my_filters %}
+      {% load static %}
+  <link rel="stylesheet" href={% static "vendors/bootstrap/css/bootstrap.min.css" %}>
+  <link rel="stylesheet" href={% static "vendors/pintuer/pintuer.css" %}>
+  <link rel="stylesheet" href={% static "css/extra_colors.css" %}>
+  <link rel="stylesheet" href={% static "vendors/bootstrap-4.0.0/dist/css/bootstrap.min.css" %}>
+  <link rel="stylesheet" href={% static "vendors/mdl/material.css" %}>
+	<link rel="stylesheet" href={% static "vendors/mdl/icon.css" %}>
+  <link rel="stylesheet" href={% static "css/custom.css" %}>
+	<link rel="stylesheet" href={% static "css/structure.css" %}>
+  <link rel="stylesheet" href={% static "vendors/fontawesome/css/fontawesome-all.min.css" %}>
+	<link rel="stylesheet" href={% static "vendors/getmdl-select-master/getmdl-select.min.css" %}>
+
+  <script src={% static "vendors/getmdl-select-master/getmdl-select.min.js" %}></script>
+  <script src={% static "vendors/jquery.js" %}></script>
+  <script src={% static "vendors/jquery.validate.min.js" %}></script>
+  <script src={% static "vendors/bootstrap/js/bootstrap.min.js" %}></script>
+  <script src={% static "vendors/bootstrap-4.0.0/dist/js/bootstrap.min.js" %}></script>
+
+  
+  <script>
+    // $('#modal_content').load('/newPatientForm')
+    // $(".modal").css("display","block");
+</script>
+{% block head_extra %}
+{% endblock %}
+
+
+  <title>瑞金医院化疗数据库 - {% block head_title %}主页{% endblock %}</title>
+</head>
+
+
+
+{% block body %}
+{% endblock %}
+
+
+
+
+
+
+
+</html>

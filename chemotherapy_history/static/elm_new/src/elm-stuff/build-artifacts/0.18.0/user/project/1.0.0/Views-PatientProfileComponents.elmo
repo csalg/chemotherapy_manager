@@ -1,0 +1,8 @@
+var _user$project$Views_PatientProfileComponents$ProfilePanel = F3(
+	function (a, b, c) {
+		return {header: a, contentRows: b, footer: c};
+	});
+var _user$project$Views_PatientProfileComponents$Header = F2(
+	function (a, b) {
+		return {txt: a, icn: b};
+	});

@@ -1,0 +1,202 @@
+var _user$project$Views_Bottle$view = function (bottleList) {
+	var fields = {
+		ctor: '::',
+		_0: {
+			ctor: '_Tuple4',
+			_0: function (_p0) {
+				return _elm_lang$core$Basics$toString(
+					function (_) {
+						return _.number;
+					}(_p0));
+			},
+			_1: '瓶数',
+			_2: {ctor: '[]'},
+			_3: {ctor: '[]'}
+		},
+		_1: {
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple4',
+				_0: function (_p1) {
+					return _elm_lang$core$Basics$toString(
+						function (_) {
+							return _.amount;
+						}(_p1));
+				},
+				_1: '剂量',
+				_2: {ctor: '[]'},
+				_3: {ctor: '[]'}
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple4',
+					_0: function (_p2) {
+						return _elm_lang$core$Basics$toString(
+							function (_) {
+								return _.remaining;
+							}(_p2));
+					},
+					_1: '该瓶剩余',
+					_2: {ctor: '[]'},
+					_3: {ctor: '[]'}
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple4',
+						_0: function (_p3) {
+							return _user$project$Data_Date$dateToString(
+								function (_) {
+									return _.opened;
+								}(_p3));
+						},
+						_1: '开封日期',
+						_2: {ctor: '[]'},
+						_3: {ctor: '[]'}
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple4',
+							_0: function (_p4) {
+								return _user$project$Data_Date$dateToString(
+									function (_) {
+										return _.expiry;
+									}(_p4));
+							},
+							_1: '失效日期',
+							_2: {ctor: '[]'},
+							_3: {ctor: '[]'}
+						},
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}
+	};
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$style(_user$project$Styles$bottleListReposition),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h6,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$style(_user$project$Styles$bottleHeader),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$i,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('fas fa-prescription-bottle'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$style(_user$project$Styles$newPatientFooterIcon),
+								_1: {ctor: '[]'}
+							}
+						},
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$span,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('药品清单'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_debois$elm_mdl$Material_Table$table,
+					{
+						ctor: '::',
+						_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '100%'),
+						_1: {
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Elevation$e2,
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_debois$elm_mdl$Material_Table$thead,
+							{
+								ctor: '::',
+								_0: A2(_debois$elm_mdl$Material_Options$css, 'background-color', 'white'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_debois$elm_mdl$Material_Table$tr,
+									{ctor: '[]'},
+									A2(
+										_elm_lang$core$List$map,
+										function (_p5) {
+											var _p6 = _p5;
+											return A2(
+												_debois$elm_mdl$Material_Table$th,
+												_p6._2,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text(_p6._1),
+													_1: {ctor: '[]'}
+												});
+										},
+										fields)),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_debois$elm_mdl$Material_Table$tbody,
+								{ctor: '[]'},
+								A2(
+									_elm_lang$core$List$map,
+									function (bottle) {
+										return A2(
+											_debois$elm_mdl$Material_Table$tr,
+											{ctor: '[]'},
+											A2(
+												_elm_lang$core$List$map,
+												function (_p7) {
+													var _p8 = _p7;
+													return A2(
+														_debois$elm_mdl$Material_Table$td,
+														_p8._3,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text(
+																_p8._0(bottle)),
+															_1: {ctor: '[]'}
+														});
+												},
+												fields));
+									},
+									bottleList)),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Views_Bottle$Bottle = F6(
+	function (a, b, c, d, e, f) {
+		return {amount: a, remaining: b, dt: c, opened: d, expiry: e, number: f};
+	});

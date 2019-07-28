@@ -1,0 +1,109 @@
+{% extends "patient_main.html" %}
+
+<!-- This is to make sure the input fields are enabled -->
+{% block dose_disabled %}{%endblock%}
+<!-- Deals with the form tags as well as panel footer -->
+
+<!-- Disables hanging the bottle opened date -->
+{% block bottle_disabled %}disabled{% endblock %}
+
+<!-- Hides footers from other two panels -->
+{% block personal_panel_end %}
+{%endblock%}
+{% block dose_panel_end %}
+{%endblock%}
+{% block heart_panel_end %}
+{%endblock%}
+
+<!-- Deals with the dose logic and input fields -->
+
+
+
+{% block dose_panel_body %}
+				<div class="panel-body">
+
+<form class="form .form-horizontal" action="{% block send_to %}/patient/{{patient.id}}/updateDoseReport/{% endblock %}" method="post">
+	{% csrf_token %}
+
+	<div class="row">	
+
+
+		<label class="control-label col-sm-3 form_label">上次用药日期：</label>
+		<div class="col-sm-4">
+			<input type="date" value="{{ patient.dose_dt }}"  class="form-control" placeholder=""  disabled>
+		</div>
+
+		<label class="control-label col-sm-2 form_label">上次体重(kg)：</label>
+		<div class="col-sm-2">
+			<input type="text" class="form-control" placeholder="体重" value="{{ patient.dose_weight }}"  disabled>
+		</div>
+	</div>	
+
+	<div class="row">	
+		<label class="control-label col-sm-3 form_label">本药开封日期：</label>
+		<div class="col-sm-4">
+			<input type="date" value="{{ patient.dose_dt_opened }}"   name="dose_dt_opened" class="form-control" placeholder="" disabled>
+		</div>
+<label class="control-label col-sm-2 form_label">本药有效期:</label>
+<div class="col-sm-3">
+	<input class="form-control"  value="{{ expiration_date }}" disabled>
+</div>
+	</div>	
+
+	<div class="row">
+
+		<label class="control-label col-sm-3 form_label">上次剂量(mg)：</label>
+		<div class="col-sm-3">
+			<input value="{{ patient.dose_amount }}" type="text" class="form-control" placeholder="剂量(mg)" disabled>
+		</div>
+
+		<label class="control-label col-sm-3 form_label">上次使用后剩余剂量(mg)：</label>
+		<div class="col-sm-3">
+			<input value="{{ patient.dose_remaining_dose }}"   type="text" class="form-control" placeholder="剩余剂量(mg)" disabled>
+		</div>
+	</div>
+
+	<div class="row">
+
+	</div>
+
+	<div class="row">
+		<div class="col-sm-3">
+			<label class="control-label col-sm-8 form_label">上次备注: </label>
+		</div>
+		<div class="col-sm-9">
+			<input type="text" value="{{patient.dose_remarks}}" class="form-control" placeholder="备注" disabled>
+		</div>
+	</div>
+	</div>
+
+
+
+	<br><hr><br>
+
+
+
+
+
+
+<div id="elmBit"></div>
+
+
+<script src="/static/elm/newDose.js"></script>
+<script>
+    var node = document.getElementById('elmBit');
+    var app = Elm.Main.embed(node, {
+    	  remaining : {{patient.dose_remaining_dose|floatformat:"2"}},
+		  opened_y : {{ patient.dose_dt_opened.year }},
+		  opened_m : {{ patient.dose_dt_opened.month }},
+		  opened_d : {{ patient.dose_dt_opened.day }},
+		  weight : {{ patient.dose_weight|floatformat:"2" }},
+    });
+    // Note: if your Elm module is named "MyThing.Root" you
+    // would call "Elm.MyThing.Root.embed(node)" instead.
+</script>
+
+
+
+
+{%endblock%}

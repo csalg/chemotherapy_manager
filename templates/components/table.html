@@ -1,0 +1,65 @@
+
+<div class="row">
+<table class="col-sm-12 mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+
+		</span>
+  		<thead>
+
+			{% load my_filters %}
+
+			{% for key in table.query|first %}
+			<th class="mdl-data-table__cell--non-numeric">
+				{% if table.translation|lookup:key %}
+				{{ table.translation|lookup:key }}
+				{% else %}
+				{{ key }}
+				{% endif %}
+			</th>
+			{% endfor %}
+
+			{% if table.tableMenu or table.rowMenu %}
+	  			<th>
+	  				{% if table.tableMenu %}
+						{% with table.tableMenu as menu %}
+							{% include "components/menu.html" %}
+						{% endwith %}
+		  			{%endif%}
+	  			</th>
+  			{%endif%}
+
+		</thead>
+  <tbody>
+
+
+  	{% for element in table.query %}
+		<tr>
+			{% for value in element.values %}
+			<td class="mdl-data-table__cell--non-numeric">
+				
+				{%if value == True %}是
+					{%elif value == False %}否
+				{% else %}{{ value }}
+				{% endif %}
+			</td>
+			{% endfor %}
+
+			{% block elementActions %}
+				{% if table.tableMenu or table.rowMenu %}
+				<td>
+					{% if table.rowMenu %}
+						{% with table.rowMenu as menu %}
+							{% include "components/row_menu.html" %}
+						{% endwith %}
+					{% endif %}
+				</td>
+				{% endif %}
+			{% endblock %}
+    	</tr>
+    {% endfor %}
+
+
+  </tbody>
+</table>
+      {% load static %}
+	</div>
+<script src={% static "vendors/mdl/material.min.js" %}></script>

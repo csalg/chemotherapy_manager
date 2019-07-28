@@ -1,0 +1,579 @@
+var _user$project$Views_PatientInfoCard$viewProfileSection = function (ps) {
+	var renderRow = function (row) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('row info-row'),
+				_1: {ctor: '[]'}
+			},
+			row);
+	};
+	var _p0 = ps;
+	var header = _p0.header;
+	var contentRows = _p0.contentRows;
+	var footer = _p0.footer;
+	var headerHtml = function () {
+		var _p1 = header;
+		if (_p1.ctor === 'Nothing') {
+			return _elm_lang$html$Html$text('');
+		} else {
+			return A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('info-header'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$h5,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$i,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class(
+										A2(_elm_lang$core$Basics_ops['++'], _p1._0.icn, ' info-header-icon')),
+									_1: {ctor: '[]'}
+								},
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$span,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('info-header-text'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(_p1._0.txt),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				});
+		}
+	}();
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('profile-section border'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: headerHtml,
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('profile-section-content'),
+						_1: {ctor: '[]'}
+					},
+					A2(_elm_lang$core$List$map, renderRow, contentRows)),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Views_PatientInfoCard$viewProfileInfoItem = function (item) {
+	var _p2 = item;
+	var cellWidth = _p2.cellWidth;
+	var cellStyle = _p2.cellStyle;
+	var icon = _p2.icon;
+	var iconStyle = _p2.iconStyle;
+	var txt = _p2.txt;
+	var txtStyle = _p2.txtStyle;
+	var cellWidth_ = function () {
+		var _p3 = cellWidth;
+		if (_p3.ctor === 'Nothing') {
+			return '';
+		} else {
+			return _elm_lang$core$Basics$toString(_p3._0);
+		}
+	}();
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class(
+				A2(_elm_lang$core$Basics_ops['++'], 'info-item x', cellWidth_)),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$i,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class(
+						A2(_elm_lang$core$Basics_ops['++'], icon, ' info-icon new-patient-footer-icon ')),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$style(iconStyle),
+						_1: {ctor: '[]'}
+					}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$span,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('info-item-text'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$style(txtStyle),
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(txt),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Views_PatientInfoCard$viewImportantItem = function (_p4) {
+	var _p5 = _p4;
+	var cellW = function () {
+		var _p6 = _p5.wdth;
+		if (_p6.ctor === 'Nothing') {
+			return '';
+		} else {
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'mdl-cell--',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(_p6._0),
+					'-col'));
+		}
+	}();
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class(
+				A2(_elm_lang$core$Basics_ops['++'], ' mdl-cell--middle mdl-cell--stretch mdl-cell ', cellW)),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$li,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('mdl-list__item mdl-list__item--two-line'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$span,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('mdl-list__item-primary-content'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$span,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('fa-stack fa-lg'),
+									_1: {
+										ctor: '::',
+										_0: A2(_elm_lang$html$Html_Attributes$attribute, 'style', ' margin-right:10px;'),
+										_1: {ctor: '[]'}
+									}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$i,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('fa fa-circle fa-stack-2x'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$style(_p5.iconStyle),
+												_1: {ctor: '[]'}
+											}
+										},
+										{ctor: '[]'}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$i,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class(
+													A2(_elm_lang$core$Basics_ops['++'], _p5.icon, ' fa-stack-1x fa-inverse')),
+												_1: {ctor: '[]'}
+											},
+											{ctor: '[]'}),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _p5.txt,
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$i,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class(_p5.badgeIcon),
+											_1: {ctor: '[]'}
+										},
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Views_PatientInfoCard$viewInfoItem = function (_p7) {
+	var _p8 = _p7;
+	var cellW = function () {
+		var _p9 = _p8.cellWidth;
+		if (_p9.ctor === 'Nothing') {
+			return '';
+		} else {
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'mdl-cell--',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(_p9._0),
+					'-col'));
+		}
+	}();
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class(
+				A2(_elm_lang$core$Basics_ops['++'], 'mdl-color--white mdl-cell--middle mdl-cell--stretch mdl-cell', cellW)),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$style(_p8.cellStyle),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$i,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class(_p8.icon),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$style(_p8.iconStyle),
+						_1: {ctor: '[]'}
+					}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$span,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('mdl-list__item-primary-content mdl-list__item'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$style(_p8.txtStyle),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$style(
+									{
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 'display', _1: 'inline'},
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(_p8.txt),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Views_PatientInfoCard$gridRender = function (lst) {
+	var makeLi = function (_p10) {
+		var _p11 = _p10;
+		return A2(
+			_debois$elm_mdl$Material_Grid$cell,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				{
+					ctor: '::',
+					_0: A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$All, _p11.wdth),
+					_1: {
+						ctor: '::',
+						_0: _debois$elm_mdl$Material_Grid$stretch,
+						_1: {
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Grid$align(_debois$elm_mdl$Material_Grid$Middle),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				_p11.cellAttr),
+			{
+				ctor: '::',
+				_0: A2(
+					_debois$elm_mdl$Material_List$li,
+					{
+						ctor: '::',
+						_0: _debois$elm_mdl$Material_List$withSubtitle,
+						_1: {
+							ctor: '::',
+							_0: A2(_debois$elm_mdl$Material_Options$css, 'class', 'background-success'),
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_debois$elm_mdl$Material_List$content,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: A2(
+									_debois$elm_mdl$Material_List$subtitle,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(_p11.labl),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											_p11.val,
+											A2(_elm_lang$core$Basics_ops['++'], ' ', _p11.valueUnit))),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	};
+	return A2(
+		_debois$elm_mdl$Material_Grid$grid,
+		{ctor: '[]'},
+		A2(_elm_lang$core$List$map, makeLi, lst));
+};
+var _user$project$Views_PatientInfoCard$white = _debois$elm_mdl$Material_Color$text(_debois$elm_mdl$Material_Color$white);
+var _user$project$Views_PatientInfoCard$view = F3(
+	function (pinfocard, model, menuRenderFunction) {
+		var i = function (name) {
+			return A2(
+				_debois$elm_mdl$Material_Icon$view,
+				name,
+				{
+					ctor: '::',
+					_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '40px'),
+					_1: {ctor: '[]'}
+				});
+		};
+		var renderMenu = F3(
+			function (model, idx, btnList) {
+				var btnRender = function (_p12) {
+					var _p13 = _p12;
+					return A2(
+						_debois$elm_mdl$Material_Menu$item,
+						{
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Menu$onSelect(_p13.act),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: i(_p13.icn),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(_p13.txt),
+								_1: {ctor: '[]'}
+							}
+						});
+				};
+				var padding = A2(_debois$elm_mdl$Material_Options$css, 'padding-right', '24px');
+				return A4(
+					menuRenderFunction,
+					model,
+					idx,
+					{
+						ctor: '::',
+						_0: _debois$elm_mdl$Material_Menu$bottomRight,
+						_1: {ctor: '[]'}
+					},
+					A2(_elm_lang$core$List$map, btnRender, btnList));
+			});
+		var _p14 = pinfocard;
+		var icn = _p14.icn;
+		var txt = _p14.txt;
+		var idx = _p14.idx;
+		var menuList = _p14.menuList;
+		var cellList = _p14.cellList;
+		return A2(
+			_debois$elm_mdl$Material_Card$view,
+			{
+				ctor: '::',
+				_0: A2(_debois$elm_mdl$Material_Options$css, 'width', 'auto'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_debois$elm_mdl$Material_Card$title,
+					{
+						ctor: '::',
+						_0: _debois$elm_mdl$Material_Color$background(_debois$elm_mdl$Material_Color$primary),
+						_1: {
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Card$expand,
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_debois$elm_mdl$Material_Card$head,
+							{
+								ctor: '::',
+								_0: _user$project$Views_PatientInfoCard$white,
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: i(icn),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(txt),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_debois$elm_mdl$Material_Card$menu,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: A3(renderMenu, model, idx, menuList),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_debois$elm_mdl$Material_Card$text,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _user$project$Views_PatientInfoCard$gridRender(cellList),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+	});
+var _user$project$Views_PatientInfoCard$colorRanger = F3(
+	function (lower, upper, val) {
+		var gt = (_elm_lang$core$Native_Utils.cmp(lower, upper) < 0) ? F2(
+			function (x, y) {
+				return _elm_lang$core$Native_Utils.cmp(x, y) > 0;
+			}) : F2(
+			function (x, y) {
+				return _elm_lang$core$Native_Utils.cmp(x, y) < 0;
+			});
+		var lt = (_elm_lang$core$Native_Utils.cmp(lower, upper) < 0) ? F2(
+			function (x, y) {
+				return _elm_lang$core$Native_Utils.cmp(x, y) < 0;
+			}) : F2(
+			function (x, y) {
+				return _elm_lang$core$Native_Utils.cmp(x, y) > 0;
+			});
+		return A2(lt, val, lower) ? {
+			ctor: '::',
+			_0: _debois$elm_mdl$Material_Color$background(
+				A2(_debois$elm_mdl$Material_Color$color, _debois$elm_mdl$Material_Color$LightBlue, _debois$elm_mdl$Material_Color$S50)),
+			_1: {ctor: '[]'}
+		} : (((A2(gt, val, lower) && A2(lt, val, upper)) || _elm_lang$core$Native_Utils.eq(val, lower)) ? {
+			ctor: '::',
+			_0: _debois$elm_mdl$Material_Color$background(
+				A2(_debois$elm_mdl$Material_Color$color, _debois$elm_mdl$Material_Color$Amber, _debois$elm_mdl$Material_Color$S300)),
+			_1: {ctor: '[]'}
+		} : {
+			ctor: '::',
+			_0: _debois$elm_mdl$Material_Color$background(
+				A2(_debois$elm_mdl$Material_Color$color, _debois$elm_mdl$Material_Color$DeepOrange, _debois$elm_mdl$Material_Color$S300)),
+			_1: {ctor: '[]'}
+		});
+	});
+var _user$project$Views_PatientInfoCard$PatientInfoCard = F5(
+	function (a, b, c, d, e) {
+		return {icn: a, txt: b, idx: c, menuList: d, cellList: e};
+	});
+var _user$project$Views_PatientInfoCard$MenuBtn = F3(
+	function (a, b, c) {
+		return {icn: a, txt: b, act: c};
+	});
+var _user$project$Views_PatientInfoCard$CardBodyCell = F5(
+	function (a, b, c, d, e) {
+		return {labl: a, val: b, valueUnit: c, wdth: d, cellAttr: e};
+	});
+var _user$project$Views_PatientInfoCard$InfoItem = F6(
+	function (a, b, c, d, e, f) {
+		return {cellWidth: a, cellStyle: b, icon: c, iconStyle: d, txt: e, txtStyle: f};
+	});
+var _user$project$Views_PatientInfoCard$ImportantItem = F5(
+	function (a, b, c, d, e) {
+		return {wdth: a, icon: b, iconStyle: c, txt: d, badgeIcon: e};
+	});
+var _user$project$Views_PatientInfoCard$ProfileSection = F3(
+	function (a, b, c) {
+		return {header: a, contentRows: b, footer: c};
+	});
+var _user$project$Views_PatientInfoCard$profileSectionInit = A3(
+	_user$project$Views_PatientInfoCard$ProfileSection,
+	_elm_lang$core$Maybe$Nothing,
+	{ctor: '[]'},
+	{ctor: '[]'});
+var _user$project$Views_PatientInfoCard$Header = F3(
+	function (a, b, c) {
+		return {txt: a, icn: b, color: c};
+	});

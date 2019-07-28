@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ch-Hans">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<head>
+      {% load static %}
+
+	<style>
+
+@page {
+  size: 400px 640px;
+  /*margin: -40px;*/
+}
+
+body {
+	 font-family: Verdana;
+	 letter-spacing: 1px;
+	 margin: 0px;
+}
+
+.page {
+	height: 640px;
+	width: 360px;
+  	/*margin: 20px;*/
+}
+
+.hospital-name {
+ 	line-height: 2px;
+ 	font-size: 0.8rem;
+ 	text-align: left;
+}
+
+.hr--extra-margin {
+	margin: 10px 0 10px 0;
+}
+
+.patient-name {
+	text-align: center;
+	font-size:1.5rem;
+	font-weight:bold;
+	letter-spacing: 2px;
+}
+.important {
+	font-size: 26px;
+}
+
+.bigLetter {
+	margin: 100px 0 100px 0px;
+	letter-spacing: 20px;
+	font-size: 54px;
+	font-family: Verdana;
+	line-height: 80px;
+
+    /*font-family: "Times New Roman", Times, serif;*/
+
+}
+
+td {
+	padding: 0 10px 0 2px;
+}
+
+.bottle-info-label {
+	width:120px; display:inline-block;
+	font-size: 1.1rem;
+}
+
+.bottle-info-data {
+	width:180px; display:inline-block;
+	font-size: 1.1rem;
+}
+
+	</style>
+
+
+</head>
+
+<body>
+{% block body %}
+
+{% endblock %}
+</body>
+
+
+
+</html>

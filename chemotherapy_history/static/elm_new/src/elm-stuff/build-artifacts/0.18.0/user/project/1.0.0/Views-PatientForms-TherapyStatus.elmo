@@ -1,0 +1,328 @@
+var _user$project$Views_PatientForms_TherapyStatus$view = function (model) {
+	return _user$project$Views_PatientForms_Base$view(model.fc);
+};
+var _user$project$Views_PatientForms_TherapyStatus$Model = F6(
+	function (a, b, c, d, e, f) {
+		return {id: a, model: b, fc: c, error: d, notifications: e, endRoute: f};
+	});
+var _user$project$Views_PatientForms_TherapyStatus$TherapyRemarksChanged = function (a) {
+	return {ctor: 'TherapyRemarksChanged', _0: a};
+};
+var _user$project$Views_PatientForms_TherapyStatus$TherapyReasonChanged = function (a) {
+	return {ctor: 'TherapyReasonChanged', _0: a};
+};
+var _user$project$Views_PatientForms_TherapyStatus$TherapyDTChanged = function (a) {
+	return {ctor: 'TherapyDTChanged', _0: a};
+};
+var _user$project$Views_PatientForms_TherapyStatus$TherapyStatusChanged = function (a) {
+	return {ctor: 'TherapyStatusChanged', _0: a};
+};
+var _user$project$Views_PatientForms_TherapyStatus$FormControlMsg = function (a) {
+	return {ctor: 'FormControlMsg', _0: a};
+};
+var _user$project$Views_PatientForms_TherapyStatus$init = A6(
+	_user$project$Views_PatientForms_TherapyStatus$Model,
+	_elm_lang$core$Maybe$Nothing,
+	_user$project$Data_TherapyStatus$init,
+	_elm_lang$core$Dict$fromList(
+		{
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'therapy_status',
+				_1: _elm_lang$core$Native_Utils.update(
+					_user$project$Views_PatientForms_Base$formControlDefault,
+					{fieldName: 'therapy_status', labelText: '治疗状态', inputType: _user$project$Views_PatientForms_Base$OptionsInput, options: _user$project$Constants$constants.therapy_states, width: 12, order: 1})
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'therapy_reason',
+					_1: _elm_lang$core$Native_Utils.update(
+						_user$project$Views_PatientForms_Base$formControlDefault,
+						{fieldName: 'therapy_reason', labelText: '原因: ', inputType: _user$project$Views_PatientForms_Base$OptionsInput, options: _user$project$Constants$constants.drug_stop_reasons, order: 2, width: 12, hidden: true})
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'therapy_remarks',
+						_1: _elm_lang$core$Native_Utils.update(
+							_user$project$Views_PatientForms_Base$formControlDefault,
+							{fieldName: 'therapy_remarks', labelText: '备注: ', width: 12, order: 3, required: false})
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'therapy_dt',
+							_1: _elm_lang$core$Native_Utils.update(
+								_user$project$Views_PatientForms_Base$formControlDefault,
+								{
+									fieldName: 'therapy_dt',
+									labelText: '纪录日期',
+									inputType: _user$project$Views_PatientForms_Base$DateInput,
+									order: 4,
+									width: 12,
+									displayOnly: true,
+									disabled: true,
+									allowOverride: true,
+									actions: A2(_user$project$Views_PatientForms_Base$manualInputAction, 'therapy_dt', _user$project$Views_PatientForms_TherapyStatus$FormControlMsg)
+								})
+						},
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}),
+	'',
+	'',
+	_user$project$Route$Patients);
+var _user$project$Views_PatientForms_TherapyStatus$initWithValues = F3(
+	function (id, therapy_dt, endRoute) {
+		var getModel = _user$project$Views_PatientForms_TherapyStatus$init.model;
+		return _elm_lang$core$Native_Utils.update(
+			_user$project$Views_PatientForms_TherapyStatus$init,
+			{
+				id: _elm_lang$core$Maybe$Just(id),
+				model: _elm_lang$core$Native_Utils.update(
+					getModel,
+					{therapy_dt: therapy_dt}),
+				endRoute: endRoute
+			});
+	});
+var _user$project$Views_PatientForms_TherapyStatus$initWithValuesTemporaryHalt = F3(
+	function (id, therapy_dt, endRoute) {
+		var getModel = _user$project$Views_PatientForms_TherapyStatus$init.model;
+		return A3(
+			_user$project$Views_PatientForms_Base$toggleHidden,
+			'therapy_reason',
+			false,
+			A3(
+				_user$project$Views_PatientForms_Base$makeDisplayOnly,
+				'therapy_status',
+				true,
+				_elm_lang$core$Native_Utils.update(
+					_user$project$Views_PatientForms_TherapyStatus$init,
+					{
+						id: _elm_lang$core$Maybe$Just(id),
+						model: _elm_lang$core$Native_Utils.update(
+							getModel,
+							{
+								therapy_dt: therapy_dt,
+								therapy_status: _user$project$Data_Patient$statusToString(_user$project$Data_Patient$TemporaryHalt),
+								therapy_reason: A2(
+									_elm_lang$core$Maybe$withDefault,
+									'',
+									_elm_lang$core$List$head(_user$project$Constants$constants.drug_stop_reasons))
+							}),
+						endRoute: endRoute
+					})));
+	});
+var _user$project$Views_PatientForms_TherapyStatus$SubmitHttp = function (a) {
+	return {ctor: 'SubmitHttp', _0: a};
+};
+var _user$project$Views_PatientForms_TherapyStatus$update = F2(
+	function (msg, model) {
+		var getStatus = model.model;
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'FormControlMsg':
+				return A2(
+					_user$project$Util_ops['=>'],
+					A2(_user$project$Views_PatientForms_Base$update, _p0._0, model),
+					_elm_lang$core$Platform_Cmd$none);
+			case 'TherapyStatusChanged':
+				var _p1 = _p0._0;
+				return (_elm_lang$core$Native_Utils.eq(_p1, '治疗中') || _elm_lang$core$Native_Utils.eq(_p1, '完成所有治疗')) ? A2(
+					_user$project$Util_ops['=>'],
+					A3(
+						_user$project$Views_PatientForms_Base$toggleHidden,
+						'therapy_reason',
+						true,
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								model: _elm_lang$core$Native_Utils.update(
+									getStatus,
+									{therapy_status: _p1, therapy_reason: ''})
+							})),
+					_elm_lang$core$Platform_Cmd$none) : A2(
+					_user$project$Util_ops['=>'],
+					A3(
+						_user$project$Views_PatientForms_Base$toggleHidden,
+						'therapy_reason',
+						false,
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								model: _elm_lang$core$Native_Utils.update(
+									getStatus,
+									{
+										therapy_status: _p1,
+										therapy_reason: A2(
+											_elm_lang$core$Maybe$withDefault,
+											'',
+											_elm_lang$core$List$head(_user$project$Constants$constants.drug_stop_reasons))
+									})
+							})),
+					_elm_lang$core$Platform_Cmd$none);
+			case 'TherapyDTChanged':
+				return A2(
+					_user$project$Util_ops['=>'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							model: _elm_lang$core$Native_Utils.update(
+								getStatus,
+								{therapy_dt: _p0._0})
+						}),
+					_elm_lang$core$Platform_Cmd$none);
+			case 'TherapyReasonChanged':
+				return A2(
+					_user$project$Util_ops['=>'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							model: _elm_lang$core$Native_Utils.update(
+								getStatus,
+								{therapy_reason: _p0._0})
+						}),
+					_elm_lang$core$Platform_Cmd$none);
+			case 'TherapyRemarksChanged':
+				return A2(
+					_user$project$Util_ops['=>'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							model: _elm_lang$core$Native_Utils.update(
+								getStatus,
+								{therapy_remarks: _p0._0})
+						}),
+					_elm_lang$core$Platform_Cmd$none);
+			case 'Submit':
+				return A2(
+					_user$project$Util_ops['=>'],
+					model,
+					A3(
+						_user$project$Request_TherapyStatus$post,
+						A2(_elm_lang$core$Maybe$withDefault, 0, model.id),
+						model.model,
+						_user$project$Views_PatientForms_TherapyStatus$SubmitHttp));
+			case 'SubmitHttp':
+				if (_p0._0.ctor === 'Err') {
+					return A2(
+						_user$project$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								error: _elm_lang$core$Basics$toString(_p0._0._0)
+							}),
+						_elm_lang$core$Platform_Cmd$none);
+				} else {
+					var _p2 = _p0._0._0;
+					if (_p2.ctor === 'Err') {
+						return A2(
+							_user$project$Util_ops['=>'],
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{notifications: _p2._0}),
+							_elm_lang$core$Platform_Cmd$none);
+					} else {
+						return A2(
+							_user$project$Util_ops['=>'],
+							model,
+							_user$project$Route$modifyUrl(model.endRoute));
+					}
+				}
+			default:
+				return A2(_user$project$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
+		}
+	});
+var _user$project$Views_PatientForms_TherapyStatus$Submit = {ctor: 'Submit'};
+var _user$project$Views_PatientForms_TherapyStatus$viewAsForm = function (model) {
+	var notifications = {
+		ctor: '::',
+		_0: A2(
+			_user$project$Views_PatientForms_Base$Notification,
+			_elm_lang$core$Native_Utils.cmp(
+				_elm_lang$core$String$length(model.notifications),
+				0) > 0,
+			model.notifications),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_user$project$Views_PatientForms_Base$Notification,
+				_elm_lang$core$Native_Utils.cmp(
+					_elm_lang$core$String$length(model.error),
+					0) > 0,
+				model.error),
+			_1: {ctor: '[]'}
+		}
+	};
+	var model_with_vals = A3(
+		_user$project$Views_PatientForms_Base$appendInputArgs,
+		'therapy_remarks',
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$value(model.model.therapy_remarks),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onInput(_user$project$Views_PatientForms_TherapyStatus$TherapyRemarksChanged),
+				_1: {ctor: '[]'}
+			}
+		},
+		A3(
+			_user$project$Views_PatientForms_Base$appendInputArgs,
+			'therapy_reason',
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$value(model.model.therapy_reason),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onInput(_user$project$Views_PatientForms_TherapyStatus$TherapyReasonChanged),
+					_1: {ctor: '[]'}
+				}
+			},
+			A3(
+				_user$project$Views_PatientForms_Base$appendInputArgs,
+				'therapy_dt',
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$value(model.model.therapy_dt),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onInput(_user$project$Views_PatientForms_TherapyStatus$TherapyDTChanged),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Views_PatientForms_Base$appendInputArgs,
+					'therapy_status',
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$value(model.model.therapy_status),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onInput(_user$project$Views_PatientForms_TherapyStatus$TherapyStatusChanged),
+							_1: {ctor: '[]'}
+						}
+					},
+					model))));
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A3(_user$project$Views_PatientForms_Base$viewAsForm, model_with_vals.fc, notifications, _user$project$Views_PatientForms_TherapyStatus$Submit),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Util$debug(
+					_elm_lang$core$Basics$toString(model.model)),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Views_PatientForms_TherapyStatus$buttons = _user$project$Views_PatientForms_Base$buttons(_user$project$Views_PatientForms_TherapyStatus$Submit);
+var _user$project$Views_PatientForms_TherapyStatus$Nope = {ctor: 'Nope'};

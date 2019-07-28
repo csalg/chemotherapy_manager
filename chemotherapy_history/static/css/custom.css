@@ -1,0 +1,189 @@
+/*body {
+		background-color: blue;
+	}*/
+
+/*.img_indexpage {
+			height: 150px;
+			width: 50%;
+			background-color: red;
+		}
+.homepage_option {
+	height: 200px;
+	width: 30%;
+	padding: 50px 0;
+	margin: 5px;
+	text-align: center;
+	background-color: #3967c1;
+	color: #fff;
+	font-size: 18px;
+}
+*/
+body {
+	background: #f2f2f2;
+}
+
+.profile-content {
+	background: #fff;
+	min-height: 80vh;
+}
+.big-icon {
+	font-size: 60px;
+}
+
+.form_label {
+	text-align: right;
+	padding: 2%;
+}
+
+.form_padded {
+	padding: 2%;
+}
+
+thead {
+	background-color: #eaf8ff;
+}
+
+.search_bar {
+	padding: 10px 20px;
+	background: #fff;
+
+	/*background-color: red;*/
+	margin: 5px;
+}
+
+.align-right {
+    text-align: right;
+}
+.align-center {
+    text-align: center;
+}
+
+.panel-default {
+    color: #333;
+    border: 1px solid #daf3ff;
+}
+
+.panel-default>.panel-heading {
+    color: #333;
+    background-color: #eaf8ff;
+    border: 1px solid #daf3ff;
+}
+
+.panel-default>.panel-footer {
+    background-color: #fff;
+    border: 1px solid #daf3ff;
+	text-align: right;
+}
+
+/*    Buttons     */
+
+.inactive-grey {
+	color: #dadee5;
+}
+
+.btn-inline {
+	margin: 0 10px 0 10px;
+}
+
+.btn-default {
+    /*background-color: white;*/
+    padding: 7pt;
+    background-color: #e7f6fe;
+    /*color: #fff;*/
+    border: 1px solid #ceedfd;
+}
+
+.btn-default:hover {
+    background-color: #b6e4fc;
+    border: 1px solid #2cb3f9;
+}
+/*
+input:invalid {
+  border: 2px dashed red;
+}*/
+/*
+input:valid {
+  border: 2px solid green;
+}
+*/
+p.validation-text{
+	color: gray;
+}
+
+.new-patient-button  
+    { background-color: var(--blue-primary-4)
+    ; border-color: var(--blue-primary-4)
+    }
+
+.new-patient-footer:hover
+    {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+    }
+
+.new-patient-footer-icon 
+    { padding-right: 10px
+    ; font-size: 1.1rem
+    }
+
+.modal-content {
+    border-top: 6px solid rgb(33,150,243);
+}
+
+.profile-section {
+	background-color: white;
+	margin: 10px;
+}
+
+.profile-wrapper {
+	margin: 20px;
+}
+
+.profile-section-content {
+	background-color: white;
+	padding: 15px;
+	margin: 10px;
+}
+
+.info-row {
+	/*display: flex;*/
+	/*justify-content: space-around;*/
+	padding: 10px;
+}
+
+.info-header {
+    display: flex;
+    align-items: center;
+    /*margin: 15px 0 0 0;*/
+    padding: 15px 15px 0 15px;
+    /*border-bottom: 1px solid var(--blue-primary-4);*/
+    /*border-bottom: 1px solid hsl(200,4%,96%);*/
+    /*background-color: hsl(200,4%,97%);*/
+}
+.info-header>h5 {
+	font-size: 1.2rem;
+    margin: 0px 0 0 0;
+	}
+.info-header-text {
+    margin-left: 10px;
+    font-weight: 350;
+    /*color: rgb(116, 119, 123);*/
+}
+.info-header-icon {
+    font-size: 2rem;
+    color: var(--blue-primary-4);
+}
+
+.info-icon {
+    font-size: 1.2rem;
+    color: var(--blue-primary-4);	
+}
+
+.info-item-text {
+	color: hsl(200,10%,57%);
+}
+
+.close:before {
+    content: "";
+}

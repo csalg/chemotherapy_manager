@@ -1,0 +1,270 @@
+var _user$project$Styles$bottleListReposition = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$margin('-30px 0 50px 0'),
+	_1: {ctor: '[]'}
+};
+var _user$project$Styles$bottleHeader = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$display('flex'),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$alignItems(_seanhess$elm_style$Style$baseline),
+		_1: {
+			ctor: '::',
+			_0: _seanhess$elm_style$Style$justifyContent(_seanhess$elm_style$Style$center),
+			_1: {
+				ctor: '::',
+				_0: _seanhess$elm_style$Style$letterSpacing(
+					_seanhess$elm_style$Style$px(2)),
+				_1: {
+					ctor: '::',
+					_0: _seanhess$elm_style$Style$color('hsla(215, 3%, 39%, 1)'),
+					_1: {
+						ctor: '::',
+						_0: _seanhess$elm_style$Style$fontWeight('350'),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}
+	}
+};
+var _user$project$Styles$padding40 = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$padding(
+		_seanhess$elm_style$Style$px(40)),
+	_1: {ctor: '[]'}
+};
+var _user$project$Styles$formControlLabel = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$fontWeight('400'),
+	_1: {ctor: '[]'}
+};
+var _user$project$Styles$newPatientFooterIcon = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$paddingRight(
+		_seanhess$elm_style$Style$px(10)),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$fontSize('1.1rem'),
+		_1: {ctor: '[]'}
+	}
+};
+var _user$project$Styles$newPatientFooter = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$display('flex'),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$justifyContent('flex-end'),
+		_1: {
+			ctor: '::',
+			_0: _seanhess$elm_style$Style$alignItems('center'),
+			_1: {ctor: '[]'}
+		}
+	}
+};
+var _user$project$Styles$newPatientButton = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$backgroundColor('var(--blue-primary-4)'),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$borderColor('var(--blue-primary-4)'),
+		_1: {ctor: '[]'}
+	}
+};
+var _user$project$Styles$newPatientHeaderText = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$marginLeft(
+		_seanhess$elm_style$Style$px(10)),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$color('hsla(215, 3%, 47%, 1)'),
+		_1: {ctor: '[]'}
+	}
+};
+var _user$project$Styles$newPatientHeaderIcon = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$fontSize('2rem'),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$color('var(--blue-primary-4)'),
+		_1: {ctor: '[]'}
+	}
+};
+var _user$project$Styles$newPatientHeader = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$display('flex'),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$alignItems(_seanhess$elm_style$Style$center),
+		_1: {
+			ctor: '::',
+			_0: _seanhess$elm_style$Style$width(
+				_seanhess$elm_style$Style$pc(40)),
+			_1: {
+				ctor: '::',
+				_0: _seanhess$elm_style$Style$paddingBottom(
+					_seanhess$elm_style$Style$px(7)),
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'border-bottom', _1: '3px solid var(--blue-primary-4)'},
+					_1: {ctor: '[]'}
+				}
+			}
+		}
+	}
+};
+var _user$project$Styles$newPatientBigHeaderIcon = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$color('hsla(198, 4%, 53%, 1)'),
+	_1: {ctor: '[]'}
+};
+var _user$project$Styles$newPatientBigHeader = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$fontSize('2.5rem'),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$letterSpacing('0.2rem'),
+		_1: {
+			ctor: '::',
+			_0: _seanhess$elm_style$Style$color('hsla(198, 4%, 39%, 1)'),
+			_1: {
+				ctor: '::',
+				_0: _seanhess$elm_style$Style$textAlign(_seanhess$elm_style$Style$center),
+				_1: {ctor: '[]'}
+			}
+		}
+	}
+};
+var _user$project$Styles$searchBarCustom = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$marginRight(
+		_seanhess$elm_style$Style$px(20)),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$backgroundColor('hsl(203,33%,95%)'),
+		_1: {ctor: '[]'}
+	}
+};
+var _user$project$Styles$colorSuccess = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$color('hsla(134, 61%, 45%, 1)'),
+	_1: {ctor: '[]'}
+};
+var _user$project$Styles$colorWarning = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$color('hsla(45, 100%, 51%, 1)'),
+	_1: {ctor: '[]'}
+};
+var _user$project$Styles$colorDanger = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$color('hsla(354, 70%, 54%, 1)'),
+	_1: {ctor: '[]'}
+};
+var _user$project$Styles$colorPrimary = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$color('hsla(211, 100%, 50%, 1)'),
+	_1: {ctor: '[]'}
+};
+var _user$project$Styles$whiteBg = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$backgroundColor('#fff'),
+	_1: {ctor: '[]'}
+};
+var _user$project$Styles$newPatientContainer = A2(
+	_elm_lang$core$Basics_ops['++'],
+	{
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$marginTop(
+			_seanhess$elm_style$Style$px(20)),
+		_1: {
+			ctor: '::',
+			_0: _seanhess$elm_style$Style$marginBottom(
+				_seanhess$elm_style$Style$px(20)),
+			_1: {
+				ctor: '::',
+				_0: _seanhess$elm_style$Style$border('1px solid var(--gray-2)'),
+				_1: {
+					ctor: '::',
+					_0: _seanhess$elm_style$Style$width(
+						_seanhess$elm_style$Style$pc(75)),
+					_1: {ctor: '[]'}
+				}
+			}
+		}
+	},
+	_user$project$Styles$whiteBg);
+var _user$project$Styles$spaceBetween = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$justifyContent('space-between'),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$display(_seanhess$elm_style$Style$flex_),
+		_1: {ctor: '[]'}
+	}
+};
+var _user$project$Styles$iconTxtGray = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$color('hsla(232, 1%, 50%, 1)'),
+	_1: {ctor: '[]'}
+};
+var _user$project$Styles$iconGray = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$color('hsla(232, 1%, 70%, 1)'),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$fontSize(
+			_seanhess$elm_style$Style$px(24)),
+		_1: {ctor: '[]'}
+	}
+};
+var _user$project$Styles$gray_bg = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$backgroundColor('hsla(210, 20%, 94%, 1)'),
+	_1: {ctor: '[]'}
+};
+var _user$project$Styles$modalFooterStyle = A2(
+	_elm_lang$core$Basics_ops['++'],
+	_user$project$Styles$gray_bg,
+	{
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 'text-align', _1: 'right'},
+		_1: {ctor: '[]'}
+	});
+var _user$project$Styles$blue_line = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$backgroundColor('rgb(33,150,243)'),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$margin('14px,14px,0,14px'),
+		_1: {
+			ctor: '::',
+			_0: _seanhess$elm_style$Style$height(
+				_seanhess$elm_style$Style$px(6)),
+			_1: {
+				ctor: '::',
+				_0: _seanhess$elm_style$Style$width('100%'),
+				_1: {ctor: '[]'}
+			}
+		}
+	}
+};
+var _user$project$Styles$horPadding1px = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$padding('0 1px 0 1px'),
+	_1: {ctor: '[]'}
+};
+var _user$project$Styles$boldText = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$fontWeight('bold'),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$letterSpacing(
+			_seanhess$elm_style$Style$px(1)),
+		_1: {
+			ctor: '::',
+			_0: _seanhess$elm_style$Style$color('hsla(240, 13%, 25%, 1)'),
+			_1: {ctor: '[]'}
+		}
+	}
+};

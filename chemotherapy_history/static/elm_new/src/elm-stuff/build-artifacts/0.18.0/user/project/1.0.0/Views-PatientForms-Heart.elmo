@@ -1,0 +1,277 @@
+var _user$project$Views_PatientForms_Heart$view = function (model) {
+	return _user$project$Views_PatientForms_Base$view(model.fc);
+};
+var _user$project$Views_PatientForms_Heart$fc = _elm_lang$core$Dict$fromList(
+	{
+		ctor: '::',
+		_0: {
+			ctor: '_Tuple2',
+			_0: 'heart_text',
+			_1: _elm_lang$core$Native_Utils.update(
+				_user$project$Views_PatientForms_Base$formControlDefault,
+				{fieldName: 'heart_text', labelText: '心超报告：', inputType: _user$project$Views_PatientForms_Base$OptionsInput, options: _user$project$Constants$constants.echocardiography_reports, width: 12, order: 1})
+		},
+		_1: {
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'heart_dt',
+				_1: _elm_lang$core$Native_Utils.update(
+					_user$project$Views_PatientForms_Base$formControlDefault,
+					{fieldName: 'heart_dt', labelText: '心超日期：', inputType: _user$project$Views_PatientForms_Base$DateInput, order: 2, width: 6, displayOnly: false, disabled: false, allowOverride: true, required: true})
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'heart_percentage',
+					_1: _elm_lang$core$Native_Utils.update(
+						_user$project$Views_PatientForms_Base$formControlDefault,
+						{
+							fieldName: 'heart_percentage',
+							labelText: '左心射血分数(%)：',
+							inputType: _user$project$Views_PatientForms_Base$Inpt('number'),
+							required: true,
+							order: 3,
+							width: 6
+						})
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'heart_remarks',
+						_1: _elm_lang$core$Native_Utils.update(
+							_user$project$Views_PatientForms_Base$formControlDefault,
+							{fieldName: 'heart_remarks', labelText: '备注：', width: 12, order: 4, required: false})
+					},
+					_1: {ctor: '[]'}
+				}
+			}
+		}
+	});
+var _user$project$Views_PatientForms_Heart$Model = F7(
+	function (a, b, c, d, e, f, g) {
+		return {id: a, model: b, fc: c, days_exceeded: d, error: e, notifications: f, endRoute: g};
+	});
+var _user$project$Views_PatientForms_Heart$HeartRemarksChanged = function (a) {
+	return {ctor: 'HeartRemarksChanged', _0: a};
+};
+var _user$project$Views_PatientForms_Heart$HeartPercentageChanged = function (a) {
+	return {ctor: 'HeartPercentageChanged', _0: a};
+};
+var _user$project$Views_PatientForms_Heart$HeartDTChanged = function (a) {
+	return {ctor: 'HeartDTChanged', _0: a};
+};
+var _user$project$Views_PatientForms_Heart$HeartTextChanged = function (a) {
+	return {ctor: 'HeartTextChanged', _0: a};
+};
+var _user$project$Views_PatientForms_Heart$FormControlMsg = function (a) {
+	return {ctor: 'FormControlMsg', _0: a};
+};
+var _user$project$Views_PatientForms_Heart$init = A3(
+	_user$project$Views_PatientForms_Base$makeDisplayOnly,
+	'heart_dt',
+	true,
+	A3(
+		_user$project$Views_PatientForms_Base$appendActions,
+		'heart_dt',
+		A2(_user$project$Views_PatientForms_Base$manualInputAction, 'heart_dt', _user$project$Views_PatientForms_Heart$FormControlMsg),
+		A7(_user$project$Views_PatientForms_Heart$Model, _elm_lang$core$Maybe$Nothing, _user$project$Data_HeartReport$init, _user$project$Views_PatientForms_Heart$fc, 0, '', '', _user$project$Route$Patients)));
+var _user$project$Views_PatientForms_Heart$initWithValues = F4(
+	function (id, days_ago, dt_now, endRoute) {
+		var days_exceeded = 0 - days_ago;
+		var getHeart = _user$project$Views_PatientForms_Heart$init.model;
+		var new_model = _elm_lang$core$Native_Utils.update(
+			_user$project$Views_PatientForms_Heart$init,
+			{
+				id: _elm_lang$core$Maybe$Just(id),
+				days_exceeded: days_exceeded,
+				model: _elm_lang$core$Native_Utils.update(
+					getHeart,
+					{heart_dt: dt_now}),
+				endRoute: endRoute
+			});
+		return new_model;
+	});
+var _user$project$Views_PatientForms_Heart$SubmitHttp = function (a) {
+	return {ctor: 'SubmitHttp', _0: a};
+};
+var _user$project$Views_PatientForms_Heart$update = F2(
+	function (msg, model) {
+		var getHeart = model.model;
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'FormControlMsg':
+				return A2(
+					_user$project$Util_ops['=>'],
+					A2(_user$project$Views_PatientForms_Base$update, _p0._0, model),
+					_elm_lang$core$Platform_Cmd$none);
+			case 'HeartTextChanged':
+				return A2(
+					_user$project$Util_ops['=>'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							model: _elm_lang$core$Native_Utils.update(
+								getHeart,
+								{heart_text: _p0._0})
+						}),
+					_elm_lang$core$Platform_Cmd$none);
+			case 'HeartDTChanged':
+				return A2(
+					_user$project$Util_ops['=>'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							model: _elm_lang$core$Native_Utils.update(
+								getHeart,
+								{heart_dt: _p0._0})
+						}),
+					_elm_lang$core$Platform_Cmd$none);
+			case 'HeartPercentageChanged':
+				return A2(
+					_user$project$Util_ops['=>'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							model: _elm_lang$core$Native_Utils.update(
+								getHeart,
+								{heart_percentage: _p0._0})
+						}),
+					_elm_lang$core$Platform_Cmd$none);
+			case 'HeartRemarksChanged':
+				return A2(
+					_user$project$Util_ops['=>'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							model: _elm_lang$core$Native_Utils.update(
+								getHeart,
+								{heart_remarks: _p0._0})
+						}),
+					_elm_lang$core$Platform_Cmd$none);
+			case 'Submit':
+				return A2(
+					_user$project$Util_ops['=>'],
+					model,
+					A3(
+						_user$project$Request_HeartReport$post,
+						A2(_elm_lang$core$Maybe$withDefault, 0, model.id),
+						model.model,
+						_user$project$Views_PatientForms_Heart$SubmitHttp));
+			case 'SubmitHttp':
+				if (_p0._0.ctor === 'Err') {
+					return A2(
+						_user$project$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								error: _elm_lang$core$Basics$toString(_p0._0._0)
+							}),
+						_elm_lang$core$Platform_Cmd$none);
+				} else {
+					return A2(
+						_user$project$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								notifications: _user$project$Data_DjangoResponse$toString(_p0._0._0)
+							}),
+						_user$project$Route$modifyUrl(model.endRoute));
+				}
+			default:
+				return A2(_user$project$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
+		}
+	});
+var _user$project$Views_PatientForms_Heart$Submit = {ctor: 'Submit'};
+var _user$project$Views_PatientForms_Heart$viewAsForm = function (model) {
+	var notifications = {
+		ctor: '::',
+		_0: A2(
+			_user$project$Views_PatientForms_Base$Notification,
+			_elm_lang$core$Native_Utils.cmp(model.days_exceeded, 0) > 0,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				'超过 ',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(model.days_exceeded),
+					' 天。必须选：“遵医嘱”。请填备注。'))),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_user$project$Views_PatientForms_Base$Notification,
+				_elm_lang$core$Native_Utils.cmp(
+					_elm_lang$core$String$length(model.notifications),
+					0) > 0,
+				model.notifications),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Views_PatientForms_Base$Notification,
+					_elm_lang$core$Native_Utils.cmp(
+						_elm_lang$core$String$length(model.error),
+						0) > 0,
+					model.error),
+				_1: {ctor: '[]'}
+			}
+		}
+	};
+	var model_with_vals = A3(
+		_user$project$Views_PatientForms_Base$makeDisplayOnly,
+		'heart_text',
+		_elm_lang$core$Native_Utils.cmp(model.days_exceeded, 0) > 0,
+		A3(
+			_user$project$Views_PatientForms_Base$appendInputArgs,
+			'heart_remarks',
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onInput(_user$project$Views_PatientForms_Heart$HeartRemarksChanged),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$value(model.model.heart_remarks),
+					_1: {ctor: '[]'}
+				}
+			},
+			A3(
+				_user$project$Views_PatientForms_Base$appendInputArgs,
+				'heart_percentage',
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onInput(_user$project$Views_PatientForms_Heart$HeartPercentageChanged),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$value(model.model.heart_percentage),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Views_PatientForms_Base$appendInputArgs,
+					'heart_dt',
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onInput(_user$project$Views_PatientForms_Heart$HeartDTChanged),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$value(model.model.heart_dt),
+							_1: {ctor: '[]'}
+						}
+					},
+					A3(
+						_user$project$Views_PatientForms_Base$appendInputArgs,
+						'heart_text',
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onInput(_user$project$Views_PatientForms_Heart$HeartTextChanged),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$value(model.model.heart_text),
+								_1: {ctor: '[]'}
+							}
+						},
+						model)))));
+	return A3(_user$project$Views_PatientForms_Base$viewAsForm, model_with_vals.fc, notifications, _user$project$Views_PatientForms_Heart$Submit);
+};
+var _user$project$Views_PatientForms_Heart$buttons = _user$project$Views_PatientForms_Base$buttons(_user$project$Views_PatientForms_Heart$Submit);
+var _user$project$Views_PatientForms_Heart$Nope = {ctor: 'Nope'};

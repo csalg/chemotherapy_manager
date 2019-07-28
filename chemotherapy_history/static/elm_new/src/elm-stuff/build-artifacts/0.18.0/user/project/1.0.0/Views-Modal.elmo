@@ -1,0 +1,102 @@
+var _user$project$Views_Modal$view = F7(
+	function (msgWrapper, closeMsg, icon, title, subView, buttons, msgToMap) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(''),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_rundis$elm_bootstrap$Bootstrap_Modal$view,
+						_rundis$elm_bootstrap$Bootstrap_Modal$shown,
+						A3(
+							_rundis$elm_bootstrap$Bootstrap_Modal$footer,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$style(_user$project$Styles$modalFooterStyle),
+								_1: {ctor: '[]'}
+							},
+							A2(
+								_elm_lang$core$List$map,
+								_elm_lang$html$Html$map(msgWrapper),
+								A2(
+									_elm_lang$core$List$map,
+									_elm_lang$html$Html$map(msgToMap),
+									buttons)),
+							A3(
+								_rundis$elm_bootstrap$Bootstrap_Modal$body,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$style(_user$project$Styles$whiteBg),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_rundis$elm_bootstrap$Bootstrap_Grid$containerFluid,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$map,
+												msgWrapper,
+												A2(_elm_lang$html$Html$map, msgToMap, subView)),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								},
+								A3(
+									_rundis$elm_bootstrap$Bootstrap_Modal$header,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$style(_user$project$Styles$gray_bg),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$h5,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('modal-title'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$i,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class(icon),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$style(
+																A2(
+																	_elm_lang$core$Basics_ops['++'],
+																	{
+																		ctor: '::',
+																		_0: _seanhess$elm_style$Style$paddingRight(
+																			_seanhess$elm_style$Style$px(10)),
+																		_1: {ctor: '[]'}
+																	},
+																	_user$project$Styles$boldText)),
+															_1: {ctor: '[]'}
+														}
+													},
+													{ctor: '[]'}),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html$text(title),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {ctor: '[]'}
+									},
+									_rundis$elm_bootstrap$Bootstrap_Modal$large(
+										_rundis$elm_bootstrap$Bootstrap_Modal$config(closeMsg)))))),
+					_1: {ctor: '[]'}
+				}
+			});
+	});

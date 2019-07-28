@@ -1,0 +1,50 @@
+var _user$project$Data_TherapyStatus$encode = function (status) {
+	return _elm_lang$http$Http$jsonBody(
+		_elm_lang$core$Json_Encode$object(
+			{
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'therapy_status',
+					_1: _elm_lang$core$Json_Encode$string(status.therapy_status)
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'therapy_dt',
+						_1: _elm_lang$core$Json_Encode$string(status.therapy_dt)
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'therapy_reason',
+							_1: _elm_lang$core$Json_Encode$string(status.therapy_reason)
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'therapy_remarks',
+								_1: _elm_lang$core$Json_Encode$string(status.therapy_remarks)
+							},
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}));
+};
+var _user$project$Data_TherapyStatus$TherapyStatus = F4(
+	function (a, b, c, d) {
+		return {therapy_status: a, therapy_dt: b, therapy_reason: c, therapy_remarks: d};
+	});
+var _user$project$Data_TherapyStatus$init = A4(
+	_user$project$Data_TherapyStatus$TherapyStatus,
+	A2(
+		_elm_lang$core$Maybe$withDefault,
+		'',
+		_elm_lang$core$List$head(_user$project$Constants$constants.therapy_states)),
+	'',
+	'',
+	'');

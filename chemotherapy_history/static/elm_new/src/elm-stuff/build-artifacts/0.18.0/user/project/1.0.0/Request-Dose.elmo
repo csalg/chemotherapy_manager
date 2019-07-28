@@ -1,0 +1,31 @@
+var _user$project$Request_Dose$get = F2(
+	function (pid, dt_now) {
+		var url = _user$project$Request_Helpers$apiUrl(
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				'/patient/',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(pid),
+					'/doseHistory/5')));
+		return A2(
+			_elm_lang$http$Http$get,
+			url,
+			_user$project$Data_Dose$decodeList(dt_now));
+	});
+var _user$project$Request_Dose$post = F3(
+	function (pid, dose, responseMsg) {
+		var url = _user$project$Request_Helpers$apiUrl(
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				'/updateDoseReport/',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(pid),
+					'/')));
+		return A3(
+			_user$project$Request_Helpers$post,
+			url,
+			responseMsg,
+			_user$project$Data_Dose$encode(dose));
+	});

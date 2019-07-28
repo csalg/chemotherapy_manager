@@ -1,0 +1,91 @@
+
+<div class="row">
+	<div class="panel panel-default">
+
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>体重(kg)</th>
+                <th>磁卡号</th>
+                <th>化疗方案</th>
+                <th>药品首用日期</th>
+                <th>已用药次数</th>
+                <th>维持使用</th>
+                <th>维持剂量(mg)</th>
+                <th>维持剂量(mg)</th>
+                <th>剩余剂量(mg)</th>
+                <th>停药原因</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr data-toggle="modal" data-target="#add_ticket_modal" onclick="$('#modal_content').load('profile.html');">
+                <td>张三</td>
+                <td>43</td>
+                <td>86</td>
+                <td>123456</td>
+                <td>EC-T(H)</td>
+                <td>123456</td>
+                <td>123456</td>
+                <td>123456</td>
+                <td>123456</td>
+                <td>123456</td>
+                <td>123456</td>
+                <td>123456</td>
+              </tr>
+                <td>张四</td>
+                <td>81</td>
+                <td>71</td>
+                <td>123456</td>
+                <td>EC-T(H)</td>
+                <td>123456</td>
+                <td>123456</td>
+                <td>123456</td>
+                <td>123456</td>
+                <td>123456</td>
+                <td>123456</td>
+                <td>123456</td>
+              </tr>
+                <td>张五</td>
+                <td>56</td>
+                <td>63</td>
+                <td>123456</td>
+                <td>EC-T(H)</td>
+                <td>123456</td>
+                <td>123456</td>
+                <td>123456</td>
+                <td>123456</td>
+                <td>123456</td>
+                <td>123456</td>
+                <td>123456</td>
+              </tr>
+
+            </tbody>
+        </table>
+        
+    </div>
+</div>
+
+<div class="row">
+    <div class="panel panel-default">
+
+        <table class="table table-hover">
+
+{% for object in objects %}
+
+    {% if forloop.first %}
+    <th>
+       {% for fieldname in object.keys %}<td>{{ fieldname }}</td>{% endfor %}
+    </th>
+    {% endif %}
+    
+{% for object in objects %}
+    <tr>
+      {% for value in object.values %}<td>{{ value }}</td>{% endfor %}
+    </tr>
+{% endfor %}
+</table>
+</div>
+</div>

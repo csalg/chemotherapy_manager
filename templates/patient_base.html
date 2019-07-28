@@ -1,0 +1,224 @@
+{% extends "base.html"%}
+
+{% load macros %}
+
+{% macro personal_disabled %}
+{%block personal_disabled%}{%endblock%}
+{% endmacro %}`
+
+{% macro dose_disabled %}
+{%block dose_disabled%}{%endblock%}
+{% endmacro %}`
+
+{% macro heart_disabled %}
+{%block heart_disabled%}{%endblock%}
+{% endmacro %}`
+
+{% block head_title %}患者 {% endblock %}
+{% block content %}
+
+	
+
+  <div class="container">
+<div class="row">
+	<div class="col-lg-2">
+	</div>
+	<div class="col-lg-8 profile-content">
+		<br>
+      <div class="modal-header">
+
+      	<h4 class="modal-title" id="modalLabel">
+
+      		{% block title %}
+      			<i class="fas fa-user"></i> 患者消息 
+      		{% endblock %} </h4>
+      </div>
+
+
+					{% block errors_panel %}
+					{% if errors %}
+							<div class="panel panel-default">
+							    <div class="panel-heading"><i class="fas fa-exclamation-triangle"></i> 验证错误</div>
+							    <div class="panel-body">
+
+
+
+							          <div class="col-sm-12">
+							          {{ form.non_field_errors }}
+							          {% for field in form %}
+							              <div class="fieldWrapper">
+							                  {{ field.label_tag }}
+							                  {{ field.errors }}
+							                  {% if field.help_text %}
+							                  <p class="help">{{ field.help_text|safe }}</p>
+							                  {% endif %}
+							              </div>
+							          {% endfor %}
+							          </div>
+							    </div>
+							</div>					
+					{%endif%}
+							{% endblock %}
+
+			<div class="panel panel-default">
+
+				<div class="panel-heading"><i class="far fa-address-card"></i> 基本信息</div>
+				<div class="panel-body">
+
+					{% block personal_form_start %}{% endblock %}
+
+					{% block personal_panel_start %}{% endblock %}
+					<div class="row">	
+						{% for formGroup in personalFormGroups %}
+							{{formGroup.renderDisabled}}
+							{%endfor%}
+						</div>
+
+
+
+					</div>	
+
+				<div class="panel-body">
+
+
+					<div class="row">	
+						{% for formGroup in personalFormGroups %}
+							{{formGroup.render}}
+							{%endfor%}
+						</div>
+
+
+
+					</div>	
+<div class="panel-footer" style="text-align: right;">
+	<div class="row">
+
+
+
+			<button type="button" class="btn  btn-default btn-inline" onclick="location.href='/patient/1027/personalHistory';">
+				<i class="fas fa-clock"></i> 查看历史
+			</button>
+
+
+
+
+			<button type="button" class="btn  btn-default btn-inline" onclick="location.href='/patient/1027/printPersonal';">
+				<i class="fas fa-print"></i> 打印标签
+			</button>
+
+		
+
+
+
+
+			<button type="button" class="btn  btn-default btn-inline" onclick="location.href='/patient/1027/updatePersonalInfo';">
+				<i class="far fa-plus-square"></i> 添加更新
+			</button>
+
+
+
+	</div>
+</div>
+					{% block personal_panel_end %}{% endblock %}
+					{% block personal_form_end %}{% endblock %}
+{% block lower_two_panels %}
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading"><i class="fas fa-medkit"></i> 用药信息</div>
+
+{% block dose_panel_body %}
+				<div class="panel-body">
+{% block dose_panel_start %}
+{% endblock %}
+
+{% block dose_panel %}
+
+					<div class="row">	
+						{% for formGroup in doseFormGroups %}
+							{{formGroup.render}}
+							{%endfor%}
+						</div>
+						<script>
+				let multiplier = 0;
+				let override = false;
+				let calculateAmount = () => {
+					console.log(override)
+					let help_text = document.querySelector('div[id="dose_amount"]>span')
+					if (override) {
+						console.log("override")
+					help_text.innerHTML = "请输入剂量"
+
+				} else {
+				document.querySelector("input[name='dose_amount']").value = (document.querySelector("input[name='dose_weight']").value * multiplier);
+
+					help_text.innerHTML = "算法：" + document.querySelector("input[name='dose_weight']").value + " * " + multiplier;
+
+				}
+				}
+
+				$('select[name="patient_frequency"]').change(function() {
+					let val = document.querySelector('select[name="patient_frequency"]').value;
+					(val === "一周一次") ? multiplier = 6 : multiplier = 8;
+					calculateAmount()
+				});
+
+				$('input[name="dose_opened"]').change(function() {
+		document.querySelector("input[name='dose_opened_expiry']").value = document.querySelector("input[name='dose_opened']").value
+		document.querySelector("input[name='dose_opened_expiry']").stepUp(28)
+		});
+				$('input[name="dose_weight"]').keyup(calculateAmount);
+				$('input[name="dose_weight"]').change(calculateAmount);
+
+				$('div[id="dose_amount"]>div>input').change( function() {
+					override = (this.checked);
+					$('div[id="dose_amount"]>input').attr("disabled", !override)
+					calculateAmount();
+
+				});
+						</script>
+					
+
+				</div>
+{% endblock %}
+{% endblock %}
+
+{% block dose_panel_end %}
+{% endblock %}
+									
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading"><i class="fas fa-heartbeat"></i> 使用前检查信息</div>
+				<div class="panel-body">
+{% block heart_panel_start %}
+{% endblock %}		
+
+					<div class="row">	
+						{% for formGroup in heartFormGroups %}
+							{{formGroup.render}}
+							{%endfor%}
+						</div>
+
+					</div>
+			
+{% block heart_panel_end %}
+{% endblock %}		
+				</div>
+
+
+{% block footer %}
+{% endblock %}
+
+		
+
+<br>
+	</div>
+<div class="col-lg-2"></div>
+</div>
+  {% block endofbody %}
+  {% endblock %}
+<br>
+<br>
+  {% endblock %} <!-- closes lower two blocks -->
+  {% endblock %} <!-- closes content -->
+

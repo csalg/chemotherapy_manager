@@ -1,0 +1,37 @@
+var _user$project$Request_External$newPatient = '/patient/';
+var _user$project$Request_External$heartHistory = function (pid) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		'/patient/',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(pid),
+			'/heartHistory/'));
+};
+var _user$project$Request_External$doseHistory = function (pid) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		'/patient/',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(pid),
+			'/doseHistory/'));
+};
+var _user$project$Request_External$personalHistory = function (pid) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		'/patient/',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(pid),
+			'/personalHistory/'));
+};
+var _user$project$Request_External$print = function (pid) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		'/patient/',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(pid),
+			'/printall/'));
+};

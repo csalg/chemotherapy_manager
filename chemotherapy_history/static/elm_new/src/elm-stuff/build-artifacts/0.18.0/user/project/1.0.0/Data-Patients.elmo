@@ -1,0 +1,4 @@
+var _user$project$Data_Patients$patientsDecoder = function (dt_now) {
+	return _elm_lang$core$Json_Decode$list(
+		_user$project$Data_Patient$patientSimpleDecoder(dt_now));
+};
